@@ -4,6 +4,7 @@ import NavBar from './NavBar';
 
 import LoyaltyPage from './LoyaltyPage';
 import LoyaltyTransaction from './LoyaltyTransaction';
+import FoodAndDrink from './FoodAndDrink';
 
 
 const Home = () => {
@@ -20,6 +21,7 @@ const Home = () => {
 
                 <div class="w3-row w3-padding-32">    
 
+                    <FoodAndDrink/>
                     
                     <div class="w3-third w3-padding-16">
                         <div class="w3-padding-top-64">

@@ -1,0 +1,22 @@
+{
+    "foodanddrink": [
+      {
+        "itemid": 1,
+        "itemname": "Popcorn",
+        "price": 6.70,
+        "id": 1
+      },
+      {
+        "itemid": 2,
+        "itemname": "Sausage bun",
+        "price": 4.50,
+        "id": 2
+      },
+      {
+        "itemid": 3,
+        "itemname": "Coke",
+        "price": 3.00,
+        "id": 3
+      }
+    ]
+  }
