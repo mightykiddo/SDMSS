@@ -2,10 +2,7 @@ import React from 'react';
 
 import NavBar from './NavBar';
 
-import LoyaltyPage from './LoyaltyPage';
-import LoyaltyTransaction from './LoyaltyTransaction';
-import FoodAndDrink from './FoodAndDrink';
-
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (
@@ -13,28 +10,27 @@ const Home = () => {
         
         <NavBar />
         
+        
         <div className="w3-padding">
 
             <div className=" " id="pets">
                 
                 <div className='w3-border-top w3-border-dark-grey' ></div>
 
-                <div class="w3-row w3-padding-32">    
-
-                    <FoodAndDrink/>
+                <div className="w3-row w3-padding-32">    
                     
-                    <div class="w3-third w3-padding-16">
-                        <div class="w3-padding-top-64">
-                        <div class="w3-padding-top-64">
-                        <div class="w3-padding-top-64">
+                    <div className="w3-third w3-padding-16">
+                        <div className="w3-padding-top-64">
+                        <div className="w3-padding-top-64">
+                        <div className="w3-padding-top-64">
                             <div className="w3-row-padding w3-padding-16">
-                                    <div class="w3-half w3-padding-16">
-                                        <h3 class="">Join us today</h3>
-                                        <h3 class="">to earn</h3>
-                                        <h3 class="w3-text-amber">Loyalty Points</h3>
+                                    <div className="w3-half w3-padding-16">
+                                        <h3 className="">Join us today</h3>
+                                        <h3 className="">to earn</h3>
+                                        <h3 className="w3-text-amber">Loyalty Points</h3>
                                     </div>
-                                    <div class="w3-half w3-padding-top-64">
-                                        <a class="w3-button w3-deep-orange w3-round-medium" href="#">Sign Up</a>
+                                    <div className="w3-half w3-padding-top-64">
+                                        <Link to='/createaccount' className="w3-button w3-deep-orange w3-round-medium">Sign Up</Link>
                                     </div>
                             </div>
                         </div>
@@ -42,7 +38,7 @@ const Home = () => {
                         </div>
                     </div>
 
-                    <div class="w3-twothird w3-padding-16">
+                    <div className="w3-twothird w3-padding-16">
                         
                         <div className="w3-row-padding w3-padding-16">
                             <h3 class="w3-border-bottom w3-border-light-grey" style={{maxWidth:"170px"}}>Now Showing</h3>

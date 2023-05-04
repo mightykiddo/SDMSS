@@ -2,8 +2,93 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../w3.css';
 import NavBar from './NavBar';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import  Modal  from 'react-modal'
+
+
+const customStyles = {
+    content : {
+      top                   : '50%',
+      left                  : '50%',
+      right                 : 'auto',
+      bottom                : 'auto',
+      marginRight           : '-50%',
+      transform             : 'translate(-50%, -50%)',
+      backgroundColor       : '#4f4747'
+    }
+};
 
 const Login = () => {
+    const [username, setusername] = useState('');
+    const [password, setpassword] = useState('');
+    const [dbuser, setdbuser] = useState([]);
+    const [modalIsOpen4, setModalIsOpen4] = useState(false);
+    const history = useNavigate();
+    var successaccess = false;
+    var accounttype = " ";
+
+    useEffect(()=>{
+        fetch('http://localhost:8005/user')
+        .then(res =>{
+            return res.json();
+        })
+        .then(data => {
+            setdbuser(data);
+            console.log(data);
+        });
+    },[]);
+
+    const handleSubmit2 = () =>{
+        setModalIsOpen4(false)
+    }
+
+    // const handleClickSignIn = () => {
+
+    //     console.log("redirect to customer page");
+
+    //     this.props.history.push({ 
+    //         pathname: "/user",
+    //         state: {id: "123", name: "testing"} // your data array of objects
+    //     });
+  
+    // };
+
+    const handleSubmit = (e) =>{
+            e.preventDefault();
+            dbuser.filter(record => record.username === username && record.password === password).map(filterrecord =>{
+
+                successaccess = true
+                console.log(filterrecord.name)
+                console.log(filterrecord.acctype)
+                console.log("Log In Successful")
+                accounttype = filterrecord.acctype
+                
+                
+            })
+
+            if (successaccess) {
+                if (accounttype === "customer"){
+                    //handleClickSignIn()
+                    console.log("redirect to customer page");
+
+                    // this.props.history.push({ 
+                    //     pathname: "/user",
+                    //     state: {id: "123", name: "testing"} // your data array of objects
+                    // });
+                    history('/user');
+                } else if (accounttype === "staff"){
+                    console.log("redirect to staff page");
+                    history('/staff');
+                }
+                
+            } else {
+                setModalIsOpen4(true);
+            }
+            
+    }
+
+
     return (
         <>
             <NavBar />
@@ -14,14 +99,16 @@ const Login = () => {
                 {/* <!-- Log in Section --> */}
                 <div className="w3-container w3-margin-top" id="login">
                     <div className="w3-padding-32">
-                        <h1 className="w3-border-bottom w3-border-teal w3-padding-64">Log in</h1>
-                        <form action="/action_page.php" target="_blank" className="w3-padding-32">
-                            <input className="w3-input w3-section w3-border w3-round" type="text" placeholder="Email" required name="Email"/>
-                            <input className="w3-input w3-section w3-border w3-round" type="text" placeholder="Password" required name="Password"/>
+                        <h1 className="w3-border-bottom w3-border-teal w3-padding-64">Sign In</h1>
+
+                        <form onSubmit={handleSubmit} className="w3-padding-32">
+                            <input value={username} placeholder="Username" onChange={(e)=> setusername(e.target.value)}className="w3-input w3-section w3-border w3-round" type="text" required name="Username"/>
+                            <input type="password" value={password} placeholder="Password" onChange={(e)=> setpassword(e.target.value)} className="w3-input w3-section w3-border w3-round" required name="Password"/>
                             <div className="w3-center w3-padding-large w3-padding-32">
-                                <Link to='/staff' className="w3-button w3-light-grey w3-round-large w3-margin-top">STAFF</Link>
-                                <Link to='/user' className="w3-button w3-teal w3-round-large w3-margin-top">LOG IN</Link>
+                                
+                                <button className="w3-button w3-teal w3-round-large w3-margin-top">SIGN IN</button>
                                 <Link to='/createaccount' className="w3-button w3-light-grey w3-round-large w3-margin-top">CREATE A NEW ACCOUNT</Link>
+                                
                             </div>
                         </form>
                     </div>
@@ -30,6 +117,18 @@ const Login = () => {
 
                 {/* <!-- End page content --> */}
             </div>
+
+            <Modal
+                isOpen={modalIsOpen4}
+                onRequestClose={() => setModalIsOpen4(false)}
+                style={customStyles} >
+
+                <h1>Incorrect Username Or Password</h1>
+                <div className="Iwantaligncenter">
+                    <button className='w3-button w3-light-grey w3-round-large w3-margin-top' onClick={handleSubmit2}>Close</button>
+                </div>
+            </Modal>
+
         </>
     )
 }

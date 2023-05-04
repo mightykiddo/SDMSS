@@ -26,6 +26,7 @@ const LoyaltyTransaction = () => {
                         <th>Transaction ID</th>
                         <th>Customer ID</th>
                         <th>Item Name</th>
+                        <th>Quantity</th>
                         <th>Item Status</th>
                     </tr>
                     {loyaltytransaction.slice(0).reverse().map( record =>(
@@ -33,6 +34,7 @@ const LoyaltyTransaction = () => {
                             <td>{record.id}</td>
                             <td>Customer ID</td>
                             <td>{record.item}</td>
+                            <td>{record.quantity}</td>
                             <td>{record.itemstatus}</td>
                         </tr>
                                 ))}

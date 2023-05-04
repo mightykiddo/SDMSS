@@ -10,6 +10,7 @@ import Staff from './components/Staff';
 import ReviewRating from './components/ReviewRating';
 import LoyaltyPage from './components/LoyaltyPage';
 import LoyaltyTransaction from './components/LoyaltyTransaction';
+import FoodAndDrink from './components/FoodAndDrink';
 
 
 const App = () => {
@@ -39,6 +40,8 @@ const App = () => {
                     <Route path='/loyaltytransaction' element={ <LoyaltyTransaction /> }></Route>
 
                     <Route path='/staff' element={ <Staff /> }></Route>
+
+                    <Route path='/foodanddrink' element={ <FoodAndDrink /> }></Route>
                     
                 </Routes>
               

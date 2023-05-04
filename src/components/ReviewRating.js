@@ -57,7 +57,6 @@ const ReviewRating = () => {
         <>
         
         <NavBarUser />
-
         <div className='w3-row w3-margin'>
             <h3 class="w3-twothird w3-container w3-xxlarge w3-border-bottom w3-border-light-grey" style={{maxWidth:""}}>Review and Rating Section</h3>
             <div className='w3-third w3-container w3-cell w3-cell-middle '>

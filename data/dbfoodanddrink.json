@@ -2,20 +2,23 @@
     "foodanddrink": [
       {
         "itemid": 1,
-        "itemname": "Popcorn",
-        "price": 6.70,
+        "itemname": "Combo 1",
+        "itemdesc":"Consists of: 1 x popcorn, 1 x soft drink",
+        "price": 7.00,
         "id": 1
       },
       {
         "itemid": 2,
-        "itemname": "Sausage bun",
-        "price": 4.50,
+        "itemname": "Combo 2",
+        "itemdesc":"Consists of: 2 x popcorn, 2 x soft drink",
+        "price": 13.50,
         "id": 2
       },
       {
         "itemid": 3,
-        "itemname": "Coke",
-        "price": 3.00,
+        "itemname": "Combo 3",
+        "itemdesc":"Consists of: 3 x popcorn, 3 x soft drink",
+        "price": 20.00,
         "id": 3
       }
     ]
