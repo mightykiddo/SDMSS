@@ -1,0 +1,12 @@
+{
+  "MovieSession": [
+    {
+      "id": 2,
+      "Movie": "batman",
+      "Room": "asd",
+      "Date": "2023-05-17",
+      "Start": "14:52",
+      "End": "06:53"
+    }
+  ]
+}

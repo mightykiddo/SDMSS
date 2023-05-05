@@ -11,7 +11,7 @@ import ReviewRating from './components/ReviewRating';
 import LoyaltyPage from './components/LoyaltyPage';
 import LoyaltyTransaction from './components/LoyaltyTransaction';
 import FoodAndDrink from './components/FoodAndDrink';
-
+import ManagerMain from './Manager/ManagerMain'
 
 const App = () => {
 
@@ -26,6 +26,8 @@ const App = () => {
               
                 <Routes>
                     <Route path='/' exact element={ <Home /> }></Route>
+                    
+                    <Route path="/Manager" element={<ManagerMain />} />
 
                     <Route path='/login' element={ <Login /> }></Route>
 
