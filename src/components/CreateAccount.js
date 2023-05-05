@@ -4,6 +4,36 @@ import '../w3.css';
 import NavBar from './NavBar';
 
 const CreateAccount = () => {
+<<<<<<< Updated upstream
+=======
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [acctype, setacctype] = useState("customer");
+    const [loyaltypoint, setloyaltypoint] = useState(0);
+    const [seatpref, setseatpref] = useState("");
+    const history = useNavigate();
+
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        setacctype("customer");
+        setloyaltypoint(0);
+        const customer = {acctype, name, email, username, password, loyaltypoint, seatpref}
+        fetch('http://localhost:8005/user',{
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(customer)
+        }).then(()=>{
+            console.log("new customer added");
+            history('/login');
+            
+        })
+    }
+    
+
+>>>>>>> Stashed changes
     return (
         <>
 

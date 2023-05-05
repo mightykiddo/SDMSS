@@ -1,12 +1,41 @@
 import React from 'react';
 import NavBarUser from './NavBarUser';
+<<<<<<< Updated upstream
+=======
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
+>>>>>>> Stashed changes
 
 const User = () => {
+
+    const location = useLocation();
+    const history = useNavigate();
+    const username = location.state.username;
+    var loyaltypoint = location.state.loyaltypoint;
+    var seatpref = location.state.seatpref;
+    var id = location.state.id;
+    
+
+    const handleSubmit = () => {
+        console.log("redirect to food and drink page");
+        history('/foodanddrink', {state:{username, loyaltypoint, seatpref, id}});
+    }
+
+
     return (
         <>
         
         <NavBarUser />
         
+        <div>
+            <h3>{username}</h3>
+            <h3>{loyaltypoint}</h3>
+            <h3>{seatpref}</h3>
+            <h3>{id}</h3>
+        </div>
+
         <div className="w3-padding">
 
             <div className=" " id="pets">
@@ -26,8 +55,23 @@ const User = () => {
                                         <h3 class="">to earn</h3>
                                         <h3 class="w3-text-amber">Loyalty Points</h3>
                                     </div>
+<<<<<<< Updated upstream
                                     <div class="w3-half w3-padding-top-64">
                                         <a class="w3-button w3-deep-orange w3-round-medium" href="#">Sign Up</a>
+=======
+                                    <div className="w3-half w3-padding-top-64">
+                                        <a className="w3-button w3-deep-orange w3-round-medium" href="#">Book</a>
+                                    </div>
+                            </div>
+                            <div className="w3-row-padding w3-padding-16">
+                                    <div className="w3-half w3-padding-16">
+                                        <h3 className="">Buy Food & Drink</h3>
+                                        <h3 className="w3-text-amber">Here</h3>
+                                    </div>
+                                    <div className="w3-half w3-padding-top-64">
+                                    <a onClick={handleSubmit} className="w3-button w3-deep-orange w3-round-medium" href="">Order</a>
+                                    
+>>>>>>> Stashed changes
                                     </div>
                             </div>
                         </div>

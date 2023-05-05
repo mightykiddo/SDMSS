@@ -2,13 +2,15 @@ import NavBarStaff from './NavBarStaff';
 import React, { useEffect, useState } from 'react';
 import AdoptList from './AdoptList';
 import ReleaseList from './ReleaseList';
+import { useLocation } from 'react-router-dom';
 
 const Staff = () => {
     const [adopt,setAdopt] = useState(null);
     const [release,setRelease] = useState(null);
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
-
+    const location = useLocation();
+    
     useEffect(()=> {
         setTimeout(() => {
             fetch('http://localhost:8000/adopt')
@@ -23,6 +25,7 @@ const Staff = () => {
                 setAdopt(data);
                 setIsPending(false);
                 setError(null);
+                console.log(location.state.username);
             })
             .catch(err => {
                 setIsPending(false);

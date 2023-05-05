@@ -5,6 +5,7 @@ import  Modal  from 'react-modal'
 import { useState } from 'react';
 import { BsHouse } from 'react-icons/bs';
 import { useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 const customStyles = {
     content : {
@@ -27,6 +28,7 @@ const ReviewRating = () => {
     const [modalIsOpen4, setModalIsOpen4] = useState(false);
     const [isPending, setIsPending] = useState(false);
     const history = useNavigate();
+    const location = useLocation();
 
     const handleSubmit2 = (e) =>{
         history('/user');

@@ -84,6 +84,121 @@
       "item": "1 x Teddy bear",
       "itemstatus": "unclaimed",
       "id": 19
+<<<<<<< Updated upstream
+=======
+    },
+    {
+      "item": "1 x Ticket",
+      "itemstatus": "unclaimed",
+      "id": 20
+    },
+    {
+      "item": "1 x Ticket",
+      "itemstatus": "unclaimed",
+      "quantity": "3",
+      "id": 21
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Unclaimed",
+      "quantity": "2",
+      "id": 22
+    },
+    {
+      "item": "Combo 3",
+      "itemstatus": "Unclaimed",
+      "quantity": "1",
+      "id": 23
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Unclaimed",
+      "quantity": "2",
+      "id": 24,
+      "username": " WE NEED SOMETHING LIKE THIS FOR THIS PART!!!!!"
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Unclaimed",
+      "quantity": "2",
+      "id": 25
+    },
+    {
+      "item": "Combo 3",
+      "itemstatus": "Unclaimed",
+      "quantity": "4",
+      "id": 26
+    },
+    {
+      "itemstatus": "Unclaimed",
+      "id": 27
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Unclaimed",
+      "quantity": "1",
+      "id": 28
+    },
+    {
+      "item": "Combo 1",
+      "itemstatus": "Unclaimed",
+      "quantity": "1",
+      "id": 29
+    },
+    {
+      "item": "Combo 3",
+      "itemstatus": "Unclaimed",
+      "quantity": "3",
+      "id": 30
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Unclaimed",
+      "quantity": "2",
+      "id": 31
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Unclaimed",
+      "quantity": "2",
+      "customerid": 8,
+      "id": 32
+    },
+    {
+      "item": "Combo 3",
+      "itemstatus": "Unclaimed",
+      "quantity": "3",
+      "customerid": 8,
+      "id": 33
+    },
+    {
+      "item": "Combo 1",
+      "itemstatus": "Unclaimed",
+      "quantity": "5",
+      "customerid": 8,
+      "id": 34
+    },
+    {
+      "item": "1 x Ticket",
+      "itemstatus": "Unclaimed",
+      "quantity": "2",
+      "customerid": 8,
+      "id": 35
+    },
+    {
+      "item": "1 x Ticket",
+      "itemstatus": "Unclaimed",
+      "quantity": "2",
+      "customerid": 8,
+      "id": 36
+    },
+    {
+      "item": "1 x Ticket",
+      "itemstatus": "Unclaimed",
+      "quantity": "1",
+      "customerid": 8,
+      "id": 37
+>>>>>>> Stashed changes
     }
   ]
 }
