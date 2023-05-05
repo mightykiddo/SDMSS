@@ -1,6 +1,6 @@
-
 import { useState, useEffect } from "react";
 import NavBarUser from "./NavBarUser";
+
 
 const LoyaltyTransaction = () => {
     const [loyaltytransaction, setLoyaltyTransaction] = useState([]);
@@ -29,10 +29,10 @@ const LoyaltyTransaction = () => {
                         <th>Quantity</th>
                         <th>Item Status</th>
                     </tr>
-                    {loyaltytransaction.slice(0).reverse().map( record =>(
+                    {loyaltytransaction.filter(filtercustomerid => filtercustomerid.customerid).slice(0).reverse().map( record =>(
                         <tr id={record.key}>
                             <td>{record.id}</td>
-                            <td>Customer ID</td>
+                            <td>{record.customerid}</td>
                             <td>{record.item}</td>
                             <td>{record.quantity}</td>
                             <td>{record.itemstatus}</td>

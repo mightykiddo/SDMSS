@@ -24,7 +24,7 @@
       "email": "JasonYaw@gmail.com",
       "username": "jason",
       "password": "1234",
-      "loyaltypoint": 0,
+      "loyaltypoint": 100,
       "seatpref": "C2",
       "id": 8
     },
@@ -123,6 +123,26 @@
       "loyaltypoint": 0,
       "seatpref": "B2",
       "id": 18
+    },
+    {
+      "acctype": "",
+      "name": "issaac",
+      "email": "isaac@gmail.com",
+      "username": "isaac",
+      "password": "1234",
+      "loyaltypoint": 0,
+      "seatpref": "A3",
+      "id": 19
+    },
+    {
+      "acctype": "customer",
+      "name": "issaac2",
+      "email": "isaac2@gmail.com",
+      "username": "issaac",
+      "password": "1234",
+      "loyaltypoint": 0,
+      "seatpref": "C1",
+      "id": 20
     }
   ]
 }
