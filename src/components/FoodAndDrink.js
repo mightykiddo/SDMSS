@@ -1,17 +1,11 @@
 import { useState, useEffect } from "react";
-<<<<<<< Updated upstream
-=======
 import NavBarUser from './NavBarUser';
 import { useLocation, useNavigate } from 'react-router-dom';
 
->>>>>>> Stashed changes
 const FoodAndDrink = () => {
     const history = useNavigate();
     const [foodanddrink, setfoodanddrink] = useState([]);
-    const [check, setCheck] = useState(false);
     const [quantity, setquantity] = useState();
-<<<<<<< Updated upstream
-=======
     const [item, setItem]= useState();
     const [itemstatus, setitemstatus] = useState("Unclaimed");
     const [isPending, setIsPending] = useState(false);
@@ -21,23 +15,15 @@ const FoodAndDrink = () => {
     var seatpref = location.state.seatpref;
     var id = location.state.id;
 
->>>>>>> Stashed changes
     useEffect(()=>{
         fetch('http://localhost:9000/foodanddrink')
         .then(res =>{
             return res.json();
         })
         .then(data => {
-            console.log(data);
             setfoodanddrink(data);
-            console.log(data);
         });
     },[]);
-<<<<<<< Updated upstream
-    const handleChange = (e) =>{
-        setCheck(e.target.checked);
-    }
-=======
 
     const handleSubmit = (e) => {
         var customerid = id;
@@ -56,44 +42,54 @@ const FoodAndDrink = () => {
     }
     
 
->>>>>>> Stashed changes
     return ( 
+        <>
+        
+        <NavBarUser />
+
         <div>
             <h3>{username}food and drink</h3>
             <h1>Food And Drink Purchase Section</h1>
             <p>Select list of items to purchase:</p>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <table>
                     <tr>
-                        <th>Tick to buy</th>
+                        
                         <th>Item name</th>
+                        <th>Item Description:</th>
                         <th>Price</th>
-                        <th>Quantity</th>
                     </tr>
                     {foodanddrink.map(record =>(
                         <tr id={record.key}>
-                            <td><input type="checkbox" onChange={handleChange}></input></td>
                             <td>{record.itemname}</td>
+                            <td>{record.itemdesc}</td>
                             <td>${record.price.toFixed(2)}</td>
-                            <td>
-                            <select
-                                value={quantity}
-                                onChange={(e) =>setquantity(e.target.value)}>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </td>
                         </tr>
                     ))}
-                    
                 </table>
+                <label>Choose a combo:</label>
+                <select value={item} onChange={(e)=> setItem(e.target.value)}>
+                    {foodanddrink.map(current =>(
+                        <option value={current.itemname}>{current.itemname}</option>
+                    ))}
+                </select>
+                <label>Item Quantity: </label>
+                <select value={quantity} onChange={(e)=>setquantity(e.target.value)}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
                 <p>Total: $</p>
-                <button>Confirm Order</button>
+                { !isPending && <button className="w3-button w3-light-grey w3-round-large w3-margin" >Place Order</button>}
+                { isPending && <button disabled className="w3-button w3-light-grey w3-round-large w3-margin-top">Submitting release form...</button>}
+                
             </form>
         </div>
+        
+        </>
+        
      );
 }
  
