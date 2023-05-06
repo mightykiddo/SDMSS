@@ -1,48 +1,48 @@
 {
   "loyaltytransaction": [
     {
-      "item": "item2",
-      "itemstatus": "Unclaimed",
+      "item": "",
+      "itemstatus": "Completed",
       "id": 3
     },
     {
-      "item": "item2",
-      "itemstatus": "Unclaimed",
+      "item": "",
+      "itemstatus": "Completed",
       "id": 4
     },
     {
-      "item": "item2",
-      "itemstatus": "Unclaimed",
+      "setitem2": "",
+      "itemstatus": "Completed",
       "id": 5
     },
     {
-      "item": "item2",
-      "itemstatus": "Unclaimed",
+      "item": "",
+      "itemstatus": "Completed",
       "id": 6
     },
     {
-      "item": "item2",
-      "itemstatus": "Unclaimed",
+      "item": "",
+      "itemstatus": "Completed",
       "id": 7
     },
     {
-      "item": "1 x Teddy bear",
-      "itemstatus": "Unclaimed",
+      "item": "",
+      "itemstatus": "Completed",
       "id": 8
     },
     {
-      "item": "1 x Ticket",
-      "itemstatus": "Unclaimed",
+      "item": " ",
+      "itemstatus": "Completed",
       "id": 9
     },
     {
-      "item": "1 x Teddy bear",
-      "itemstatus": "Unclaimed",
+      "item": " ",
+      "itemstatus": "Completed",
       "id": 10
     },
     {
-      "item": "1 x Teddy bear",
-      "itemstatus": "Unclaimed",
+      "item": "1 x Ticket",
+      "itemstatus": "Completed",
       "id": 11
     },
     {
@@ -51,23 +51,23 @@
       "id": 12
     },
     {
-      "item": "",
+      "item": "1 x Large Size Popcorn",
       "itemstatus": "unclaimed",
       "id": 13
     },
     {
       "item": "1 x Teddy bear",
-      "itemstatus": "claimed",
+      "itemstatus": "Completed",
       "id": 14
     },
     {
       "item": "1 x Large Size Popcorn",
-      "itemstatus": "unclaimed",
+      "itemstatus": "Completed",
       "id": 15
     },
     {
       "item": "1 x Ticket",
-      "itemstatus": "unclaimed",
+      "itemstatus": "Completed",
       "id": 16
     },
     {
@@ -84,8 +84,6 @@
       "item": "1 x Teddy bear",
       "itemstatus": "unclaimed",
       "id": 19
-<<<<<<< Updated upstream
-=======
     },
     {
       "item": "1 x Ticket",
@@ -198,7 +196,27 @@
       "quantity": "1",
       "customerid": 8,
       "id": 37
->>>>>>> Stashed changes
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Unclaimed",
+      "quantity": "4",
+      "customerid": 8,
+      "id": 38
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Unclaimed",
+      "quantity": "2",
+      "customerid": 21,
+      "id": 39
+    },
+    {
+      "item": "1 x Ticket",
+      "itemstatus": "Unclaimed",
+      "quantity": "1",
+      "customerid": 8,
+      "id": 40
     }
   ]
 }
