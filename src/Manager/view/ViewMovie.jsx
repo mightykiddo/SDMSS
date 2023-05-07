@@ -43,7 +43,7 @@ function ViewMovie() {
     setConfirmModal(true); 
   }
 
-  const handleSubmit = (e)=> {
+  const handleSearch = (e)=> {
     e.preventDefault();
     fetch(`${apiUrl}/Movie?Movie=${query}`)
       .then(response => response.json())
@@ -54,7 +54,7 @@ function ViewMovie() {
   return (
     <> 
       <div className="d-flex justify-content-end">
-        <form className="input-group p-3" style={{width : "350px"}}   onSubmit={handleSubmit}>
+        <form className="input-group p-3" style={{width : "350px"}}   onSubmit={handleSearch}>
           <input class="form-control border " type={"text"} value={query} onChange={handleChange} ></input>
         <button  className="btn btn-light" type="submit">search</button>
         </form>
@@ -120,36 +120,13 @@ export default ViewMovie;
 const UpdateMovie = ({data, setData, show, handleClose}) => {
   const apiUrl_Room = process.env.REACT_APP_API_URL_ROOM;
   const apiUrl_Movie = process.env.REACT_APP_API_URL_MOVIE;
-  const apiUrl_Session = process.env.REACT_APP_API_URL_SESSION;
   const [formData, setFormData] = useState(data[0]);
-  const [movies, setMovies] = useState([])
-  const [rooms , setRooms] = useState([])
 
-  useEffect(() => { 
-    fetch(`${apiUrl_Movie}/Movie`)
-    .then(response => response.json())
-    .then(data => {
-         const extractedMovies = data.map(item => item.Movie);
-         setMovies(extractedMovies);
-    })
-    .catch(error => console.error(error));
-
-    //fetch room too
-    fetch(`${apiUrl_Room}/Room`)
-    .then(response => response.json())
-    .then(data => {
-         const extractedRooms = data.map(item => item.Room);
-         setRooms(extractedRooms);
-    })
-    .catch(error => console.error(error));
-  }, []);
-
-
-   
   const handleEdit = (event) => {
     const { id, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
   };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();

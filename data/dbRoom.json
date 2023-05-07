@@ -1,16 +1,12 @@
 {
   "Room": [
     {
-      "id": 1,
-      "Room": "123"
-    },
-    {
-      "id": 2,
-      "Room": "asd"
-    },
-    {
       "id": 3,
-      "Room": "apple"
+      "Name": "apple"
+    },
+    {
+      "id": 5,
+      "Name": "3333"
     }
   ]
 }

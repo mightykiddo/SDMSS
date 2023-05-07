@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
-import ConfirmModal from "../ConfirmModal";
 function ViewSession() {
 
   const [showModal, setShowModal] = useState(false);
@@ -8,14 +7,46 @@ function ViewSession() {
   const [data, setData] = useState([])
   const [filteredData, setFilteredData] = useState([]);
   const [query, setQuery] = useState('');
-  const apiUrl = process.env.REACT_APP_API_URL_SESSION;
+  const apiUrl_Session = process.env.REACT_APP_API_URL_SESSION;
+  const apiUrl_Movie = process.env.REACT_APP_API_URL_MOVIE;
+  const apiUrl_Room = process.env.REACT_APP_API_URL_ROOM;
 
   const loadData = () => {
-    fetch(`${apiUrl}/MovieSession`)
-    .then(response => response.json())
-    .then(data => setData(data))
-    .catch(error => console.error(error));
+    fetch(`${apiUrl_Movie}/Movie`)
+      .then(movieResponse => movieResponse.json())
+      .then(movieData => {
+        fetch(`${apiUrl_Session}/MovieSession`)
+          .then(sessionResponse => sessionResponse.json())
+          .then(sessionData => {
+            fetch(`${apiUrl_Room}/Room`) // fetch room data
+              .then(roomResponse => roomResponse.json())
+              .then(roomData => {
+                // Join the movie, movie_session, and room arrays based on their id/movie_id/room_id fields
+                const joinedData = sessionData.map(session => {
+                  const movie = movieData.find(movie => movie.id === session.Movie_id);
+                  const movieTitle = movie ? movie.Movie: "Nil";
+                  const room = roomData.find(room => room.id === session.Room_id);
+                  const roomName = room ? room.Name : "Nil";
+                  return { ...session, Movie: movieTitle, Room: roomName };
+                });
+                setData(joinedData); // set the state variable to the joined data
+              })
+              .catch(roomError => console.error(roomError));
+          })
+          .catch(sessionError => console.error(sessionError));
+      })
+      .catch(movieError => console.error(movieError));
   }
+  
+
+  /* 
+    movie deleted will delete movie session
+            const joinedData = sessionData.map(session => {
+            const movie = movieData.find(movie => movie.id === session.Movie_id);
+            return { ...session, Movie: movie.Movie };
+          });
+  
+  */
 
   const handleChange = event => {
     setQuery(event.target.value);
@@ -45,8 +76,7 @@ function ViewSession() {
 
   const handleSubmit = (e)=> {//rename
     e.preventDefault();
-    console.log(query)
-    fetch(`${apiUrl}/MovieSession?Movie=${query}`)
+    fetch(`${apiUrl_Session}/MovieSession?Movie=${query}`)
       .then(response => response.json())
       .then(data => setData(data))
       .catch(error => console.error(error));
@@ -150,8 +180,32 @@ const UpdateSession = ({data, setData, show, handleClose}) => {
     setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => { 
     e.preventDefault();
+    fetch(`${apiUrl_Movie}/Movie`)
+    .then(movieResponse => movieResponse.json())
+    .then(movieData => {
+      const matchingMovie = movieData.find(movie => movie.Movie === formData.Movie);
+      const movieId = matchingMovie ? matchingMovie.id : null;
+      console.log(movieId)
+      // Update the movie_id field of the movie_session item using the fetched movieId
+      fetch(`${apiUrl_Session}/MovieSession/${formData.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...formData, Movie_id: movieId }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setData("reload parent")
+          handleClose();
+        })
+        .catch((error) => console.error(error));
+    })
+    .catch(movieError => console.error(movieError));
+    /*
+    default
     fetch(`${apiUrl_Session}/MovieSession/${formData.id}`, {
       method: 'PUT',
       headers: {
@@ -167,7 +221,7 @@ const UpdateSession = ({data, setData, show, handleClose}) => {
         
       })
       .catch((error) => console.error(error));
-     
+      */  
   }
   return(
     <>

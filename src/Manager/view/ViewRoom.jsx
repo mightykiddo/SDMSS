@@ -1,6 +1,5 @@
 import { useState, useEffect} from "react";
-import UpdateModal from "../UpdateModal";
-import ConfirmModal from "../ConfirmModal";
+import { Modal, Button } from "react-bootstrap";
 function ViewRoom() {
 
   const [showModal, setShowModal] = useState(false);
@@ -49,7 +48,7 @@ function ViewRoom() {
   const handleSubmit = (e)=> {
     e.preventDefault();
     console.log(query)
-    fetch(`${apiUrl}/Room?Room=${query}`)
+    fetch(`${apiUrl}/Room?Name=${query}`)
       .then(response => response.json())
       .then(data => setData(data))
       .catch(error => console.error(error));
@@ -75,7 +74,7 @@ function ViewRoom() {
         data?.map((room) => (
           <>
           <tr key={room.No}>
-            <td className="p-4">{room.Room}</td>
+            <td className="p-4">{room.Name}</td>
             <td>
                <div className="d-flex justify-content-end"> 
                     <button type="button" className="btn text-white m-1 " style={{backgroundColor : "royalblue"}} onClick={()=>handleUpdate(room.id)}>Update</button>
@@ -90,18 +89,15 @@ function ViewRoom() {
         )))}
       </tbody>
      </table>
-     {showModal === true && 
-          <UpdateModal
-          type = "ViewRoom"
+     {showModal === true &&      
+     <UpdateRoom
           data={filteredData}
           setData = {setFilteredData} //setData to reload parent
           show={showModal}
-          handleClose={handleCloseModal}/>
-     }
+          handleClose={handleCloseModal}
+        />}
     {showConfirmModal == true &&
-        <ConfirmModal
-        type = "delete"
-        db = "Room"
+        <DeleteRoom
         data={filteredData}
         setData ={setFilteredData}
         show={showConfirmModal}
@@ -112,3 +108,82 @@ function ViewRoom() {
 }
 
 export default ViewRoom;
+
+
+const UpdateRoom = ({data, setData, show, handleClose}) => {
+  const apiUrl_Room = process.env.REACT_APP_API_URL_ROOM;
+  const [formData, setFormData] = useState(data[0]);
+
+
+  const handleEdit = (event) => {
+    const { id, value } = event.target;
+    setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
+  };
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData.Name)
+    fetch(`${apiUrl_Room}/Room/${formData.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setData("re-load parent")
+        handleClose();
+      })
+      .catch((error) => console.error(error));
+  }
+  return(
+    <>
+      <Modal show={show} onHide={handleClose}>
+      <Modal.Body>
+      <form  onSubmit={handleSubmit}>
+          <div class="form-group">
+            <label hmtlfor="Name"  class="col-form-label">Room Name:</label>
+            <input type="text" onChange={handleEdit}  value={formData.Name} class="form-control" id="Name"></input>
+          </div>
+          <button type="submit">Update</button>
+        </form>
+        </Modal.Body>
+      </Modal>
+    </>
+  )
+}
+
+const DeleteRoom = ({data, setData, show, handleClose}) => {
+  const apiUrl_Room = process.env.REACT_APP_API_URL_ROOM;
+
+  const handleDelete = () => {
+    fetch(`${apiUrl_Room}/Room/${data[0].id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => 
+        setData("reload"))
+      .catch(error => console.error(error))
+
+    handleClose()
+  }
+  return(
+    <>
+    <Modal show={show} onHide={handleClose}>
+     <Modal.Body>
+          Confirm Delete Room ?
+     </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleDelete}>
+          Yes {/*handle delete/update*/}
+        </Button>
+      </Modal.Footer>
+    </Modal>
+    </>
+  )
+}
