@@ -10,28 +10,33 @@ function CreateMovieSession() {
      const [rooms , setRooms] = useState([])
      const [formData, setFormData] = useState({
           id: "",
-          Movie: "",
-          Room: "",
+          Movie_id:  "",
+          Room_id: "",
           Date: "",
           Start: "",
           End: "" });
-
 
      const loadMoviesnRooms = () => {
           // read the data from the JSON file when the component mounts
           fetch(`${apiUrl_Movie}/Movie`)
           .then(response => response.json())
           .then(data => {
-               const extractedMovies = data.map(item => item.Movie);
+               const extractedMovies = data.map(item => ({
+                    Movie: item.Movie,
+                    id: item.id
+                  }));
                setMovies(extractedMovies);
+               
           })
           .catch(error => console.error(error));
-
           //fetch room too
           fetch(`${apiUrl_Room}/Room`)
           .then(response => response.json())
           .then(data => {
-               const extractedRooms = data.map(item => item.Room);
+               const extractedRooms = data.map(item => ({
+                    Name: item.Name,
+                    id: item.id
+                  }));
                setRooms(extractedRooms);
           })
           .catch(error => console.error(error));
@@ -43,12 +48,6 @@ function CreateMovieSession() {
           loadMoviesnRooms()
      }, []);
 
-     const formatTime = (time) => {
-          const [hours, minutes] = time.split(':');
-          let suffix = hours >= 12 ? 'pm' : 'am';
-          let formattedHours = hours % 12 || 12;
-          return `${formattedHours}:${minutes}${suffix}`;
-        }
 
      const handleCloseModal = () => {
           setShowModal(false); 
@@ -62,8 +61,7 @@ function CreateMovieSession() {
       
      const handleSubmit = (event) =>{
           event.preventDefault();
-          console.log("pleaes")
-          
+          console.log(formData)
           fetch(`${apiUrl_Session}/MovieSession`, {
                method: 'POST',
                headers: {
@@ -74,7 +72,6 @@ function CreateMovieSession() {
                .then((response) => response.json())
                .then((data) => console.log(data))
                .catch((error) => console.error(error));
-          
      }
 
      return (
@@ -83,20 +80,20 @@ function CreateMovieSession() {
           
           <div className="form-group d-flex p-3">
                <p class="col-form-label" style={{width:'100px'}}>Movie</p>
-               <select id="Movie" className="form-select text-wrap" style={{ width: '400px'}} onChange={handleEdit}>
+               <select id="Movie_id" className="form-select text-wrap" style={{ width: '400px'}} onChange={handleEdit}>
                     {/* got data then use map to populate the dd */}
                     {movies.map((option) => (
-                         <option key={option} value={option}>{option} </option>
+                         <option key={option.id} value={option.id}>{option.Movie} </option>
                     ))}
                </select>
           </div>
 
           <div className="form-group d-flex align-items-center text-left p-3 ">
                <p class="col-form-label"  style={{width:'100px'}}>Room:</p>
-               <select id="Room" className="form-select text-wrap" style={{ width: '400px'}} onChange={handleEdit}>
+               <select id="Room_id" className="form-select text-wrap" style={{ width: '400px'}} onChange={handleEdit}>
                     {/* got data then use map to populate the dd */}
                     {rooms.map((option) => (
-                         <option key={option} value={option}>{option} </option>
+                         <option key={option.id} value={option.id}>{option.Name} </option>
                     ))}
                </select>
           </div>

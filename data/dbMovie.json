@@ -13,6 +13,13 @@
       "Duration": "",
       "Synopsis": "",
       "AgeRating": ""
+    },
+    {
+      "id": 5,
+      "Movie": "marvels",
+      "Duration": "2hr",
+      "Synopsis": "dadawdaw",
+      "AgeRating": "PG13"
     }
   ]
 }

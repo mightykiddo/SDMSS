@@ -12,10 +12,11 @@ function ViewUserAcc(){
   const apiUrl = process.env.REACT_APP_API_URL_USERACC;
 
   const loadData = () => {
-    fetch(`${apiUrl}/User`)
+    fetch(`${apiUrl}/user`)
     .then(response => response.json())
     .then(data => {
       setData(data)
+      console.log(data)
     })
     .catch(error => console.error(error));
   }
@@ -55,7 +56,7 @@ function ViewUserAcc(){
 
   const handleSubmit = (e)=> {
     e.preventDefault();
-    fetch(`${apiUrl}/User?Email=${query}`)
+    fetch(`${apiUrl}/user?email=${query}`)
       .then(response => response.json())
       .then(data => setData(data))
       .catch(error => console.error(error));
@@ -73,6 +74,7 @@ function ViewUserAcc(){
       <table className="text-black" style={{backgroundColor : "whitesmoke", width : '1000px'}}>
       <thead>
         <tr className="d-flex-column" style={{backgroundColor : "orange"}}>
+          <th scope="col">Name</th>
           <th scope="col">Email</th>
           <th scope="col">Account Type</th>
           <th scope="col">Status</th>
@@ -83,10 +85,11 @@ function ViewUserAcc(){
         {data.length == 0 ?  (<p className="p-3">No Matching Records</p>) : (
         data?.map((acc) => (
           <>
-          <tr key={acc.Email}>
-            <td className="p-2">{acc.Email}</td>
-            <td className="p-2">{acc.Type}</td>
-            <td className='p-2' style={{ color: acc.Status === "Active" ? "royalblue" : "red"}}>{acc.Status}</td>
+          <tr key={acc.email}>
+            <td className="p-2">{acc.name}</td>
+            <td className="p-2">{acc.email}</td>
+            <td className="p-2">{acc.acctype}</td>
+            <td className='p-2' style={{ color: acc.Status === "Active" ? "royalblue" : "red"}}>{acc.status}</td>
             <td>
               <div className="d-flex align-items-center justify-content-end"> 
                     <button type="button" className="btn text-white m-1 " style={{backgroundColor : "royalblue"}}
@@ -94,7 +97,7 @@ function ViewUserAcc(){
                         Update
                       </button>
                   <button type="button" className="btn text-white m-1" style={{backgroundColor : "red"}} onClick={()=> confirmModal(acc.id, "delete")}>Delete</button>
-                    <button type="button" className="btn text-white m-1" style={{backgroundColor : "red"}} onClick={()=> confirmModal(acc.id, acc.Status)}>{acc.Status === "Active" ? "Suspend" : "Unsuspend"}</button>
+                    <button type="button" className="btn text-white m-1" style={{backgroundColor : "red"}} onClick={()=> confirmModal(acc.id, acc.status)}>{acc.status === "Active" ? "Suspend" : "Unsuspend"}</button>
                </div>
             </td>
           </tr>
@@ -137,19 +140,7 @@ export default ViewUserAcc;
 const UpdateUserAccount = ({data, setData, show, handleClose}) => {
   const apiUrl_User = process.env.REACT_APP_API_URL_USERACC;
   const [formData, setFormData] = useState(data[0]);
-  
-  /*alternate way
-  const [user , setUser] = useState([]);
-  useEffect(() => { //load data on page load 
-    fetch(`${apiUrl_User}/User`)
-    .then(response => response.json())
-    .then(data => {
-          const extractedEmail = data.map(item => item.Email);
-          setUser(extractedEmail);
-    })
-    .catch(error => console.error(error));
-  });*/
-  
+
   const handleEdit = (event) => {
     const { id, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
@@ -158,7 +149,7 @@ const UpdateUserAccount = ({data, setData, show, handleClose}) => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    fetch(`${apiUrl_User}/User/${formData.id}`, {
+    fetch(`${apiUrl_User}/user/${formData.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -180,15 +171,15 @@ const UpdateUserAccount = ({data, setData, show, handleClose}) => {
       <form  onSubmit={handleSubmit}>
           <div class="form-group">
             <label hmtlfor="Email"  class="col-form-label">Email:</label>
-            <input type="text" onChange={handleEdit}  value={formData.Email} class="form-control" id="Email"></input>
+            <input type="text" onChange={handleEdit}  value={formData.email} class="form-control" id="email"></input>
           </div>
           <div class="form-group">
             <label hmtlfor="Status" class="col-form-label">Status:</label>
-            <textarea class="form-control" onChange={handleEdit} value={formData.Status} id="Status"></textarea>
+            <textarea class="form-control" disabled onChange={handleEdit} value={formData.status} id="status"></textarea>
           </div>
           <div class="form-group">
             <label hmtlfor="Type" class="col-form-label">Type</label>
-            <select className="form-select" onChange={handleEdit} value={formData.Type} id="Type">
+            <select className="form-select" onChange={handleEdit} value={formData.acctype} id="acctype">
             <option value="Customer">Customer</option>
                     <option value="System Admin">System Admin</option>
                     <option value="Manager">Manager</option>

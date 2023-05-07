@@ -1,0 +1,13 @@
+{
+     "MovieTransaction": [
+       {
+         "id": 36,
+         "Ticket_id" : "T0332",
+         "Movie_id": "2",
+         "Room_id" : "3",
+         "Seat_No" : "23",
+         "Cost" : "17.99",
+         "Date" : "2023-3-3"
+       }
+     ]
+   }

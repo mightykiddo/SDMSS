@@ -1,32 +1,28 @@
 {
   "MovieSession": [
     {
-      "id": 1,
-      "Movie_id": 3,
-      "Room_id" : 3,
-      "Date": "2023-05-17",
-      "Start": "14:52",
-      "End": "06:53",
-      "Movie": "catwomn"
+      "id": 36,
+      "Movie_id": "4",
+      "Room_id": "5",
+      "Date": "2023-05-10",
+      "Start": "",
+      "End": ""
     },
     {
-      "id": 23,
-      "Movie_id": 4,
-      "Room_id" : 2,
-      "Room": "asd",
-      "Date": "2023-05-17",
-      "Start": "14:52",
-      "End": "06:53",
-      "Movie": "superman"
+      "id": 37,
+      "Movie_id": "4",
+      "Room_id": "5",
+      "Date": "2023-05-09",
+      "Start": "13:36",
+      "End": "21:41"
     },
     {
-      "id": 33,
-      "Movie_id": 3,
-      "Room_id" : 1,
-      "Room": "asd",
-      "Date": "2023-05-17",
-      "Start": "14:52",
-      "End": "06:53"
+      "id": 38,
+      "Movie_id": "4",
+      "Room_id": 0,
+      "Date": "",
+      "Start": "",
+      "End": ""
     }
   ]
 }

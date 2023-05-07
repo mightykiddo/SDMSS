@@ -5,12 +5,11 @@ function CreateUserAcc() {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
      id : "",
-     Email : "",
-     Password : "",
-     Status : "Active",
-     Type : ""});
-     
-     
+     name : "",
+     email : "",
+     password : "",
+     status: "Active",
+     acctype : ""});
   const apiUrl = process.env.REACT_APP_API_URL_USERACC;
 
   const handleSubmit = e =>{
@@ -38,6 +37,10 @@ function CreateUserAcc() {
      return (
           <>
           <form onSubmit={handleSubmit} className="CreateMovie text-white bg-dark d-flex-column " style={{height : "1000px"}}>
+          <div className="form-group d-flex align-items-center text-left p-3 ">
+               <label class="col-form-label"  style={{width:'100px'}}>Name:</label>
+               <input id="Name" class="form-control" type="text" style={{ width: '400px'}}  onChange={handleEdit} ></input>
+          </div>
           <div className="form-group d-flex align-items-center text-left p-3 ">
                <label class="col-form-label"  style={{width:'100px'}}>Email:</label>
                <input id="Email" class="form-control" type="text" style={{ width: '400px'}}  onChange={handleEdit} ></input>

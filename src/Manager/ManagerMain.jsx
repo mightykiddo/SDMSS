@@ -1,12 +1,12 @@
 //Manager View
 import { useNavigate, Link} from "react-router-dom";
-import {BrowserRouter as Router,  Route, Routes, Switch } from 'react-router-dom';
 import CreateMovie from "./create/CreateMovie";
 import CreateMovieSession from "./create/CreateMovieSess";
 import CreateRoom from "./create/CreateRoom";
 import ViewMovie from "./view/ViewMovie";
 import ViewSession from "./view/viewSession";
 import ViewRoom from "./view/ViewRoom";
+import GenerateReport from "./report/GenerateReport";
 
 //states
 import { useState } from "react";
@@ -71,6 +71,7 @@ function Main() {
                {Option == "view-room" && <ViewRoom/>}
                {Option == "view-session" && <ViewSession/>}
                {Option == "view-movie" && <ViewMovie/>}
+               {Option == "GenerateReport" && <GenerateReport/>}
                
           </div>
      </div>

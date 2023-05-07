@@ -23,12 +23,14 @@ function ViewSession() {
               .then(roomData => {
                 // Join the movie, movie_session, and room arrays based on their id/movie_id/room_id fields
                 const joinedData = sessionData.map(session => {
-                  const movie = movieData.find(movie => movie.id === session.Movie_id);
+                  const movie = movieData.find(movie => movie.id === parseInt(session.Movie_id));
                   const movieTitle = movie ? movie.Movie: "Nil";
-                  const room = roomData.find(room => room.id === session.Room_id);
+                  const room = roomData.find(room => room.id === parseInt(session.Room_id));
                   const roomName = room ? room.Name : "Nil";
+                  console.log({...session, Movie: movieTitle, Room: roomName})
                   return { ...session, Movie: movieTitle, Room: roomName };
                 });
+               
                 setData(joinedData); // set the state variable to the joined data
               })
               .catch(roomError => console.error(roomError));
@@ -37,15 +39,13 @@ function ViewSession() {
       })
       .catch(movieError => console.error(movieError));
   }
-  
-
+   
   /* 
     movie deleted will delete movie session
             const joinedData = sessionData.map(session => {
             const movie = movieData.find(movie => movie.id === session.Movie_id);
             return { ...session, Movie: movie.Movie };
           });
-  
   */
 
   const handleChange = event => {
