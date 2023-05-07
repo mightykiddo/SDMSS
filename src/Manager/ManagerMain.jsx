@@ -56,14 +56,13 @@ function Main() {
                          </option>
                     </select>
                </div>
-          
+          {/* 
                <div className="m-0 input-group justify-content-end align-items-center">
                     <form class="form-inline my-2 my-lg-0">
                          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
-                         {/*<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> */}
-                         {/*prevent e.default...*/}
                     </form>
                </div>
+          */}
           </div>
           <div style={{width : '100%'}}>
                 {Option == "create-movie" && <CreateMovie/>}

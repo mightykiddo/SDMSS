@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SuccessModel from "../../components/SuccessModal"
+import SuccessModel from "../../components/SuccessModal";
 function CreateMovieSession() {
      const apiUrl_Movie = process.env.REACT_APP_API_URL_MOVIE;
      const apiUrl_Room = process.env.REACT_APP_API_URL_ROOM;

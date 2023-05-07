@@ -7,6 +7,7 @@ function ViewRoom() {
   const [showConfirmModal, setConfirmModal] = useState(false);
   const [data, setData] = useState([])
   const [filteredData, setFilteredData] = useState([]);
+  const [query, setQuery] = useState('');
 
   const apiUrl = process.env.REACT_APP_API_URL_ROOM;
 
@@ -16,9 +17,10 @@ function ViewRoom() {
     .then(data => setData(data))
     .catch(error => console.error(error));
   }
+
   useEffect(() => { //load data on page load 
     loadData()
-  }, [filteredData]);
+  }, [filteredData, query]);
 
 
 
@@ -26,6 +28,11 @@ function ViewRoom() {
     setFilteredData(data.filter((roomData) => roomData.id === id));
     // filteredData will now contain an array with only the movie data objects that match the given id
     setShowModal(true);
+  };
+
+  //for search 
+  const handleChange = event => {
+    setQuery(event.target.value);
   };
 
   const handleCloseModal = () => {
@@ -39,8 +46,23 @@ function ViewRoom() {
     setConfirmModal(true); 
   }
 
+  const handleSubmit = (e)=> {
+    e.preventDefault();
+    console.log(query)
+    fetch(`${apiUrl}/Room?Room=${query}`)
+      .then(response => response.json())
+      .then(data => setData(data))
+      .catch(error => console.error(error));
+  };
+
   return (
      <>
+      <div className="d-flex justify-content-end">
+        <form className="input-group p-3" style={{width : "350px"}}   onSubmit={handleSubmit}>
+          <input class="form-control border " type={"text"} value={query} onChange={handleChange} ></input>
+        <button  className="btn btn-light" type="submit">search</button>
+        </form>
+      </div>
     <table className="text-black" style={{backgroundColor : "whitesmoke", width : '100%'}}>
       <thead>
         <tr className="d-flex-column" style={{backgroundColor : "orange"}}>
@@ -49,7 +71,8 @@ function ViewRoom() {
         </tr>
       </thead>
       <tbody >
-        {data?.map((room) => (
+      {data.length == 0 ?  (<p className="p-3">No Matching Records</p>) : (
+        data?.map((room) => (
           <>
           <tr key={room.No}>
             <td className="p-4">{room.Room}</td>
@@ -64,7 +87,7 @@ function ViewRoom() {
               <td colSpan="2" className="border-bottom"></td>
           </tr>
           </>
-        ))}
+        )))}
       </tbody>
      </table>
      {showModal === true && 

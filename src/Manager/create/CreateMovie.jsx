@@ -13,7 +13,7 @@ function CreateMovie() {
      const handleCloseModal = () => {
           setShowModal(false); 
      };
-          console.log("cr8 movei")
+          
      const handleEdit = (event) => {
           const { id, value } = event.target;
           setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
@@ -21,7 +21,7 @@ function CreateMovie() {
       
      const handleSubmit = (event) =>{
           event.preventDefault();
-          console.log(formData)
+         
           
           fetch(`${apiUrl}/Movie`, {
                method: 'POST',

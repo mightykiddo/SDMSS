@@ -12,6 +12,7 @@ import LoyaltyPage from './components/LoyaltyPage';
 import LoyaltyTransaction from './components/LoyaltyTransaction';
 import FoodAndDrink from './components/FoodAndDrink';
 import ManagerMain from './Manager/ManagerMain'
+import SystemAdmin from './SystemAdmin/SystemAdminMain';
 
 const App = () => {
 
@@ -26,6 +27,8 @@ const App = () => {
               
                 <Routes>
                     <Route path='/' exact element={ <Home /> }></Route>
+                    
+                    <Route path="/Admin" element={<SystemAdmin/>} />
                     
                     <Route path="/Manager" element={<ManagerMain />} />
 

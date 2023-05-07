@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SuccessModel from "../../components/SuccessModal"
+import SuccessModel from "../../components/SuccessModal";
 function CreateRoom() {
 
      const apiUrl= process.env.REACT_APP_API_URL_ROOM;
