@@ -20,6 +20,10 @@ const User = () => {
         history('/foodanddrink', {state:{username, loyaltypoint, seatpref, id}});
     }
 
+    const handleSubmit2 = () => {
+        console.log("redirect to food and drink page");
+        history('/bookticket', {state:{username, loyaltypoint, seatpref, id}});
+    }
 
     return (
         <>
@@ -51,7 +55,8 @@ const User = () => {
                                         <h3 className="w3-text-amber">Now</h3>
                                     </div>
                                     <div className="w3-half w3-padding-top-64">
-                                        <a className="w3-button w3-deep-orange w3-round-medium" href="#">Book</a>
+                                        
+                                        <a onClick={handleSubmit2} className="w3-button w3-deep-orange w3-round-medium" href="">Book</a>
                                     </div>
                             </div>
                             <div className="w3-row-padding w3-padding-16">

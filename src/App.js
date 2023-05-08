@@ -11,6 +11,7 @@ import ReviewRating from './components/ReviewRating';
 import LoyaltyPage from './components/LoyaltyPage';
 import LoyaltyTransaction from './components/LoyaltyTransaction';
 import FoodAndDrink from './components/FoodAndDrink';
+import BookTicket from './components/BookTicket';
 
 
 const App = () => {
@@ -42,6 +43,8 @@ const App = () => {
                     <Route path='/staff' element={ <Staff /> }></Route>
 
                     <Route path='/foodanddrink' element={ <FoodAndDrink /> }></Route>
+
+                    <Route path='/bookticket' element={ <BookTicket/> }></Route>
                     
                 </Routes>
               

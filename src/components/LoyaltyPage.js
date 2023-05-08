@@ -7,6 +7,7 @@ const LoyaltyPage = () => {
     const history = useNavigate();
     const [loyaltyitem, setLoyaltyItem] = useState([]);
     const [item, setItem] = useState('');
+    
     const [points, setPoints] = useState('');
     const [itemstatus, setitemstatus] = useState("Unclaimed");
     const [quantity, setquantity] = useState(" ");
@@ -17,6 +18,7 @@ const LoyaltyPage = () => {
     var seatpref = location.state.seatpref;
     var id = location.state.id;
     var totalpoints = " ";
+    
 
     useEffect(() => {
         fetch('http://localhost:8004/loyaltyitems')
@@ -36,10 +38,36 @@ const LoyaltyPage = () => {
         
         if (loyaltypoint > totalpoints){
 
+            var deduction = loyaltypoint - totalpoints; 
+
+            console.log(deduction)
+
             var customerid = id;
+            const itemstatus ="Unclaimed"
             const loyaltytransaction = {item, itemstatus, quantity, customerid};
             
             setIsPending(true);
+
+            loyaltypoint = deduction
+
+            fetch(`http://localhost:8005/user/${customerid}`) 
+            .then(res=>{
+                return res.json();
+            })
+            .then(data => {
+                
+                console.log(data)
+
+                fetch(`http://localhost:8005/user/${customerid}`,
+                {
+                    method: 'PUT',
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({...data, loyaltypoint : deduction})
+                }) 
+                
+            }); 
+
+            
             
             fetch('http://localhost:8003/loyaltytransaction',{
                 method: 'POST',
@@ -49,6 +77,7 @@ const LoyaltyPage = () => {
                 console.log("Item is redeemed");
                 history('/user', {state:{username, loyaltypoint, seatpref, id}});
             })
+ 
 
         } else if (loyaltypoint < totalpoints){
 

@@ -1,0 +1,13 @@
+{"moviesession": [
+    { "id": 1, "date": "0105", "movie":  "Movie 1", "timeslot": "1000" },
+    { "id": 2, "date": "0105", "movie":  "Movie 1", "timeslot": "1100" },
+    { "id": 3, "date": "0105", "movie":  "Movie 2", "timeslot": "1000" },
+    { "id": 4, "date": "0105", "movie":  "Movie 3", "timeslot": "1100" },
+    { "id": 5, "date": "0105", "movie":  "Movie 1", "timeslot": "1300" },
+    { "id": 6, "date": "0105", "movie":  "Movie 2", "timeslot": "1100" },
+    { "id": 7, "date": "0205", "movie":  "Movie 2", "timeslot": "1200" },
+    { "id": 8, "date": "0205", "movie":  "Movie 3", "timeslot": "1300" },
+    { "id": 9, "date": "0305", "movie":  "Movie 1", "timeslot": "1400" },
+    { "id": 10, "date": "0205", "movie":  "Movie 3", "timeslot": "1500" }
+    ]
+}

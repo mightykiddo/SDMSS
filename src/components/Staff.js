@@ -3,6 +3,10 @@ import React, { useEffect, useState } from 'react';
 import AdoptList from './AdoptList';
 import ReleaseList from './ReleaseList';
 import { useLocation } from 'react-router-dom';
+import TestWater from './TestWater';
+import BookTicket from './BookTicket';
+import ViewSession from './viewSession';
+
 
 const Staff = () => {
     const [adopt,setAdopt] = useState(null);
@@ -60,6 +64,8 @@ const Staff = () => {
         <>
         
         <NavBarStaff />
+
+        <ViewSession/>
 
         { error && <div> {error} </div> }
         {isPending && <div>Loading...</div>}

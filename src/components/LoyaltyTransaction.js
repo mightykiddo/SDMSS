@@ -23,7 +23,6 @@ const LoyaltyTransaction = () => {
     return (  
         <>
             <NavBarUser />
-            <StaffSetLoyaltyTransaction/>
 
             <div>    
                 <h1>Loyalty Transaction History</h1>
