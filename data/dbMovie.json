@@ -1,17 +1,17 @@
 {
   "Movie": [
     {
-      "id": 4,
-      "Movie": "superman",
-      "Duration": "",
-      "Synopsis": "",
-      "AgeRating": ""
-    },
-    {
       "id": 5,
       "Movie": "marvels",
       "Duration": "2hr",
       "Synopsis": "dadawdaw",
+      "AgeRating": "PG13"
+    },
+    {
+      "id": 6,
+      "Movie": "singpore",
+      "Duration": "123",
+      "Synopsis": "13123123",
       "AgeRating": "PG13"
     }
   ]

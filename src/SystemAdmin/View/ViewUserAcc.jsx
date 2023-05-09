@@ -43,7 +43,6 @@ function ViewUserAcc(){
   };
 
   const confirmModal = (id, status) => {
-    console.log("account status" , status)
     setFilteredData(data.filter((userData) => userData.id === id));
     //delete modal
     if (status === "Active") {
@@ -75,6 +74,7 @@ function ViewUserAcc(){
       <table className="text-black" style={{backgroundColor : "whitesmoke", width : '1000px'}}>
       <thead>
         <tr className="d-flex-column" style={{backgroundColor : "orange"}}>
+        <th scope="col">UserName</th>
           <th scope="col">Name</th>
           <th scope="col">Email</th>
           <th scope="col">Account Type</th>
@@ -87,10 +87,10 @@ function ViewUserAcc(){
         data?.map((acc) => (
           <>
           <tr key={acc.email}>
-            <td className="p-2">{acc.name}</td>
+            <td className="p-2">{acc.username}</td>
             <td className="p-2">{acc.email}</td>
             <td className="p-2">{acc.acctype}</td>
-            <td className='p-2' style={{ color: acc.Status === "Active" ? "royalblue" : "red"}}>{acc.status}</td>
+            <td className='p-2' style={{ color: acc.status === "Active" ? "royalblue" : "red"}}>{acc.status}</td>
             <td>
               <div className="d-flex align-items-center justify-content-end"> 
                     <button type="button" className="btn text-white m-1 " style={{backgroundColor : "royalblue"}}
@@ -170,13 +170,20 @@ const UpdateUserAccount = ({data, setData, show, handleClose}) => {
       <Modal show={show} onHide={handleClose}>
       <Modal.Body>
       <form  onSubmit={handleSubmit}>
+      <div class="form-group">
+            <label hmtlfor="username"  class="col-form-label">username:</label>
+            <input type="text" onChange={handleEdit}  value={formData.username} class="form-control" id="username"></input>
+          </div>
           <div class="form-group">
             <label hmtlfor="Email"  class="col-form-label">Email:</label>
-            <input type="text" onChange={handleEdit}  value={formData.email} class="form-control" id="email"></input>
+            <input type="text" disabled onChange={handleEdit}  value={formData.email} class="form-control" id="email"></input>
           </div>
           <div class="form-group">
             <label hmtlfor="Status" class="col-form-label">Status:</label>
-            <textarea class="form-control" disabled onChange={handleEdit} value={formData.status} id="status"></textarea>
+            <select class="form-control" disabled onChange={handleEdit} value={formData.status} id="status">
+              <option value="Suspend">Suspend</option>
+              <option value="Active">Active</option>
+            </select>
           </div>
           <div class="form-group">
             <label hmtlfor="Type" class="col-form-label">Type</label>
@@ -198,7 +205,6 @@ const UpdateUserAccount = ({data, setData, show, handleClose}) => {
 
 const DeleteUserAcc = ({data, setData, show , handleClose}) => {
   const apiUrl_User = process.env.REACT_APP_API_URL_USERACC;
-  console.log("delete")
   const handleDelete = e =>{
     fetch(`${apiUrl_User}/user/${data[0].id}`, {
       method: 'DELETE',
@@ -232,7 +238,6 @@ const DeleteUserAcc = ({data, setData, show , handleClose}) => {
 
 const SuspendUserAcc = ({type, data, setData, show , handleClose}) => {
   const apiUrl_User = process.env.REACT_APP_API_URL_USERACC;
-  console.log("suspend", type)
   const handleSuspend = e =>{
     if (type === "unsuspend"){
       fetch(`${apiUrl_User}/user/${data[0].id}`, {

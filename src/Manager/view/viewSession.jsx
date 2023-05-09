@@ -152,18 +152,16 @@ const UpdateSession = ({data, setData, show, handleClose}) => {
 
   const handleSubmit = (e) => { 
     e.preventDefault();
+    console.log(formData)
     var movie = null;
     var room = null;
-    console.log(formData)
-    if(formData.Movie_id !== null){   
+    if(formData.Movie_id !== null ){   
         movie = movies.find(movie => movie.id == formData.Movie_id) //will return undefined and break
         movie = movie.Movie
-        console.log("Movie is selected", movie)
       }
     if(formData.Room_id !== null){
       room = rooms.find(room => room.id == formData.Room_id)
       room = room.Name
-      console.log("Room is selected", rooms)
     }
 
     fetch(`${apiUrl_Session}/MovieSession/${formData.id}`, {
@@ -175,8 +173,8 @@ const UpdateSession = ({data, setData, show, handleClose}) => {
         ...formData, 
         Movie : movie,
         Room : room,
-        Room_id : formData.Room_id,
-        Movie_id : formData.Movie_id
+        Room_id : parseInt(formData.Room_id),
+        Movie_id : parseInt(formData.Movie_id)
       }),
     })
       .then((response) => response.json())

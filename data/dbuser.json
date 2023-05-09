@@ -1,21 +1,10 @@
 {
   "user": [
     {
-      "acctype": "System Admin",
-      "name": "shijie",
-      "email": "shijie@gmail.com",
-      "username": "shijie",
-      "password": "1234",
-      "loyaltypoint": 0,
-      "seatpref": "A3",
-      "status": "Active",
-      "id": 9
-    },
-    {
       "acctype": "Customer",
       "name": "shijie2",
       "email": "shijie2@gmail.com",
-      "username": "sj",
+      "username": "sjd",
       "password": "1234",
       "loyaltypoint": 0,
       "seatpref": "B3",

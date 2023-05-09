@@ -2,25 +2,15 @@
   "MovieSession": [
     {
       "id": 43,
-      "Movie_id": "4",
+      "Movie_id": 4,
       "Movie": "superman",
-      "Room_id": "3",
-      "Room": "apples",
+      "Room_id": 4,
+      "Room": "ddd",
       "Date": "",
       "Start": "",
       "End": ""
     },
-    {
-      "id": 44,
-      "Movie_id": null,
-      "Movie": null,
-      "Room_id": null,
-      "Room": null,
-      "Date": "2023-05-24",
-      "Start": "",
-      "End": ""
-    },
-    {
+    { 
       "id": 22,
       "Movie_id": "1",
       "Movie": "catwomnDDDd",
