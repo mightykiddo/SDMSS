@@ -12,41 +12,13 @@ function ViewSession() {
   const apiUrl_Room = process.env.REACT_APP_API_URL_ROOM;
 
   const loadData = () => {
-    fetch(`${apiUrl_Movie}/Movie`)
-      .then(movieResponse => movieResponse.json())
-      .then(movieData => {
-        fetch(`${apiUrl_Session}/MovieSession`)
-          .then(sessionResponse => sessionResponse.json())
-          .then(sessionData => {
-            fetch(`${apiUrl_Room}/Room`) // fetch room data
-              .then(roomResponse => roomResponse.json())
-              .then(roomData => {
-                // Join the movie, movie_session, and room arrays based on their id/movie_id/room_id fields
-                const joinedData = sessionData.map(session => {
-                  const movie = movieData.find(movie => movie.id === parseInt(session.Movie_id));
-                  const movieTitle = movie ? movie.Movie: "Nil";
-                  const room = roomData.find(room => room.id === parseInt(session.Room_id));
-                  const roomName = room ? room.Name : "Nil";
-                  console.log({...session, Movie: movieTitle, Room: roomName})
-                  return { ...session, Movie: movieTitle, Room: roomName };
-                });
-               
-                setData(joinedData); // set the state variable to the joined data
-              })
-              .catch(roomError => console.error(roomError));
-          })
-          .catch(sessionError => console.error(sessionError));
-      })
-      .catch(movieError => console.error(movieError));
+
+    fetch(`${apiUrl_Session}/MovieSession`)
+      .then(res => res.json())
+      .then(data => setData(data))
+      .catch(SessionError => console.error(SessionError))
   }
-   
-  /* 
-    movie deleted will delete movie session
-            const joinedData = sessionData.map(session => {
-            const movie = movieData.find(movie => movie.id === session.Movie_id);
-            return { ...session, Movie: movie.Movie };
-          });
-  */
+  
 
   const handleChange = event => {
     setQuery(event.target.value);
@@ -106,8 +78,8 @@ function ViewSession() {
         data?.map((session) => (
           <>
           <tr key={session.id}>
-            <td className="p-2">{session.Movie}</td>
-            <td className="p-2">{session.Room}</td>
+            <td className="p-2">{session.Movie === null ? "Nil" : session.Movie}</td>
+            <td className="p-2">{session.Room === null ? "Nil" : session.Room}</td>
             <td className="p-2">{session.Date}</td>
             <td className="p-2">{session.Start}</td>
             <td className="p-2">{session.End}</td>
@@ -153,15 +125,14 @@ const UpdateSession = ({data, setData, show, handleClose}) => {
     const apiUrl_Movie = process.env.REACT_APP_API_URL_MOVIE;
     const apiUrl_Session = process.env.REACT_APP_API_URL_SESSION;
     const [formData, setFormData] = useState(data[0]);
-    const [movies, setMovies] = useState([])
-    const [rooms , setRooms] = useState([])
+    const [movies, setMovies] = useState()
+    const [rooms , setRooms] = useState()
 
-  useEffect(() => { //load data on page load 
+    useEffect(() => { //load data on page load 
       fetch(`${apiUrl_Movie}/Movie`)
       .then(response => response.json())
       .then(data => {
-           const extractedMovies = data.map(item => item.Movie);
-           setMovies(extractedMovies);
+           setMovies(data);
       })
       .catch(error => console.error(error));
 
@@ -169,8 +140,7 @@ const UpdateSession = ({data, setData, show, handleClose}) => {
       fetch(`${apiUrl_Room}/Room`)
       .then(response => response.json())
       .then(data => {
-           const extractedRooms = data.map(item => item.Room);
-           setRooms(extractedRooms);
+           setRooms(data);
       })
       .catch(error => console.error(error));
     }, []);
@@ -182,12 +152,49 @@ const UpdateSession = ({data, setData, show, handleClose}) => {
 
   const handleSubmit = (e) => { 
     e.preventDefault();
+    var movie = null;
+    var room = null;
+    console.log(formData)
+    if(formData.Movie_id !== null){   
+        movie = movies.find(movie => movie.id == formData.Movie_id) //will return undefined and break
+        movie = movie.Movie
+        console.log("Movie is selected", movie)
+      }
+    if(formData.Room_id !== null){
+      room = rooms.find(room => room.id == formData.Room_id)
+      room = room.Name
+      console.log("Room is selected", rooms)
+    }
+
+    fetch(`${apiUrl_Session}/MovieSession/${formData.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...formData, 
+        Movie : movie,
+        Room : room,
+        Room_id : formData.Room_id,
+        Movie_id : formData.Movie_id
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        setData("reload parent")
+        handleClose();
+        
+      })
+      .catch((error) => console.error(error));
+
+    //when submit need to update movie based on movie_id
+      /*
     fetch(`${apiUrl_Movie}/Movie`)
     .then(movieResponse => movieResponse.json())
     .then(movieData => {
       const matchingMovie = movieData.find(movie => movie.Movie === formData.Movie);
       const movieId = matchingMovie ? matchingMovie.id : null;
-      console.log(movieId)
       // Update the movie_id field of the movie_session item using the fetched movieId
       fetch(`${apiUrl_Session}/MovieSession/${formData.id}`, {
         method: 'PUT',
@@ -203,24 +210,7 @@ const UpdateSession = ({data, setData, show, handleClose}) => {
         })
         .catch((error) => console.error(error));
     })
-    .catch(movieError => console.error(movieError));
-    /*
-    default
-    fetch(`${apiUrl_Session}/MovieSession/${formData.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data)
-        setData("reload parent")
-        handleClose();
-        
-      })
-      .catch((error) => console.error(error));
+    .catch(movieError => console.error(movieError))
       */  
   }
   return(
@@ -230,17 +220,17 @@ const UpdateSession = ({data, setData, show, handleClose}) => {
         <form onSubmit={handleSubmit}>
         <div class="form-group">
             <label hmtlfor="Movie" class="col-form-label">Movie:</label>
-            <select className="form-select" onChange={handleEdit} value={formData.Movie} id="Movie">
-                {movies.map((option) => (
-                        <option key={option} value={option}>{option} </option>
+            <select className="form-select" onChange={handleEdit} value={formData.Movie_id} id="Movie_id">
+                {movies?.map((option) => (
+                        <option key={option.id} value={option.id}>{option.Movie} </option>
                     ))}
             </select>
           </div>
           <div class="form-group">
             <label hmtlfor="Room" class="col-form-label">Room:</label>
-            <select className="form-select" onChange={handleEdit} value={formData.Room} id="Room">
-                {rooms.map((option) => (
-                        <option key={option} value={option}>{option} </option>
+            <select className="form-select" onChange={handleEdit} value={formData.Room_id} id="Room_id">
+                {rooms?.map((option) => (
+                        <option key={option.id} value={option.id}>{option.Name}</option>
                     ))}
             </select>
           </div>
@@ -302,3 +292,31 @@ const DeleteSession = ({data, setData, show, handleClose}) => {
     </>
   )
 }
+
+    /*
+    fetch(`${apiUrl_Movie}/Movie`)
+      .then(movieResponse => movieResponse.json())
+      .then(movieData => {
+        fetch(`${apiUrl_Session}/MovieSession`)
+          .then(sessionResponse => sessionResponse.json())
+          .then(sessionData => {
+            fetch(`${apiUrl_Room}/Room`) // fetch room data
+              .then(roomResponse => roomResponse.json())
+              .then(roomData => {
+                // Join the movie, movie_session, and room arrays based on their id/movie_id/room_id fields
+                const joinedData = sessionData.map(session => {
+                  const movie = movieData.find(movie => movie.id === parseInt(session.Movie_id));
+                  const movieTitle = movie ? movie.Movie: "Nil";
+                  const room = roomData.find(room => room.id === parseInt(session.Room_id));
+                  const roomName = room ? room.Name : "Nil";
+                  return { ...session, Movie: movieTitle, Room: roomName };
+                });
+               
+                setData(joinedData); // set the state variable to the joined data
+              })
+              .catch(roomError => console.error(roomError));
+          })
+          .catch(sessionError => console.error(sessionError));
+      })
+      .catch(movieError => console.error(movieError));
+      */

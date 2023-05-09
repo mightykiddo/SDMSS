@@ -1,13 +1,6 @@
 {
   "Movie": [
     {
-      "id": 3,
-      "Movie": "catwomnDDDd",
-      "Duration": "313123",
-      "Synopsis": "313123123",
-      "AgeRating": "PG"
-    },
-    {
       "id": 4,
       "Movie": "superman",
       "Duration": "",

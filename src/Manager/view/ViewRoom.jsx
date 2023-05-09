@@ -157,7 +157,57 @@ const UpdateRoom = ({data, setData, show, handleClose}) => {
 
 const DeleteRoom = ({data, setData, show, handleClose}) => {
   const apiUrl_Room = process.env.REACT_APP_API_URL_ROOM;
+  const apiUrl_Session = process.env.REACT_APP_API_URL_SESSION;
 
+  const id =data[0].id
+
+  //delete room in movie session // do here instead of in movie sessions
+  const handleDelete = () => {
+    fetch(`${apiUrl_Room}/Room/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(deletedRoom => {
+        console.log(`Deleted room with id ${id}`);
+  
+        // Find all movie sessions with the deleted room's id and set the room_id and Room fields to null
+        fetch(`${apiUrl_Session}/MovieSession?Room_id=${id}`)
+          .then(sessionResponse => sessionResponse.json())
+          .then(sessionData => {
+            const updatedSessions = sessionData.map(session => {
+              return { ...session, Room_id: null, Room: null }
+            });
+            console.log("Updated sessions: ", updatedSessions);
+  
+            // Send a PUT request to update the MovieSession data on the server for each updated session
+            updatedSessions.forEach(session => {
+              fetch(`${apiUrl_Session}/MovieSession/${session.id}`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(session)
+              })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+            });
+          })
+          .catch(sessionError => console.error(sessionError));
+  
+        setData("reload");
+        handleClose();
+      })
+      .catch(error => console.error(error));
+  };
+  
+
+
+
+  /*
   const handleDelete = () => {
     fetch(`${apiUrl_Room}/Room/${data[0].id}`, {
       method: 'DELETE',
@@ -167,11 +217,23 @@ const DeleteRoom = ({data, setData, show, handleClose}) => {
     })
       .then(response => response.json())
       .then(data => 
-        setData("reload"))
-      .catch(error => console.error(error))
+        {
+          console.log("id to delete",id)
+          fetch(`${apiUrl_Session}/MovieSession?Room_id=${id}`)
+            .then(session => session.json())
+            .then(sessionData => {
+                const removeRoom = sessionData.map(session => {
+                  return {...session, Room_id : "" , Room : "" }
+                })
+                console.log(removeRoom)
+            }).catch(sessionError => console.log(sessionError))
+
+          setData("reload")
+        }
+      ).catch(error => console.error(error))
 
     handleClose()
-  }
+  }*/
   return(
     <>
     <Modal show={show} onHide={handleClose}>

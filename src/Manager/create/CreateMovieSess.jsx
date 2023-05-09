@@ -11,7 +11,9 @@ function CreateMovieSession() {
      const [formData, setFormData] = useState({
           id: "",
           Movie_id:  "",
+          Movie: "",
           Room_id: "",
+          Room: "",
           Date: "",
           Start: "",
           End: "" });
@@ -62,12 +64,15 @@ function CreateMovieSession() {
      const handleSubmit = (event) =>{
           event.preventDefault();
           console.log(formData)
+          const movie = movies.find(movie => movie.id === parseInt(formData.Movie_id));
+          const room = rooms.find(room => room.id === parseInt(formData.Room_id));
+          console.log(movie)
           fetch(`${apiUrl_Session}/MovieSession`, {
                method: 'POST',
                headers: {
                  'Content-Type': 'application/json',
                },
-               body: JSON.stringify(formData),
+               body: JSON.stringify({...formData, Movie: movie.Movie, Room : room.Name }),
              })
                .then((response) => response.json())
                .then((data) => console.log(data))

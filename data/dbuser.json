@@ -1,28 +1,7 @@
 {
   "user": [
     {
-      "acctype": "Admin",
-      "name": "nic",
-      "email": "nic@gmail.com",
-      "username": "nic",
-      "password": "1234",
-      "status": "Active",
-      "id": 7,
-      "Status": "Suspended"
-    },
-    {
-      "acctype": "Customer",
-      "name": "Jason Yaw",
-      "email": "JasonYaw@gmail.com",
-      "username": "jason",
-      "password": "1234",
-      "loyaltypoint": 0,
-      "seatpref": "C2",
-      "status": "Active",
-      "id": 8
-    },
-    {
-      "acctype": "Customer",
+      "acctype": "System Admin",
       "name": "shijie",
       "email": "shijie@gmail.com",
       "username": "shijie",

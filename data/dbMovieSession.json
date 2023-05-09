@@ -1,26 +1,32 @@
 {
   "MovieSession": [
     {
-      "id": 36,
+      "id": 43,
       "Movie_id": "4",
-      "Room_id": "5",
-      "Date": "2023-05-10",
+      "Movie": "superman",
+      "Room_id": "3",
+      "Room": "apples",
+      "Date": "",
       "Start": "",
       "End": ""
     },
     {
-      "id": 37,
-      "Movie_id": "4",
-      "Room_id": "5",
-      "Date": "2023-05-09",
-      "Start": "13:36",
-      "End": "21:41"
+      "id": 44,
+      "Movie_id": null,
+      "Movie": null,
+      "Room_id": null,
+      "Room": null,
+      "Date": "2023-05-24",
+      "Start": "",
+      "End": ""
     },
     {
-      "id": 38,
-      "Movie_id": "4",
-      "Room_id": 0,
-      "Date": "",
+      "id": 22,
+      "Movie_id": "1",
+      "Movie": "catwomnDDDd",
+      "Room_id": null,
+      "Room": null,
+      "Date": "2023-05-17",
       "Start": "",
       "End": ""
     }

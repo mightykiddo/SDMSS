@@ -16,7 +16,7 @@ function ViewUserAcc(){
     .then(response => response.json())
     .then(data => {
       setData(data)
-      console.log(data)
+      
     })
     .catch(error => console.error(error));
   }
@@ -43,14 +43,16 @@ function ViewUserAcc(){
   };
 
   const confirmModal = (id, status) => {
+    console.log("account status" , status)
     setFilteredData(data.filter((userData) => userData.id === id));
     //delete modal
     if (status === "Active") {
       setType("suspend")
     }
-    else {
+    else if (status === "Suspended") {
       setType("unsuspend")
     }
+    else (setType("delete"))
     setConfirmModal(true); 
   }
 
@@ -62,7 +64,6 @@ function ViewUserAcc(){
       .catch(error => console.error(error));
   };
 
-   console.log(data)
      return(
       <>
        <div className="d-flex justify-content-end">
@@ -197,9 +198,9 @@ const UpdateUserAccount = ({data, setData, show, handleClose}) => {
 
 const DeleteUserAcc = ({data, setData, show , handleClose}) => {
   const apiUrl_User = process.env.REACT_APP_API_URL_USERACC;
-
+  console.log("delete")
   const handleDelete = e =>{
-    fetch(`${apiUrl_User}/User/${data[0].id}`, {
+    fetch(`${apiUrl_User}/user/${data[0].id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -231,15 +232,15 @@ const DeleteUserAcc = ({data, setData, show , handleClose}) => {
 
 const SuspendUserAcc = ({type, data, setData, show , handleClose}) => {
   const apiUrl_User = process.env.REACT_APP_API_URL_USERACC;
-
-  const handleDelete = e =>{
+  console.log("suspend", type)
+  const handleSuspend = e =>{
     if (type === "unsuspend"){
-      fetch(`${apiUrl_User}/User/${data[0].id}`, {
+      fetch(`${apiUrl_User}/user/${data[0].id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify( {...data[0], Status : "Active"}),
+        body: JSON.stringify( {...data[0], status : "Active"}),
       })
         .then(response => response.json())
         .then(data => 
@@ -248,13 +249,13 @@ const SuspendUserAcc = ({type, data, setData, show , handleClose}) => {
 
       handleClose()
     }
-    else {
-      fetch(`${apiUrl_User}/User/${data[0].id}`, {
+    else if (type === "suspend") {
+      fetch(`${apiUrl_User}/user/${data[0].id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify( {...data[0], Status : "Suspended"}),
+        body: JSON.stringify( {...data[0], status : "Suspended"}),
       })
         .then(response => response.json())
         .then(data => 
@@ -271,7 +272,7 @@ const SuspendUserAcc = ({type, data, setData, show , handleClose}) => {
           {type === "suspend" ?  "Confirm Suspend User ?" : "Confirm Unsuspend User ?"}
      </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleDelete}>
+        <Button variant="secondary" onClick={handleSuspend}>
           Yes {/*handle delete/update*/}
         </Button>
       </Modal.Footer>

@@ -182,9 +182,55 @@ const UpdateMovie = ({data, setData, show, handleClose}) => {
 }
 
 const DeleteMovie = ({data, setData, show, handleClose}) => {
-  const [id, setId] = useState(data[0].id)
   const apiUrl_Movie = process.env.REACT_APP_API_URL_MOVIE;
+  const apiUrl_Session = process.env.REACT_APP_API_URL_SESSION;
 
+  const id =data[0].id
+
+  //delete room in movie session // do here instead of in movie sessions
+  const handleDelete = () => {
+    fetch(`${apiUrl_Movie}/Movie/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(deletedMovie => {
+        console.log(`Deleted Movie with id ${id}`);
+  
+        // Find all movie sessions with the deleted room's id and set the room_id and Room fields to null
+        fetch(`${apiUrl_Session}/MovieSession?Movie_id=${id}`)
+          .then(sessionResponse => sessionResponse.json())
+          .then(sessionData => {
+            const updatedSessions = sessionData.map(session => {
+              return { ...session, Movie_id: null, Movie: null }
+            });
+            console.log("Updated sessions: ", updatedSessions);
+  
+            // Send a PUT request to update the MovieSession data on the server for each updated session
+            updatedSessions.forEach(session => {
+              fetch(`${apiUrl_Session}/MovieSession/${session.id}`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(session)
+              })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+            });
+          })
+          .catch(sessionError => console.error(sessionError));
+  
+        setData("reload");
+        handleClose();
+      })
+      .catch(error => console.error(error));
+  };
+
+  /*
   const handleDelete = () => {
     fetch(`${apiUrl_Movie}/Movie/${id}`, {
       method: 'DELETE',
@@ -199,6 +245,8 @@ const DeleteMovie = ({data, setData, show, handleClose}) => {
 
     handleClose()
   }
+*/
+  
   return(
     <>
     <Modal show={show} onHide={handleClose}>
