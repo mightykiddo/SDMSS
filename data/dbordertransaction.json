@@ -1,0 +1,137 @@
+{
+  "ordertransaction": [
+    {
+      "itemid": 1,
+      "itemname": "Combo 1",
+      "itemdesc": "Consists of: 1 x popcorn, 1 x soft drink",
+      "price": 7,
+      "id": 1
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Unclaimed",
+      "quantity": "2",
+      "total": 26,
+      "id": 2
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Unclaimed",
+      "quantity": "2",
+      "total": 26,
+      "id": 3
+    },
+    {
+      "item": "Combo 3",
+      "itemstatus": "Unclaimed",
+      "quantity": "2",
+      "total": 40,
+      "id": 4
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Unclaimed",
+      "quantity": "3",
+      "total": 40.5,
+      "id": 5
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Unclaimed",
+      "quantity": "2",
+      "total": 27,
+      "id": 6
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Unclaimed",
+      "quantity": "3",
+      "total": 40.5,
+      "id": 7
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Unclaimed",
+      "quantity": "2",
+      "total": 27,
+      "id": 8
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Unclaimed",
+      "quantity": "2",
+      "total": 27,
+      "id": 9
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Unclaimed",
+      "quantity": "2",
+      "total": 27,
+      "id": 10
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Unclaimed",
+      "quantity": "2",
+      "total": 27,
+      "id": 11
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Paid",
+      "quantity": "2",
+      "totalamount": 27,
+      "customerid": 8,
+      "id": 12
+    },
+    {
+      "item": "Combo 3",
+      "itemstatus": "Paid",
+      "quantity": "1",
+      "totalamount": 20,
+      "customerid": 8,
+      "id": 13
+    },
+    {
+      "item": "Combo 1",
+      "itemstatus": "Paid",
+      "quantity": "2",
+      "totalamount": 14,
+      "customerid": "staff",
+      "id": 14
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Paid",
+      "quantity": "2",
+      "totalamount": 27,
+      "customerid": 8,
+      "id": 15
+    },
+    {
+      "item": "Combo 3",
+      "itemstatus": "Paid",
+      "quantity": "4",
+      "totalamount": 80,
+      "customerid": 8,
+      "id": 16
+    },
+    {
+      "item": "Combo 3",
+      "itemstatus": "Paid",
+      "quantity": "5",
+      "totalamount": 100,
+      "customerid": 8,
+      "id": 17
+    },
+    {
+      "item": "Combo 3",
+      "itemstatus": "Paid",
+      "quantity": "4",
+      "totalamount": 80,
+      "customerid": 8,
+      "id": 18
+    }
+  ]
+}

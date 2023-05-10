@@ -119,6 +119,16 @@
       "feedback": "testing12345",
       "rating": "5",
       "id": 26
+    },
+    {
+      "feedback": "it was a wonderful experience!!!",
+      "rating": "5",
+      "id": 27
+    },
+    {
+      "feedback": "the cinema is clean and tidy. love it!!!!",
+      "rating": "4",
+      "id": 28
     }
   ]
 }

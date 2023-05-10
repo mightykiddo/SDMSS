@@ -73,7 +73,7 @@ const Login = () => {
 
                 } else if (accounttype === "staff"){
                     console.log("redirect to staff page");
-                    history('/staff', {state:{username}});
+                    history('/stafffoodanddrink', {state:{username}});
                     
                 }
                 

@@ -47,12 +47,12 @@
     },
     {
       "item": "1 x Ticket",
-      "itemstatus": "Unclaimed",
+      "itemstatus": "Completed",
       "id": 12
     },
     {
       "item": "1 x Large Size Popcorn",
-      "itemstatus": "unclaimed",
+      "itemstatus": "Completed",
       "id": 13
     },
     {
@@ -72,58 +72,58 @@
     },
     {
       "item": "1 x Teddy bear",
-      "itemstatus": "Unclaimed",
+      "itemstatus": "Completed",
       "id": 17
     },
     {
       "item": "1 x Ticket",
-      "itemstatus": "unclaimed",
+      "itemstatus": "Completed",
       "id": 18
     },
     {
       "item": "1 x Teddy bear",
-      "itemstatus": "unclaimed",
+      "itemstatus": "Completed",
       "id": 19
     },
     {
       "item": "1 x Ticket",
-      "itemstatus": "unclaimed",
+      "itemstatus": "Completed",
       "id": 20
     },
     {
       "item": "1 x Ticket",
-      "itemstatus": "unclaimed",
+      "itemstatus": "Completed",
       "quantity": "3",
       "id": 21
     },
     {
       "item": "Combo 2",
-      "itemstatus": "Unclaimed",
+      "itemstatus": "Completed",
       "quantity": "2",
       "id": 22
     },
     {
       "item": "Combo 3",
-      "itemstatus": "Unclaimed",
+      "itemstatus": "Completed",
       "quantity": "1",
       "id": 23
     },
     {
       "item": "Combo 2",
-      "itemstatus": "Unclaimed",
+      "itemstatus": "Completed",
       "quantity": "2",
       "id": 24,
       "username": " WE NEED SOMETHING LIKE THIS FOR THIS PART!!!!!"
     },
     {
       "item": "Combo 2",
-      "itemstatus": "Unclaimed",
+      "itemstatus": "Completed",
       "quantity": "2",
       "id": 25
     },
     {
       "item": "Combo 3",
-      "itemstatus": "Unclaimed",
+      "itemstatus": "Completed",
       "quantity": "4",
       "id": 26
     },
@@ -343,6 +343,62 @@
       "quantity": "1",
       "customerid": 8,
       "id": 58
+    },
+    {
+      "item": "Combo 3",
+      "itemstatus": "Unclaimed",
+      "quantity": "3",
+      "customerid": 8,
+      "id": 59
+    },
+    {
+      "item": "Combo 1",
+      "itemstatus": "Unclaimed",
+      "quantity": "1",
+      "customerid": 8,
+      "id": 60
+    },
+    {
+      "item": "1 x Ticket",
+      "itemstatus": "Unclaimed",
+      "quantity": "1",
+      "customerid": 8,
+      "id": 61
+    },
+    {
+      "item": "1 x Ticket",
+      "itemstatus": "Unclaimed",
+      "quantity": "1",
+      "customerid": 8,
+      "id": 62
+    },
+    {
+      "item": "1 x Ticket",
+      "itemstatus": "Unclaimed",
+      "quantity": "1",
+      "customerid": 8,
+      "id": 63
+    },
+    {
+      "item": "1 x Teddy bear",
+      "itemstatus": "Unclaimed",
+      "quantity": "2",
+      "customerid": 8,
+      "id": 64
+    },
+    {
+      "item": "Combo 1",
+      "itemstatus": "Unpaid",
+      "quantity": "1",
+      "customerid": 8,
+      "id": 65
+    },
+    {
+      "item": "Combo 1",
+      "itemstatus": "Unpaid",
+      "quantity": "1",
+      "customerid": "staff",
+      "id": 66
     }
   ]
 }

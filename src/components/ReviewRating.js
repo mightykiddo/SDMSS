@@ -29,9 +29,14 @@ const ReviewRating = () => {
     const [isPending, setIsPending] = useState(false);
     const history = useNavigate();
     const location = useLocation();
+    const username = location.state.username;
+    var loyaltypoint = location.state.loyaltypoint;
+    var seatpref = location.state.seatpref;
+    var id = location.state.id;
 
     const handleSubmit2 = (e) =>{
-        history('/user');
+        e.preventDefault();
+        history('/user', {state:{username, loyaltypoint, seatpref, id}});
         setModalIsOpen4(false)
     }
 
