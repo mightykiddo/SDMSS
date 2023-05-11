@@ -2,87 +2,120 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 function GenerateReport() {
-  const [show, setShow] = useState("Weekly")
+  const [data, setData] = useState();
   const [sales ,setSales] = useState();
+  const [customer , setCustomer] = useState();
+  const [movieRankings , setMovieRankings] = useState()
 
   const apiUrl_tx = process.env.REACT_APP_API_URL_TX;
 
+  const getTotalSales = () =>{
+    const total = data.reduce((acc, curr) => acc + curr.totalprice, 0);
+    setSales(total)
+    
+  }
+
+  console.log(movieRankings)
   useEffect(() => { //load data on page load 
+
+
     fetch(`${apiUrl_tx}/transaction`)
     .then(response => response.json())
     .then(data => {
-         setSales(data);
+         setData(data);
+         const totalsales = data.reduce((acc, curr) => acc + curr.totalprice, 0);
+         setSales(totalsales.toFixed(2))
+
+         const movieCounts = {};
+         data.forEach(transaction => {
+           const movieName = transaction.movie_name;
+           const quantity = transaction.quantity;
+           if (movieCounts[movieName]) {
+             movieCounts[movieName] += quantity;
+           } else {
+             movieCounts[movieName] = quantity;
+           }
+         });
+     
+         const movieRankings = Object.keys(movieCounts)
+           .map(movieName => ({ movieName, count: movieCounts[movieName] }))
+           .sort((a, b) => b.count - a.count);
+     
+         setMovieRankings(movieRankings);
     })
     .catch(error => console.error(error));
   }, []);
 
-  const GenerateReport = (type) => {
-    if (type === "weekly"){
-    //weekly sales
-    const today = new Date();
-    const oneWeekAgo = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
-  
-    fetch(`${apiUrl_tx}/transaction`)
-    .then((response) => response.json())
-    .then((data) => {
-      const filteredSales = data.filter((sale) => {
-        const saleDateStr = sale.date;
-        const [day, month, year] = saleDateStr.split("/");
-        const saleDate = new Date(year, month - 1, day);
-        return saleDate >= oneWeekAgo && saleDate <= today;
-      });
-
-      setSales(filteredSales);
-      setShow("weekly")
-    })
-    .catch((error) => console.error(error));
-  }
-
-  else if (type == "monthly") { //monthly
-    const today = new Date();
-    const thirtyDaysAgo = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 30);
-
-    fetch(`${apiUrl_tx}/transaction`)
-    .then((response) => response.json())
-    .then((data) => {
-      const filteredSales = data.filter((sale) => {
-        const saleDateStr = sale.date;
-        const [day, month, year] = saleDateStr.split("/");
-        const saleDate = new Date(year, month - 1, day);
-        return saleDate >= thirtyDaysAgo && saleDate <= today;
-      });
-      console.log(filteredSales)
-      setSales(filteredSales);
-      setShow("monthly")
-    })
-    .catch((error) => console.error(error));
-
-    }
-  //need transaction 
-  console.log(sales)
-  }
   return (
      <>
-     <div className="text-white d-flex-column">
-          <div>
-            <button onClick={() => GenerateReport("weekly")}>Weekly sales</button>
-            <button onClick={() => GenerateReport("monthly")}>Monthly sales</button>
-          </div>
-          <div>
-            {
-              show === "weekly" ? (
-                <>
+        <ul className="list-group py-5" style={{width : "max-content"}}>  
+          <li className="list-group-item d-flex justify-content-between align-items-start">
+              <div className="ms-2 me-auto">
+              <p className="fs-3">Total Revenue: </p>
+              <p className="fs-4"><strong>${sales}</strong></p>
+              </div>
+          </li>
+        </ul>
 
-                </>
-              ) 
-              : (
-                <>monthly</>
-              )
-            }
-          </div>
-     </div>
+        <table className="text-black" style={{backgroundColor : "whitesmoke", width : '1000px'}}>
+          <thead>
+            <tr className="d-flex-column" style={{backgroundColor : "orange"}}>
+              <th scope="col">Rank</th>
+              <th scope="col">Movie</th>
+              <th scope="col">Tickets Sold</th>
+            </tr>
+          </thead>
+          <tbody>
+          {
+            movieRankings?.map((movie, index) => (
+              <>
+              <tr key={index}>
+                <td className="p-2">{index + 1}</td>
+                <td className="p-2">{movie.movieName}</td>
+                <td className="p-2">{movie.count}</td>
+              </tr>
+              <tr>
+                  <td colSpan="6" className="border-bottom"></td>
+              </tr>
+              </>
+            ))}
+          </tbody>
+        </table>
      </>
   );
 }
 
 export default GenerateReport;
+/*
+     <div className="text-white d-flex-column "  style={{backgroundColor : "whitesmoke"}}>
+          <ul className="list-group p-4 bg-dark" style={{width : "max-content"}}>  
+            <li className="list-group-item d-flex justify-content-between align-items-start">
+                <div className="ms-2 me-auto">
+                <p className="fs-3">Total Revenue: </p>
+                <p className="fs-4"><strong>${sales}</strong></p>
+                </div>
+            </li>
+          </ul>
+          <div>
+            <ul className="list-group p-4"  style={{width : "500px"}}>  
+              <li className="list-group-item d-flex justify-content-between align-items-start">
+                  <div className="ms-2 me-auto">
+                  <p className="fs-3">Movie by sales: </p>
+                  </div>
+              </li>
+            {
+              movieRankings?.map((movie) => (
+                <>
+                  <li className="list-group-item d-flex justify-content-between align-items-start">
+                    <div className="ms-2 me-auto">
+                      {movie.movieName}
+                    </div>
+                    <span className="badge bg-primary rounded-pill">{movie.count}</span>
+                  </li>
+                </>
+              ))
+            }
+            </ul>
+          </div>
+     </div>
+*/

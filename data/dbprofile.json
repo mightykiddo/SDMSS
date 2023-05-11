@@ -1,0 +1,24 @@
+{
+  "profile": [
+    {
+      "id": 1,
+      "profile": "Admin"
+    },
+    {
+      "id": 2,
+      "profile": "Manager"
+    },
+    {
+      "id": 3,
+      "profile": "Staff"
+    },
+    {
+      "id": 4,
+      "profile": "Customer"
+    },
+    {
+      "id": 5,
+      "profile": "Manager2"
+    }
+  ]
+}

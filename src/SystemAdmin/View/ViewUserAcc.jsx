@@ -16,11 +16,9 @@ function ViewUserAcc(){
     .then(response => response.json())
     .then(data => {
       setData(data)
-      
     })
     .catch(error => console.error(error));
   }
-
   useEffect(() => { //load data on page load 
     loadData()
   }, [filteredData, query]);
@@ -74,7 +72,6 @@ function ViewUserAcc(){
       <table className="text-black" style={{backgroundColor : "whitesmoke", width : '1000px'}}>
       <thead>
         <tr className="d-flex-column" style={{backgroundColor : "orange"}}>
-        <th scope="col">UserName</th>
           <th scope="col">Name</th>
           <th scope="col">Email</th>
           <th scope="col">Account Type</th>
@@ -87,7 +84,7 @@ function ViewUserAcc(){
         data?.map((acc) => (
           <>
           <tr key={acc.email}>
-            <td className="p-2">{acc.username}</td>
+            <td className="p-2">{acc.name}</td>
             <td className="p-2">{acc.email}</td>
             <td className="p-2">{acc.acctype}</td>
             <td className='p-2' style={{ color: acc.status === "Active" ? "royalblue" : "red"}}>{acc.status}</td>
@@ -140,7 +137,17 @@ export default ViewUserAcc;
 
 const UpdateUserAccount = ({data, setData, show, handleClose}) => {
   const apiUrl_User = process.env.REACT_APP_API_URL_USERACC;
+  const apiUrl_profile =  process.env.REACT_APP_API_URL_USEPROFILE;
+  const [profile, setProfile] = useState()
   const [formData, setFormData] = useState(data[0]);
+
+
+  useEffect(() => {
+    fetch(`${apiUrl_profile}/profile`)
+         .then((response) => response.json())
+         .then((data) => setProfile(data))
+         .catch((error) => console.error(error));
+ } , [])
 
   const handleEdit = (event) => {
     const { id, value } = event.target;
@@ -188,10 +195,11 @@ const UpdateUserAccount = ({data, setData, show, handleClose}) => {
           <div class="form-group">
             <label hmtlfor="Type" class="col-form-label">Type</label>
             <select className="form-select" onChange={handleEdit} value={formData.acctype} id="acctype">
-            <option value="Customer">Customer</option>
-                    <option value="System Admin">System Admin</option>
-                    <option value="Manager">Manager</option>
-                    <option value="Staff">Staff</option>
+                    {profile?.map((item) => (
+                         <>
+                              <option value={item.profile} key={item.id}>{item.profile}</option>
+                         </>
+                    ))}
             </select>
           </div>
           <button type="submit">Update</button>
