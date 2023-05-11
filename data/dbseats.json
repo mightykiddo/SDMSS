@@ -1,0 +1,49 @@
+{
+    "seats": [
+      {
+        "seat": "A1",
+        "occupy": "no",
+        "id": 1
+      },
+      {
+        "seat": "A2",
+        "occupy": "no",
+        "id": 2
+      },
+      {
+        "seat": "A3",
+        "occupy": "no",
+        "id": 3
+      },
+      {
+        "seat": "B1",
+        "occupy": "no",
+        "id": 4
+      },
+      {
+        "seat": "B2",
+        "occupy": "no",
+        "id": 5
+      },
+      {
+        "seat": "B3",
+        "occupy": "no",
+        "id": 6
+      },
+      {
+        "seat": "C1",
+        "occupy": "no",
+        "id": 7
+      },
+      {
+        "seat": "C2",
+        "occupy": "yes",
+        "id": 8
+      },
+      {
+        "seat": "C3",
+        "occupy": "no",
+        "id": 9
+      }
+    ]
+}
