@@ -3,6 +3,8 @@ import { useState } from "react";
 //imports
 import CreateUserAcc from "./Create/CreateUserAcc";
 import ViewUserAcc from "./View/ViewUserAcc";
+import CreateUserProfile from "./Create/CreateUserProfile";
+import ViewUserProfile from "./View/ViewUserProfile";
 
 function SystemAdmin() {
   const [Option, setOption] = useState('Cuser');//set default val
@@ -28,6 +30,8 @@ function SystemAdmin() {
          <div style={{width : '100%'}}>
               {Option == "Cuser" && <CreateUserAcc/>}
               {Option == "Vuser" && <ViewUserAcc/>}
+              {Option == "Cprofile" && <CreateUserProfile/>}
+              {Option == "Vprofile" && <ViewUserProfile/>}
          </div>
 
     </div>

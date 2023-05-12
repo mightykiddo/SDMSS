@@ -15,7 +15,7 @@ function CreateUserAcc() {
   const [profile, setProfile] = useState()
 
   useEffect(() => {
-     fetch(`${apiUrl_profile}/profile`)
+     fetch(`${apiUrl_profile}/Userprofile`)
           .then((response) => response.json())
           .then((data) => setProfile(data))
           .catch((error) => console.error(error));
@@ -65,7 +65,7 @@ function CreateUserAcc() {
                     {/* got data then use map to populate the dd */}
                     {profile?.map((item) => (
                          <>
-                              <option value={item.profile} key={item.id}>{item.profile}</option>
+                              <option value={item.UserProfile} key={item.id}>{item.UserProfile}</option>
                          </>
                     ))}
                </select>
@@ -76,7 +76,7 @@ function CreateUserAcc() {
   </form>
        
        <SuccessModel 
-       message = "Movie Successfully Created !" 
+       message = "User Successfully Created !" 
        show = {showModal}
        handleClose={handleCloseModal}
   />

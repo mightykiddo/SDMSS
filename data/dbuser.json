@@ -26,6 +26,14 @@
       "password": "shed",
       "status": "Active",
       "acctype": "Manager"
+    },
+    {
+      "id": 13,
+      "name": "hs",
+      "email": "hs",
+      "password": "hs",
+      "status": "Active",
+      "acctype": "Assistant Manager"
     }
   ]
 }
