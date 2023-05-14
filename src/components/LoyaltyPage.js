@@ -130,9 +130,11 @@ const LoyaltyPage = () => {
         <>
             <NavBarUser />
 
+            <div className='w3-border-top w3-border-dark-grey' ></div>
+
             <div style={{margin: '20px'}}>
                 <h1>Loyalty Point Redemption</h1>
-                <p>Customer points: {loyaltypoint}</p>
+                <p>Current Loyalty Points: <span className='w3-text-amber'>{loyaltypoint}</span></p>
                 <table style={tableStyles}>
                     <thead>
                         <tr style={tableHeaderStyles}>
@@ -148,7 +150,7 @@ const LoyaltyPage = () => {
                             <td style={tableDataStyles}>{record.itemid}</td>
                             <td style={tableDataStyles}>{record.itemname}</td>
                             <td style={tableDataStyles}>{record.points}</td>
-                            <td style={tableDataStyles}><img src={record.imagesrc}></img></td>
+                            <td style={tableDataStyles}><img src={record.imagesrc} style={{width:"300px", height:"200px"}} className="w3-round"></img></td>
                         </tr>
                         ))}
                     </tbody>

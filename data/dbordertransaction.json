@@ -1,17 +1,21 @@
 {
   "ordertransaction": [
     {
-      "itemid": 1,
-      "itemname": "Combo 1",
-      "itemdesc": "Consists of: 1 x popcorn, 1 x soft drink",
-      "price": 7,
+      "item": "Movie Ticket",
+      "itemstatus": "Paid",
+      "quantity": 2,
+      "totalamount": 24,
+      "customerid": 8,
+      "detail": " [Date]: 0205,  [Timeslot]: 1500,  [Movie]: Movie 3,  [Room]: 3,  [Ticket Type]: adult,  [Seats]: A3,B3",
       "id": 1
     },
     {
-      "item": "Combo 2",
-      "itemstatus": "Unclaimed",
-      "quantity": "2",
-      "total": 26,
+      "item": "Movie Ticket",
+      "itemstatus": "Paid",
+      "quantity": 2,
+      "totalamount": 24,
+      "customerid": 8,
+      "detail": " [Date]: 0205,  [Timeslot]: 1500,  [Movie]: Movie 3,  [Room]: 3,  [Ticket Type]: adult,  [Seats]: A3,B3",
       "id": 2
     },
     {
@@ -132,6 +136,93 @@
       "totalamount": 80,
       "customerid": 8,
       "id": 18
+    },
+    {
+      "item": "Combo 1",
+      "itemstatus": "Paid",
+      "quantity": "1",
+      "totalamount": 7,
+      "customerid": 8,
+      "id": 19
+    },
+    {
+      "item": "Movie Ticket",
+      "itemstatus": "Unpaid",
+      "quantity": 2,
+      "totalamount": 24,
+      "customerid": 8,
+      "detail": " [Date]: 0105,  [Timeslot]: 1000,  [Movie]: Movie 1,  [Seats]: A1,A3",
+      "id": 20
+    },
+    {
+      "item": "Movie Ticket",
+      "itemstatus": "Unpaid",
+      "quantity": 2,
+      "totalamount": 18,
+      "customerid": 8,
+      "detail": " [Date]: 0305,  [Timeslot]: 1400,  [Movie]: Movie 1,  [Room]: 4,  [Seats]: B2,B3",
+      "id": 21
+    },
+    {
+      "item": "Movie Ticket",
+      "itemstatus": "Paid",
+      "quantity": 2,
+      "totalamount": 24,
+      "customerid": 8,
+      "detail": " [Date]: 0205,  [Timeslot]: 1500,  [Movie]: Movie 3,  [Room]: 3,  [Ticket Type]: adult,  [Seats]: A3,B3",
+      "id": 22
+    },
+    {
+      "item": "Movie Ticket",
+      "itemstatus": "Unpaid",
+      "quantity": 1,
+      "totalamount": 12,
+      "customerid": "staff",
+      "detail": " [Date]: 0205,  [Timeslot]: 1500,  [Movie]: Black Panther: Wakanda Forever,  [Room]: 3,  [Ticket Type]: adult,  [Seats]: B1",
+      "id": 23
+    },
+    {
+      "item": "Movie Ticket",
+      "itemstatus": "Unpaid",
+      "quantity": 1,
+      "totalamount": 12,
+      "customerid": "staff",
+      "detail": " [Date]: 0105,  [Timeslot]: 1000,  [Movie]: Captain Marvel,  [Room]: 1,  [Ticket Type]: adult,  [Seats]: A2",
+      "id": 24
+    },
+    {
+      "item": "Movie Ticket",
+      "itemstatus": "Paid",
+      "quantity": 1,
+      "totalamount": 12,
+      "customerid": 8,
+      "detail": " [Date]: 0105,  [Timeslot]: 1000,  [Movie]: Captain Marvel,  [Room]: 1,  [Ticket Type]: adult,  [Seats]: B2",
+      "id": 25
+    },
+    {
+      "item": "Combo 1",
+      "itemstatus": "Paid",
+      "quantity": "1",
+      "totalamount": 7,
+      "customerid": 8,
+      "id": 26
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Paid",
+      "quantity": "1",
+      "totalamount": 13.5,
+      "customerid": "staff",
+      "id": 27
+    },
+    {
+      "item": "Movie Ticket",
+      "itemstatus": "Paid",
+      "quantity": 1,
+      "totalamount": 12,
+      "customerid": "staff",
+      "detail": " [Date]: 0105,  [Timeslot]: 1000,  [Movie]: Captain Marvel,  [Room]: 1,  [Ticket Type]: adult,  [Seats]: C1",
+      "id": 28
     }
   ]
 }

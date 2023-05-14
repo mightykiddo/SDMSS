@@ -26,6 +26,7 @@ const FoodAndDrink = () => {
             setfoodanddrink(data);
         });
     },[]);
+    
     const handleSubmit = (e) => {
         var customerid = id;
         const ordertransaction = {item, itemstatus, quantity, totalamount, customerid};
@@ -68,6 +69,8 @@ const FoodAndDrink = () => {
         <>
         
         <NavBarUser />
+
+        <div className='w3-border-top w3-border-dark-grey' ></div>
 
         <div style={{margin: '20px'}}>
             <h1>Food And Drink Purchase Section</h1>

@@ -4,21 +4,21 @@
         "itemid": 1,
         "points": 70,
         "itemname": "1 x Large Size Popcorn",
-        "imagesrc": "./logo192.png",
+        "imagesrc": "./popcorn.jpg",
         "id": 1
       },
       {
         "itemid": 2,
         "points": 80,
         "itemname": "1 x Ticket",
-        "imagesrc": "./logo192.png",
+        "imagesrc": "./ticket.jpg",
         "id": 2
       },
       {
         "itemid": 3,
         "points": 150,
         "itemname": "1 x Teddy bear",
-        "imagesrc": "./logo192.png",
+        "imagesrc": "./teddy.jpg",
         "id": 3
       }
     ]

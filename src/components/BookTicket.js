@@ -6,9 +6,6 @@ import { useNavigate } from "react-router-dom";
 const BookTicket = () => {
 
     const [date, setDate] = useState("");
-    const [selectedTimeslot, setSelectedTimeslot] = useState("");
-    const [selectedDate, setSelectedDate] = useState("");
-    const [selectedMovie, setSelectedMovie] = useState("");
     const [data, setData] = useState([]);
 
     const location = useLocation();
@@ -19,7 +16,7 @@ const BookTicket = () => {
     var id = location.state.id;
 
     useEffect(() => {
-        fetch('http://localhost:8006/moviesession')
+        fetch('http://localhost:8009/moviesession')
         .then(res =>{
             return res.json();
         })
@@ -27,18 +24,6 @@ const BookTicket = () => {
             setData(data);
         })
     }, []); 
-
-    // const data = [
-    //     { id: 1, date: '0105', movie: 'Movie 1', timeslot: '1000' },
-    //     { id: 2, date: '0105', movie: 'Movie 1', timeslot: '1100' },
-    //     { id: 3, date: '0105', movie: 'Movie 2', timeslot: '1000' },
-    //     { id: 4, date: '0105', movie: 'Movie 3', timeslot: '1100' },
-    //     { id: 5, date: '0105', movie: 'Movie 1', timeslot: '1300' },
-    //     { id: 6, date: '0105', movie: 'Movie 2', timeslot: '1100' },
-    //     { id: 7, date: '0205', movie: 'Movie 2', timeslot: '1200' },
-    //     { id: 8, date: '0205', movie: 'Movie 3', timeslot: '1300' },
-    //     { id: 9, date: '0305', movie: 'Movie 1', timeslot: '1400' },
-    // ];
       
     const groupedData = data.reduce((result, item) => {
         const key = item.movie;
@@ -59,57 +44,56 @@ const BookTicket = () => {
     }, {});
 
     const handleTimeslotClick = (e) => {
+
+        e.preventDefault();
         const selectedRecord = data.find(record => record.id === parseInt(e.target.value));
-        setSelectedTimeslot(selectedRecord.timeslot);
-        setSelectedDate(selectedRecord.date);
-        setSelectedMovie(selectedRecord.movie);
+        var selectedTimeslot = selectedRecord.timeslot;
+        var selectedDate = selectedRecord.date;
+        var selectedMovie = selectedRecord.movie;
+        var selectedId = selectedRecord.id;
+        var selectedRoom = selectedRecord.room;
+        history('/selectseats', {state:{username, loyaltypoint, seatpref, id, selectedDate, selectedId, selectedMovie, selectedTimeslot, selectedRoom}});
     }
   
     return ( 
         <>
         <NavBarUser/>
 
-      <div>
-        <h3>Booking Ticket</h3>
+        <div className='w3-border-top w3-border-dark-grey' ></div>
 
-        <select 
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-        >
-            <option value="">Select a date</option>
-            {(Object.keys(groupedData2)).map(record => (
-                <option key={record} value={record}>{record}</option>
+        <div className='w3-padding-32'> 
+            <h3>Booking Ticket</h3>
+
+            <select 
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+            >
+                <option value="">Select a date</option>
+                {(Object.keys(groupedData2)).map(record => (
+                    <option key={record} value={record}>{record}</option>
+                ))}
+            </select>
+
+            {Object.keys(groupedData).map((key) => (
+                <div key={key}>
+                    <h2>{key}</h2>
+                    <ul>
+                        {groupedData[key].filter(record => record.date === date).map((item) => (
+                            <li key={item.id}>
+                                <button 
+                                    value={item.id} 
+                                    onClick={handleTimeslotClick}
+                                >
+                                    Time Slot: {item.timeslot}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             ))}
-        </select>
 
-        {Object.keys(groupedData).map((key) => (
-            <div key={key}>
-                <h2>{key}</h2>
-                <ul>
-                    {groupedData[key].filter(record => record.date === date).map((item) => (
-                        <li key={item.id}>
-                            <button 
-                                value={item.id} 
-                                onClick={handleTimeslotClick}
-                            >
-                                Time Slot: {item.timeslot}
-                            </button>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        ))}
-
-        {selectedTimeslot !== "" && (
-            <>
-                <h3>Selected Date: {selectedDate}</h3>
-                <h3>Selected Movie: {selectedMovie}</h3>
-                <h3>Selected Time: {selectedTimeslot}</h3>
-            </>
-        )}
-
-      </div>
-      </>
+        </div>
+        </>
     );
 }
    

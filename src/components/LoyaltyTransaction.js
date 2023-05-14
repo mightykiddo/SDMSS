@@ -53,6 +53,39 @@ const LoyaltyTransaction = () => {
     return (  
         <>
             <NavBarUser />
+
+            <div className='w3-border-top w3-border-dark-grey' ></div>
+
+            <div style={{margin: '20px'}}>
+                <h1>Order Transaction History</h1>
+                <table style={tableStyles}>
+                    <thead>
+                        <tr style={tableHeaderStyles}>
+                            <th style={tableDataStyles}>Transaction ID</th>
+                            <th style={tableDataStyles}>Customer ID</th>
+                            <th style={tableDataStyles}>Item Name</th>
+                            <th style={tableDataStyles}>Quantity</th>
+                            <th style={tableDataStyles}>Total Amount</th>
+                            <th style={tableDataStyles}>Item Status</th>
+                            <th style={tableDataStyles}>Detail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {ordertransaction.filter(filtercustomerid => filtercustomerid.customerid === id).slice(0).reverse().map((record, index) => (
+                            <tr id={record.key} style={index % 2 === 0 ? {} : alternatingRowStyles}>
+                                <td style={tableDataStyles}>{record.id}</td>
+                                <td style={tableDataStyles}>{record.customerid}</td>
+                                <td style={tableDataStyles}>{record.item}</td>
+                                <td style={tableDataStyles}>{record.quantity}</td>
+                                <td style={tableDataStyles}>${record.totalamount.toFixed(2)}</td>
+                                <td style={tableDataStyles}>{record.itemstatus}</td>
+                                <td style={tableDataStyles}>{record.detail}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
             <div style={{margin: '20px'}}>
                 <h1>Loyalty Transaction History</h1>
                 <table style={tableStyles}>
@@ -67,32 +100,6 @@ const LoyaltyTransaction = () => {
                     </thead>
                     <tbody>
                         {loyaltytransaction.filter(filtercustomerid => filtercustomerid.customerid === id).slice(0).reverse().map((record, index) => (
-                            <tr id={record.key} style={index % 2 === 0 ? {} : alternatingRowStyles}>
-                                <td style={tableDataStyles}>{record.id}</td>
-                                <td style={tableDataStyles}>{record.customerid}</td>
-                                <td style={tableDataStyles}>{record.item}</td>
-                                <td style={tableDataStyles}>{record.quantity}</td>
-                                <td style={tableDataStyles}>{record.itemstatus}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-
-            <div style={{margin: '20px'}}>
-                <h1>Order Transaction History</h1>
-                <table style={tableStyles}>
-                    <thead>
-                        <tr style={tableHeaderStyles}>
-                            <th style={tableDataStyles}>Transaction ID</th>
-                            <th style={tableDataStyles}>Customer ID</th>
-                            <th style={tableDataStyles}>Item Name</th>
-                            <th style={tableDataStyles}>Quantity</th>
-                            <th style={tableDataStyles}>Item Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {ordertransaction.filter(filtercustomerid => filtercustomerid.customerid === id).slice(0).reverse().map((record, index) => (
                             <tr id={record.key} style={index % 2 === 0 ? {} : alternatingRowStyles}>
                                 <td style={tableDataStyles}>{record.id}</td>
                                 <td style={tableDataStyles}>{record.customerid}</td>

@@ -86,45 +86,76 @@ const StaffSetOrderStatus = () => {
 
         });  
 
-        
+    }
+
+    const tableStyles = {
+        borderCollapse: 'collapse',
+        width: '100%',
+        backgroundColor: '#f9f9f9',
+        color: '#444'
+    }
+    
+    const tableHeaderStyles = {
+        backgroundColor: '#333',
+        color: '#fff',
+        fontWeight: 'bold'
+    }
+    
+    const tableDataStyles = {
+        textAlign: 'left',
+        padding: '8px'
     }
 
     return ( 
         <>
         <NavBarStaff />
+
+        <div className='w3-border-top w3-border-dark-grey' ></div>
         
-        <div>
+        <div className="w3-padding-32">
             <h1>Update Order Status</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} style={{margin: '20px'}}>
                 <table>
-                    <tr>
-                        <td><label>Search Transaction History using id:</label></td>
-                        <td><input type="text" value={searched} onChange={(e) => setsearched(e.target.value)}></input><button>Search</button></td>
-                        
-                    </tr>          
+                <thead>
+                <tr>
+                    <th><h3>Search Order Transaction History Using ID: &nbsp; </h3></th>
+                    <th><input type="text" value={searched} onChange={(e) => setsearched(e.target.value)}></input><button>Search</button></th>
+                </tr>    
+                </thead>      
                 </table>
             </form>
             
-            <form onSubmit={handleSubmit2}>
-                <table>
-                    <tr>
-                        <th>Transaction ID</th>
-                        <th>Customer ID</th>
-                        <th>Item Name</th>
-                        <th>Item Status</th>
-                        <th>Submit to confirm claim</th>
-                    </tr>
-                    {isPending && LoyaltyTransaction.filter(records => records.id === parseInt(searched)).map(record =>(
-                    <tr id={record.key}>
-                        <td>{record.id}</td>
-                        <td>{record.customerid}</td>
-                        <td>{record.item}</td>
-                        <td>{record.itemstatus}</td>
-                        <td><button value={record.id} onClick={(e)=> setId2(e.target.value)}>Submit</button></td>
-                    </tr>
-                    ))}         
+            <form onSubmit={handleSubmit2} style={{margin: '20px'}}>
+                <table style={tableStyles}>
+                    <thead>
+                        <tr style={tableHeaderStyles}>
+                            <th style={tableDataStyles}>Transaction ID</th>
+                            <th style={tableDataStyles}>Customer ID</th>
+                            <th style={tableDataStyles}>Item Name</th>
+                            <th style={tableDataStyles}>Quantity</th>
+                            <th style={tableDataStyles}>Total Amount</th>
+                            <th style={tableDataStyles}>Item Status</th>
+                            <th style={tableDataStyles}>Item Detail</th>
+                            <th style={tableDataStyles}>Submit to confirm claim</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {isPending && LoyaltyTransaction.filter(records => records.id === parseInt(searched)).map(record =>(
+                        <tr id={record.key}>
+                            <td style={tableDataStyles}>{record.id}</td>
+                            <td style={tableDataStyles}>{record.customerid}</td>
+                            <td style={tableDataStyles}>{record.item}</td>
+                            <td style={tableDataStyles}>{record.quantity}</td>
+                            <td style={tableDataStyles}>${record.totalamount.toFixed(2)}</td>
+                            <td style={tableDataStyles}>{record.itemstatus}</td>
+                            <td style={tableDataStyles}>{record.detail}</td>
+                            <td style={tableDataStyles}><button className="w3-button w3-red w3-round-large" value={record.id} onClick={(e)=> setId2(e.target.value)}>Submit</button></td>
+                        </tr>
+                        ))}     
+                    </tbody>    
                 </table>
             </form>
+            
         </div>
         </>
      );

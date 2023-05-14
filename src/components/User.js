@@ -3,10 +3,11 @@ import NavBarUser from './NavBarUser';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-
+import { useState, useEffect } from "react";
 
 const User = () => {
 
+    const [movie, setMovie] = useState([]);
     const location = useLocation();
     const history = useNavigate();
     const username = location.state.username;
@@ -14,6 +15,15 @@ const User = () => {
     var seatpref = location.state.seatpref;
     var id = location.state.id;
     
+    useEffect(() => {
+        fetch('http://localhost:8008/movie')
+        .then(res =>{
+            return res.json();
+        })
+        .then(data => {
+            setMovie(data);
+        })
+    }, []); 
 
     const handleSubmit = () => {
         console.log("redirect to food and drink page");
@@ -29,13 +39,6 @@ const User = () => {
         <>
         
         <NavBarUser />
-        
-        <div>
-            <h3>{username}</h3>
-            <h3>{loyaltypoint}</h3>
-            <h3>{seatpref}</h3>
-            <h3>{id}</h3>
-        </div>
 
         <div className="w3-padding">
 
@@ -45,6 +48,9 @@ const User = () => {
 
                 <div className="w3-row w3-padding-32">    
 
+                    <div>
+                        <h3>Welcome <span className='w3-text-amber'>{username}</span>, your [ Current Loyalty Point ] : <span className='w3-text-amber'>{loyaltypoint}</span> and [ Seat Preference ] : <span className='w3-text-amber'>{seatpref}</span></h3>
+                    </div>
                     
                     <div className="w3-third w3-padding-16">
                         <div className="w3-padding-top-64">
@@ -80,28 +86,41 @@ const User = () => {
                             <h3 className="w3-border-bottom w3-border-light-grey" style={{maxWidth:"170px"}}>Now Showing</h3>
                     
                             <div className="w3-col l4 m8 w3-margin-bottom w3-padding-16">
-                                <img src={require("../pics/blacky.jpg")} alt="blacky" className="" style={{width:"100%"}}/>
-                                <div className='w3-dark-grey w3-padding' style={{minHeight:"400px"}}>
-                                    <h3>Blacky</h3>
-                                    <p className="w3-opacity w3-large">The AZoom team makes the experience of car-renting relatively stress-free. They are an awesome group of people to work with - quick to respond, always ready to help, positive and open to suggestions for improvements. Keep up the good work!</p>
-                                </div>
+                                <img src={require("../pics/captainmarvel.jpg")} alt="captainmarvel" className="" style={{width:"100%"}}/>
+
+                                {movie.filter(filter => filter.id === 1).map((record) => (
+                                    <div className='w3-dark-grey w3-padding' style={{minHeight:"400px"}}>
+                                        <h3>{record.movie}</h3>
+                                        <p className="w3-opacity w3-small">{record.duration}&emsp;({record.agerating})</p>
+                                        <p className="w3-opacity w3-large">{record.sysnopsis}</p>
+                                    </div>
+                                ))}
                             </div>
+
                             <div className="w3-col l4 m8 w3-margin-bottom w3-padding-16">
-                                <img src={require("../pics/colin.jpg")} alt="colin" className="" style={{width:"100%"}}/>
-                                <div className='w3-dark-grey w3-padding' style={{minHeight:"400px"}}>
-                                    <h3>Blacky</h3>
-                                    <p className="w3-opacity w3-large">The AZoom team makes the experience of car-renting relatively stress-free. They are an awesome group of people to work with - quick to respond, always ready to help, positive and open to suggestions for improvements. Keep up the good work!</p>
-                                </div>
-                                
+                                <img src={require("../pics/avengers.jpg")} alt="avengers" className="" style={{width:"100%"}}/>
+
+                                {movie.filter(filter => filter.id === 2).map((record) => (
+                                    <div className='w3-dark-grey w3-padding' style={{minHeight:"400px"}}>
+                                        <h3>{record.movie}</h3>
+                                        <p className="w3-opacity w3-small">{record.duration}&emsp;({record.agerating})</p>
+                                        <p className="w3-opacity w3-large">{record.sysnopsis}</p>
+                                    </div>
+                                ))}
                             </div>
+
                             <div className="w3-col l4 m8 w3-margin-bottom w3-padding-16">
-                                <img src={require("../pics/goldy.jpg")} alt="goldy" className="" style={{width:"100%"}}/>
-                                <div className='w3-dark-grey w3-padding' style={{minHeight:"400px"}}>
-                                    <h3>Blacky</h3>
-                                    <p className="w3-opacity w3-large">The AZoom team makes the experience of car-renting relatively stress-free. They are an awesome group of people to work with - quick to</p>
-                                </div>
+                                <img src={require("../pics/blackpanther.jpg")} alt="blackpanther" className="" style={{width:"100%"}}/>
                                 
+                                {movie.filter(filter => filter.id === 3).map((record) => (
+                                    <div className='w3-dark-grey w3-padding' style={{minHeight:"400px"}}>
+                                        <h3>{record.movie}</h3>
+                                        <p className="w3-opacity w3-small">{record.duration}&emsp;({record.agerating})</p>
+                                        <p className="w3-opacity w3-large">{record.sysnopsis}</p>
+                                    </div>
+                                ))}
                             </div>
+
                         </div>
 
                     </div>
@@ -118,17 +137,17 @@ const User = () => {
                     <h3 className="w3-padding-16 w3-xxlarge">What our customer are saying about us</h3>
 
                     <div className="w3-panel w3-leftbar w3-dark-grey w3-round">
-                        <p><i>"The AZoom team makes the experience of car-renting relatively stress-free. They are an awesome group of people to work with - quick to respond, always ready to help, positive and open to suggestions for improvements. Keep up the good work! 👍"</i></p>
+                        <p><i>"I love going to this cinema! The seats are comfortable, the screens are huge, and the sound quality is amazing. The staff are always friendly and helpful too. 👍"</i></p>
                         <p>Albert Tan</p>
                     </div>
 
                     <div className="w3-panel w3-leftbar w3-dark-grey w3-round">
-                        <p><i>"AZoom has a great and very responsive customer service team. It is an easy and hassle-free platform for me to rent an eletric car. No confusion and is clear-cut."</i></p>
+                        <p><i>"I really enjoyed my experience at this cinema. The staff were friendly, the seats were comfortable, and the movie was amazing. I'll definitely be coming back here again!"</i></p>
                         <p>Shimei He</p>
                     </div>
 
                     <div className="w3-panel w3-leftbar w3-dark-grey w3-round">
-                        <p><i>"Convenient way to rent an eletric car. Hassle free! :)"</i></p>
+                        <p><i>"I've been to a lot of cinemas, but this one is definitely my favorite. The seats are so comfortable, and the sound quality is amazing. I always have a great time here. :) "</i></p>
                         <p>Jonathan Lai</p>
                     </div>
                 </div>

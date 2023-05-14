@@ -399,6 +399,20 @@
       "quantity": "1",
       "customerid": "staff",
       "id": 66
+    },
+    {
+      "item": "1 x Large Size Popcorn",
+      "itemstatus": "Unclaimed",
+      "quantity": "2",
+      "customerid": 8,
+      "id": 67
+    },
+    {
+      "item": "1 x Teddy bear",
+      "itemstatus": "Completed",
+      "quantity": "1",
+      "customerid": 8,
+      "id": 68
     }
   ]
 }

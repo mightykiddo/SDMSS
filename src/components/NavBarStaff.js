@@ -10,7 +10,8 @@ const NavBarStaff = () => {
         
             <div className='menuitem'>
 
-                    <Link to='/stafffoodanddrink'>Food & Drink</Link>   
+                    <Link to='/stafffoodanddrink'>Food & Drink</Link>
+                    <Link to='/staffbookticket'>Book Ticket</Link>     
                     <Link to='/staffsetloyaltystatus'>Update Loyalty Status</Link>
                     <Link to='/staffsetorderstatus'>Update Order Status</Link>
         

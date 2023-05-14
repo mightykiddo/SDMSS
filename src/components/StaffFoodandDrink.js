@@ -66,10 +66,12 @@ const StaffFoodandDrink = () => {
         
         <NavBarStaff />
 
-        <div style={{margin: '20px'}}>
+        <div className='w3-border-top w3-border-dark-grey' ></div>
+
+        <div className="w3-padding-32">
             <h1>Food And Drink Purchase Section</h1>
             <p>Select a combo to purchase:</p>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} style={{margin: '20px'}}>
 
                 <table style={tableStyles}>
                     <thead>

@@ -6,7 +6,6 @@ import Home from './components/Home';
 import Login from './components/Login';
 import CreateAccount from './components/CreateAccount';
 import User from './components/User';
-import Staff from './components/StaffFoodandDrink';
 import ReviewRating from './components/ReviewRating';
 import LoyaltyPage from './components/LoyaltyPage';
 import LoyaltyTransaction from './components/LoyaltyTransaction';
@@ -15,6 +14,9 @@ import BookTicket from './components/BookTicket';
 import StaffSetLoyaltyStatus from './components/StaffSetLoyaltyStatus';
 import StaffFoodandDrink from './components/StaffFoodandDrink';
 import StaffSetOrderStatus from './components/StaffSetOrderStatus';
+import SelectSeats from './components/SelectSeats';
+import StaffBookTicket from './components/StaffBookTicket';
+import StaffSelectSeats from './components/StaffSelectSeats';
 
 
 const App = () => {
@@ -53,6 +55,12 @@ const App = () => {
 
                     <Route path='/staffsetorderstatus' element={ <StaffSetOrderStatus/> }></Route>
                     
+                    <Route path='/selectseats' element={ <SelectSeats/> }></Route>
+
+                    <Route path='/staffbookticket' element={ <StaffBookTicket/> }></Route>
+
+                    <Route path='/staffselectseats' element={ <StaffSelectSeats/> }></Route>
+
                 </Routes>
               
             </GlobalStore>
