@@ -23,7 +23,6 @@ const Login = () => {
 
     const [username, setusername] = useState('');
     const [password, setpassword] = useState('');
-    const [dbuser, setdbuser] = useState([]);
     const [modalIsOpen4, setModalIsOpen4] = useState(false);
     const history = useNavigate();
     var successaccess = false;
@@ -32,55 +31,57 @@ const Login = () => {
     var seatpref = " ";
     var id = " ";
 
-    useEffect(()=>{
-        fetch('http://localhost:8005/user')
-        .then(res =>{
-            return res.json();
-        })
-        .then(data => {
-            setdbuser(data);
-            console.log(data);
-        });
-    },[]);
-
     const handleSubmit2 = () =>{
         setModalIsOpen4(false)
     }
 
     const handleSubmit = (e) =>{
             e.preventDefault();
-            dbuser.filter(record => record.username === username && record.password === password).map(filterrecord =>{
-
-                successaccess = true
-                console.log(filterrecord.name)
-                console.log(filterrecord.acctype)
-                console.log("Log In Successfully")
-                accounttype = filterrecord.acctype
-                loyaltypoint = filterrecord.loyaltypoint
-                seatpref = filterrecord.seatpref
-                id = filterrecord.id
-
-                
+            fetch('http://localhost:8005/user')
+            .then(res =>{
+                return res.json();
             })
+            .then(data => {
+                console.log(data);
+                data.filter(record => record.username === username && record.password === password && record.status === "Active").map(filterrecord =>{
 
-            if (successaccess) {
-
-                if (accounttype === "customer"){
-
-                    console.log("redirect to customer page");
-                    history('/user', {state:{username, loyaltypoint, seatpref, id}});
-                    //history({pathname: '/user', search: createSearchParams({id:username}).toString()});
-
-                } else if (accounttype === "staff"){
-                    console.log("redirect to staff page");
-                    history('/stafffoodanddrink', {state:{username}});
+                    successaccess = true
+                    console.log(filterrecord.name)
+                    console.log(filterrecord.acctype)
+                    console.log("Log In Successfully")
+                    accounttype = filterrecord.acctype
+                    loyaltypoint = filterrecord.loyaltypoint
+                    seatpref = filterrecord.seatpref
+                    id = filterrecord.id
                     
+                })
+
+                if (successaccess) {
+
+                    if (accounttype === "customer"){
+    
+                        console.log("redirect to customer page");
+                        history('/user', {state:{username, loyaltypoint, seatpref, id}});
+                        //history({pathname: '/user', search: createSearchParams({id:username}).toString()});
+    
+                    } else if (accounttype === "staff"){
+                        console.log("redirect to staff page");
+                        history('/stafffoodanddrink', {state:{username}});
+                        
+                    } else if (accounttype === "Manager"){
+                        console.log("redirect to manager page");
+                        history('/manager', {state:{username}});
+                        
+                    } else if (accounttype === "System Admin"){
+                        console.log("redirect to admin page");
+                        history('/admin', {state:{username}});
+                        
+                    }
+                    
+                } else {
+                    setModalIsOpen4(true);
                 }
-                
-            } else {
-                setModalIsOpen4(true);
-            }
-            
+            });
     }
 
 

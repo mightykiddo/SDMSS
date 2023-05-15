@@ -1,0 +1,40 @@
+{
+  "Userprofile": [
+    {
+      "id": 1,
+      "UserProfile": "customer"
+    },
+    {
+      "id": 22,
+      "UserProfile": "System Admin"
+    },
+    {
+      "id": 2,
+      "UserProfile": "staff"
+    },
+    {
+      "id": 2,
+      "UserProfile": "Manager"
+    },
+    {
+      "id": 2,
+      "UserProfile": "Marketing Executive"
+    },
+    {
+      "id": 3,
+      "UserProfile": "Senior Marketing Executive"
+    },
+    {
+      "id": 8,
+      "UserProfile": "Senior Manager"
+    },
+    {
+      "id": 9,
+      "UserProfile": "Assistant Manager"
+    },
+    {
+      "id": 10,
+      "UserProfile": "Engineer"
+    }
+  ]
+}

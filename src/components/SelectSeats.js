@@ -99,10 +99,11 @@ const SelectSeats = () => {
     var quantity = numberOfSelectedSeats;
     var itemstatus = "Unpaid";
     var item = "Movie Ticket";
+    var movie = selectedMovie;
     var detail = " [Date]: "+selectedDate+",  [Timeslot]: "+selectedTimeslot+",  [Movie]: "+selectedMovie+",  [Room]: "+selectedRoom+",  [Ticket Type]: "+tickettype+",  [Seats]: "+selectedSeats;
     console.log("Detail", detail);
 
-    const ordertransaction = {item, itemstatus, quantity, totalamount, customerid, detail};
+    const ordertransaction = {item, itemstatus, quantity, totalamount, customerid, movie, detail};
     e.preventDefault();
     
     fetch('http://localhost:8007/ordertransaction',{

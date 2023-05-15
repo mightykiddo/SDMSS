@@ -1,371 +1,6 @@
 {
   "loyaltytransaction": [
     {
-      "item": "",
-      "itemstatus": "Completed",
-      "id": 3
-    },
-    {
-      "item": "",
-      "itemstatus": "Completed",
-      "id": 4
-    },
-    {
-      "setitem2": "",
-      "itemstatus": "Completed",
-      "id": 5
-    },
-    {
-      "item": "",
-      "itemstatus": "Completed",
-      "id": 6
-    },
-    {
-      "item": "",
-      "itemstatus": "Completed",
-      "id": 7
-    },
-    {
-      "item": "",
-      "itemstatus": "Completed",
-      "id": 8
-    },
-    {
-      "item": " ",
-      "itemstatus": "Completed",
-      "id": 9
-    },
-    {
-      "item": " ",
-      "itemstatus": "Completed",
-      "id": 10
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Completed",
-      "id": 11
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Completed",
-      "id": 12
-    },
-    {
-      "item": "1 x Large Size Popcorn",
-      "itemstatus": "Completed",
-      "id": 13
-    },
-    {
-      "item": "1 x Teddy bear",
-      "itemstatus": "Completed",
-      "id": 14
-    },
-    {
-      "item": "1 x Large Size Popcorn",
-      "itemstatus": "Completed",
-      "id": 15
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Completed",
-      "id": 16
-    },
-    {
-      "item": "1 x Teddy bear",
-      "itemstatus": "Completed",
-      "id": 17
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Completed",
-      "id": 18
-    },
-    {
-      "item": "1 x Teddy bear",
-      "itemstatus": "Completed",
-      "id": 19
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Completed",
-      "id": 20
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Completed",
-      "quantity": "3",
-      "id": 21
-    },
-    {
-      "item": "Combo 2",
-      "itemstatus": "Completed",
-      "quantity": "2",
-      "id": 22
-    },
-    {
-      "item": "Combo 3",
-      "itemstatus": "Completed",
-      "quantity": "1",
-      "id": 23
-    },
-    {
-      "item": "Combo 2",
-      "itemstatus": "Completed",
-      "quantity": "2",
-      "id": 24,
-      "username": " WE NEED SOMETHING LIKE THIS FOR THIS PART!!!!!"
-    },
-    {
-      "item": "Combo 2",
-      "itemstatus": "Completed",
-      "quantity": "2",
-      "id": 25
-    },
-    {
-      "item": "Combo 3",
-      "itemstatus": "Completed",
-      "quantity": "4",
-      "id": 26
-    },
-    {
-      "itemstatus": "Unclaimed",
-      "id": 27
-    },
-    {
-      "item": "Combo 2",
-      "itemstatus": "Unclaimed",
-      "quantity": "1",
-      "id": 28
-    },
-    {
-      "item": "Combo 1",
-      "itemstatus": "Unclaimed",
-      "quantity": "1",
-      "id": 29
-    },
-    {
-      "item": "Combo 3",
-      "itemstatus": "Unclaimed",
-      "quantity": "3",
-      "id": 30
-    },
-    {
-      "item": "Combo 2",
-      "itemstatus": "Unclaimed",
-      "quantity": "2",
-      "id": 31
-    },
-    {
-      "item": "Combo 2",
-      "itemstatus": "Unclaimed",
-      "quantity": "2",
-      "customerid": 8,
-      "id": 32
-    },
-    {
-      "item": "Combo 3",
-      "itemstatus": "Unclaimed",
-      "quantity": "3",
-      "customerid": 8,
-      "id": 33
-    },
-    {
-      "item": "Combo 1",
-      "itemstatus": "Unclaimed",
-      "quantity": "5",
-      "customerid": 8,
-      "id": 34
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Unclaimed",
-      "quantity": "2",
-      "customerid": 8,
-      "id": 35
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Unclaimed",
-      "quantity": "2",
-      "customerid": 8,
-      "id": 36
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Unclaimed",
-      "quantity": "1",
-      "customerid": 8,
-      "id": 37
-    },
-    {
-      "item": "Combo 2",
-      "itemstatus": "Unclaimed",
-      "quantity": "4",
-      "customerid": 8,
-      "id": 38
-    },
-    {
-      "item": "Combo 2",
-      "itemstatus": "Unclaimed",
-      "quantity": "2",
-      "customerid": 21,
-      "id": 39
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Unclaimed",
-      "quantity": "1",
-      "customerid": 8,
-      "id": 40
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Completed",
-      "quantity": "1",
-      "customerid": 8,
-      "id": 41
-    },
-    {
-      "item": "",
-      "itemstatus": "Completed",
-      "quantity": "1",
-      "customerid": 8,
-      "id": 42
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Completed",
-      "quantity": "1",
-      "customerid": 8,
-      "id": 43
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Completed",
-      "quantity": "1",
-      "customerid": 8,
-      "id": 44
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Completed",
-      "quantity": " ",
-      "customerid": 8,
-      "id": 45
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Completed",
-      "quantity": "1",
-      "customerid": 8,
-      "id": 46
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Completed",
-      "quantity": "1",
-      "customerid": 8,
-      "id": 47
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Completed",
-      "quantity": "1",
-      "customerid": 8,
-      "id": 48
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Completed",
-      "quantity": "1",
-      "customerid": 8,
-      "id": 49
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Completed",
-      "quantity": "1",
-      "customerid": 8,
-      "id": 50
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Completed",
-      "quantity": "1",
-      "customerid": 8,
-      "id": 51
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Completed",
-      "quantity": "1",
-      "customerid": 8,
-      "id": 52
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Completed",
-      "quantity": "1",
-      "customerid": 8,
-      "id": 53
-    },
-    {
-      "item": "1 x Large Size Popcorn",
-      "itemstatus": "Unclaimed",
-      "quantity": "1",
-      "customerid": 8,
-      "id": 54
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Unclaimed",
-      "quantity": " ",
-      "customerid": 8,
-      "id": 55
-    },
-    {
-      "item": "1 x Large Size Popcorn",
-      "itemstatus": "Unclaimed",
-      "quantity": " ",
-      "customerid": 8,
-      "id": 56
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Unclaimed",
-      "quantity": " ",
-      "customerid": 8,
-      "id": 57
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Unclaimed",
-      "quantity": "1",
-      "customerid": 8,
-      "id": 58
-    },
-    {
-      "item": "Combo 3",
-      "itemstatus": "Unclaimed",
-      "quantity": "3",
-      "customerid": 8,
-      "id": 59
-    },
-    {
-      "item": "Combo 1",
-      "itemstatus": "Unclaimed",
-      "quantity": "1",
-      "customerid": 8,
-      "id": 60
-    },
-    {
-      "item": "1 x Ticket",
-      "itemstatus": "Unclaimed",
-      "quantity": "1",
-      "customerid": 8,
-      "id": 61
-    },
-    {
       "item": "1 x Ticket",
       "itemstatus": "Unclaimed",
       "quantity": "1",
@@ -390,13 +25,6 @@
       "item": "Combo 1",
       "itemstatus": "Unpaid",
       "quantity": "1",
-      "customerid": 8,
-      "id": 65
-    },
-    {
-      "item": "Combo 1",
-      "itemstatus": "Unpaid",
-      "quantity": "1",
       "customerid": "staff",
       "id": 66
     },
@@ -413,6 +41,27 @@
       "quantity": "1",
       "customerid": 8,
       "id": 68
+    },
+    {
+      "item": "1 x Large Size Popcorn",
+      "itemstatus": "Completed",
+      "quantity": "1",
+      "customerid": 8,
+      "id": 69
+    },
+    {
+      "item": "1 x Large Size Popcorn",
+      "itemstatus": "Completed",
+      "quantity": "1",
+      "customerid": 8,
+      "id": 70
+    },
+    {
+      "item": "1 x Large Size Popcorn",
+      "itemstatus": "Completed",
+      "quantity": "1",
+      "customerid": 27,
+      "id": 71
     }
   ]
 }

@@ -17,6 +17,8 @@ import StaffSetOrderStatus from './components/StaffSetOrderStatus';
 import SelectSeats from './components/SelectSeats';
 import StaffBookTicket from './components/StaffBookTicket';
 import StaffSelectSeats from './components/StaffSelectSeats';
+import SystemAdmin from './SystemAdmin/SystemAdminMain';
+import ManagerMain from './Manager/ManagerMain'
 
 
 const App = () => {
@@ -60,6 +62,10 @@ const App = () => {
                     <Route path='/staffbookticket' element={ <StaffBookTicket/> }></Route>
 
                     <Route path='/staffselectseats' element={ <StaffSelectSeats/> }></Route>
+
+                    <Route path="/Admin" element={<SystemAdmin/>} />
+                    
+                    <Route path="/Manager" element={<ManagerMain />} />
 
                 </Routes>
               

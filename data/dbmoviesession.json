@@ -1,69 +1,16 @@
 {
   "moviesession": [
     {
-      "id": 1,
-      "date": "0105",
-      "movie": "Captain Marvel",
-      "timeslot": "1000",
-      "room": "1",
-      "seats": [
-        {
-          "seat": "A1",
-          "occupy": "yes",
-          "id": 1
-        },
-        {
-          "seat": "A2",
-          "occupy": "yes",
-          "id": 2
-        },
-        {
-          "seat": "A3",
-          "occupy": "yes",
-          "id": 3
-        },
-        {
-          "seat": "B1",
-          "occupy": "yes",
-          "id": 4
-        },
-        {
-          "seat": "B2",
-          "occupy": "yes",
-          "id": 5
-        },
-        {
-          "seat": "B3",
-          "occupy": "yes",
-          "id": 6
-        },
-        {
-          "seat": "C1",
-          "occupy": "yes",
-          "id": 7
-        },
-        {
-          "seat": "C2",
-          "occupy": "yes",
-          "id": 8
-        },
-        {
-          "seat": "C3",
-          "occupy": "no",
-          "id": 9
-        }
-      ]
-    },
-    {
       "id": 2,
-      "date": "0105",
-      "movie": "Captain Marvel",
-      "timeslot": "1100",
+      "movie_id": "2",
+      "movie": "Avengers: Endgame",
+      "room_id": "7",
       "room": "2",
+      "timeslot": "10:30 - 12:30",
       "seats": [
         {
           "seat": "A1",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 1
         },
         {
@@ -73,7 +20,7 @@
         },
         {
           "seat": "A3",
-          "occupy": "no",
+          "occupy": "yes",
           "id": 3
         },
         {
@@ -98,7 +45,7 @@
         },
         {
           "seat": "C2",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 8
         },
         {
@@ -106,23 +53,25 @@
           "occupy": "no",
           "id": 9
         }
-      ]
+      ],
+      "date": "2023-05-15"
     },
     {
       "id": 3,
-      "date": "0105",
+      "movie_id": "2",
       "movie": "Avengers: Endgame",
-      "timeslot": "1000",
-      "room": "2",
+      "room_id": "8",
+      "room": "3",
+      "timeslot": "12:30 - 14:30",
       "seats": [
         {
           "seat": "A1",
-          "occupy": "no",
+          "occupy": "yes",
           "id": 1
         },
         {
           "seat": "A2",
-          "occupy": "no",
+          "occupy": "yes",
           "id": 2
         },
         {
@@ -152,7 +101,7 @@
         },
         {
           "seat": "C2",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 8
         },
         {
@@ -160,14 +109,16 @@
           "occupy": "no",
           "id": 9
         }
-      ]
+      ],
+      "date": "2023-05-15"
     },
     {
       "id": 4,
-      "date": "0105",
-      "movie": "Black Panther: Wakanda Forever",
-      "timeslot": "1100",
-      "room": "3",
+      "movie_id": "2",
+      "movie": "Avengers: Endgame",
+      "room_id": "9",
+      "room": "4",
+      "timeslot": "15:30 - 17:30",
       "seats": [
         {
           "seat": "A1",
@@ -206,7 +157,7 @@
         },
         {
           "seat": "C2",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 8
         },
         {
@@ -214,23 +165,25 @@
           "occupy": "no",
           "id": 9
         }
-      ]
+      ],
+      "date": "2023-05-15"
     },
     {
       "id": 5,
-      "date": "0105",
+      "movie_id": "1",
       "movie": "Captain Marvel",
-      "timeslot": "1300",
+      "room_id": "6",
       "room": "1",
+      "timeslot": "10:30 - 12:30",
       "seats": [
         {
           "seat": "A1",
-          "occupy": "no",
+          "occupy": "yes",
           "id": 1
         },
         {
           "seat": "A2",
-          "occupy": "no",
+          "occupy": "yes",
           "id": 2
         },
         {
@@ -260,7 +213,7 @@
         },
         {
           "seat": "C2",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 8
         },
         {
@@ -268,23 +221,25 @@
           "occupy": "no",
           "id": 9
         }
-      ]
+      ],
+      "date": "2023-05-16"
     },
     {
       "id": 6,
-      "date": "0105",
-      "movie": "Avengers: Endgame",
-      "timeslot": "1100",
-      "room": "4",
+      "movie_id": "1",
+      "movie": "Captain Marvel",
+      "room_id": "7",
+      "room": "2",
+      "timeslot": "12:30 - 14:30",
       "seats": [
         {
           "seat": "A1",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 1
         },
         {
           "seat": "A2",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 2
         },
         {
@@ -299,12 +254,12 @@
         },
         {
           "seat": "B2",
-          "occupy": "no",
+          "occupy": "yes",
           "id": 5
         },
         {
           "seat": "B3",
-          "occupy": "no",
+          "occupy": "yes",
           "id": 6
         },
         {
@@ -322,28 +277,30 @@
           "occupy": "no",
           "id": 9
         }
-      ]
+      ],
+      "date": "2023-05-16"
     },
     {
       "id": 7,
-      "date": "0205",
-      "movie": "Avengers: Endgame",
-      "timeslot": "1200",
-      "room": "2",
+      "movie_id": "3",
+      "movie": "Black Panther: Wakanda Forever",
+      "room_id": "6",
+      "room": "1",
+      "timeslot": "14:30 - 16:30",
       "seats": [
         {
           "seat": "A1",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 1
         },
         {
           "seat": "A2",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 2
         },
         {
           "seat": "A3",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 3
         },
         {
@@ -358,7 +315,7 @@
         },
         {
           "seat": "B3",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 6
         },
         {
@@ -368,7 +325,7 @@
         },
         {
           "seat": "C2",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 8
         },
         {
@@ -376,38 +333,40 @@
           "occupy": "no",
           "id": 9
         }
-      ]
+      ],
+      "date": "2023-05-16"
     },
     {
       "id": 8,
-      "date": "0205",
+      "movie_id": "3",
       "movie": "Black Panther: Wakanda Forever",
-      "timeslot": "1300",
-      "room": "1",
+      "room_id": "7",
+      "room": "2",
+      "timeslot": "10:30 - 12:30",
       "seats": [
         {
           "seat": "A1",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 1
         },
         {
           "seat": "A2",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 2
         },
         {
           "seat": "A3",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 3
         },
         {
           "seat": "B1",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 4
         },
         {
           "seat": "B2",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 5
         },
         {
@@ -417,12 +376,12 @@
         },
         {
           "seat": "C1",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 7
         },
         {
           "seat": "C2",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 8
         },
         {
@@ -430,87 +389,35 @@
           "occupy": "no",
           "id": 9
         }
-      ]
+      ],
+      "date": "2023-05-16"
     },
     {
       "id": 9,
-      "date": "0305",
-      "movie": "Captain Marvel",
-      "timeslot": "1400",
-      "room": "4",
+      "movie_id": "4",
+      "movie": "Superman",
+      "room_id": "7",
+      "room": "2",
+      "timeslot": "10:30 - 12:30",
       "seats": [
         {
           "seat": "A1",
-          "occupy": "yes",
-          "id": 1
-        },
-        {
-          "seat": "A2",
-          "occupy": "yes",
-          "id": 2
-        },
-        {
-          "seat": "A3",
-          "occupy": "yes",
-          "id": 3
-        },
-        {
-          "seat": "B1",
-          "occupy": "yes",
-          "id": 4
-        },
-        {
-          "seat": "B2",
-          "occupy": "yes",
-          "id": 5
-        },
-        {
-          "seat": "B3",
-          "occupy": "yes",
-          "id": 6
-        },
-        {
-          "seat": "C1",
-          "occupy": "yes",
-          "id": 7
-        },
-        {
-          "seat": "C2",
-          "occupy": "yes",
-          "id": 8
-        },
-        {
-          "seat": "C3",
           "occupy": "no",
-          "id": 9
-        }
-      ]
-    },
-    {
-      "id": 10,
-      "date": "0205",
-      "movie": "Black Panther: Wakanda Forever",
-      "timeslot": "1500",
-      "room": "3",
-      "seats": [
-        {
-          "seat": "A1",
-          "occupy": "yes",
           "id": 1
         },
         {
           "seat": "A2",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 2
         },
         {
           "seat": "A3",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 3
         },
         {
           "seat": "B1",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 4
         },
         {
@@ -520,7 +427,7 @@
         },
         {
           "seat": "B3",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 6
         },
         {
@@ -530,7 +437,7 @@
         },
         {
           "seat": "C2",
-          "occupy": "yes",
+          "occupy": "no",
           "id": 8
         },
         {
@@ -538,7 +445,8 @@
           "occupy": "no",
           "id": 9
         }
-      ]
+      ],
+      "date": "2023-05-23"
     }
   ]
 }

@@ -1,205 +1,6 @@
 {
   "ordertransaction": [
     {
-      "item": "Movie Ticket",
-      "itemstatus": "Paid",
-      "quantity": 2,
-      "totalamount": 24,
-      "customerid": 8,
-      "detail": " [Date]: 0205,  [Timeslot]: 1500,  [Movie]: Movie 3,  [Room]: 3,  [Ticket Type]: adult,  [Seats]: A3,B3",
-      "id": 1
-    },
-    {
-      "item": "Movie Ticket",
-      "itemstatus": "Paid",
-      "quantity": 2,
-      "totalamount": 24,
-      "customerid": 8,
-      "detail": " [Date]: 0205,  [Timeslot]: 1500,  [Movie]: Movie 3,  [Room]: 3,  [Ticket Type]: adult,  [Seats]: A3,B3",
-      "id": 2
-    },
-    {
-      "item": "Combo 2",
-      "itemstatus": "Unclaimed",
-      "quantity": "2",
-      "total": 26,
-      "id": 3
-    },
-    {
-      "item": "Combo 3",
-      "itemstatus": "Unclaimed",
-      "quantity": "2",
-      "total": 40,
-      "id": 4
-    },
-    {
-      "item": "Combo 2",
-      "itemstatus": "Unclaimed",
-      "quantity": "3",
-      "total": 40.5,
-      "id": 5
-    },
-    {
-      "item": "Combo 2",
-      "itemstatus": "Unclaimed",
-      "quantity": "2",
-      "total": 27,
-      "id": 6
-    },
-    {
-      "item": "Combo 2",
-      "itemstatus": "Unclaimed",
-      "quantity": "3",
-      "total": 40.5,
-      "id": 7
-    },
-    {
-      "item": "Combo 2",
-      "itemstatus": "Unclaimed",
-      "quantity": "2",
-      "total": 27,
-      "id": 8
-    },
-    {
-      "item": "Combo 2",
-      "itemstatus": "Unclaimed",
-      "quantity": "2",
-      "total": 27,
-      "id": 9
-    },
-    {
-      "item": "Combo 2",
-      "itemstatus": "Unclaimed",
-      "quantity": "2",
-      "total": 27,
-      "id": 10
-    },
-    {
-      "item": "Combo 2",
-      "itemstatus": "Unclaimed",
-      "quantity": "2",
-      "total": 27,
-      "id": 11
-    },
-    {
-      "item": "Combo 2",
-      "itemstatus": "Paid",
-      "quantity": "2",
-      "totalamount": 27,
-      "customerid": 8,
-      "id": 12
-    },
-    {
-      "item": "Combo 3",
-      "itemstatus": "Paid",
-      "quantity": "1",
-      "totalamount": 20,
-      "customerid": 8,
-      "id": 13
-    },
-    {
-      "item": "Combo 1",
-      "itemstatus": "Paid",
-      "quantity": "2",
-      "totalamount": 14,
-      "customerid": "staff",
-      "id": 14
-    },
-    {
-      "item": "Combo 2",
-      "itemstatus": "Paid",
-      "quantity": "2",
-      "totalamount": 27,
-      "customerid": 8,
-      "id": 15
-    },
-    {
-      "item": "Combo 3",
-      "itemstatus": "Paid",
-      "quantity": "4",
-      "totalamount": 80,
-      "customerid": 8,
-      "id": 16
-    },
-    {
-      "item": "Combo 3",
-      "itemstatus": "Paid",
-      "quantity": "5",
-      "totalamount": 100,
-      "customerid": 8,
-      "id": 17
-    },
-    {
-      "item": "Combo 3",
-      "itemstatus": "Paid",
-      "quantity": "4",
-      "totalamount": 80,
-      "customerid": 8,
-      "id": 18
-    },
-    {
-      "item": "Combo 1",
-      "itemstatus": "Paid",
-      "quantity": "1",
-      "totalamount": 7,
-      "customerid": 8,
-      "id": 19
-    },
-    {
-      "item": "Movie Ticket",
-      "itemstatus": "Unpaid",
-      "quantity": 2,
-      "totalamount": 24,
-      "customerid": 8,
-      "detail": " [Date]: 0105,  [Timeslot]: 1000,  [Movie]: Movie 1,  [Seats]: A1,A3",
-      "id": 20
-    },
-    {
-      "item": "Movie Ticket",
-      "itemstatus": "Unpaid",
-      "quantity": 2,
-      "totalamount": 18,
-      "customerid": 8,
-      "detail": " [Date]: 0305,  [Timeslot]: 1400,  [Movie]: Movie 1,  [Room]: 4,  [Seats]: B2,B3",
-      "id": 21
-    },
-    {
-      "item": "Movie Ticket",
-      "itemstatus": "Paid",
-      "quantity": 2,
-      "totalamount": 24,
-      "customerid": 8,
-      "detail": " [Date]: 0205,  [Timeslot]: 1500,  [Movie]: Movie 3,  [Room]: 3,  [Ticket Type]: adult,  [Seats]: A3,B3",
-      "id": 22
-    },
-    {
-      "item": "Movie Ticket",
-      "itemstatus": "Unpaid",
-      "quantity": 1,
-      "totalamount": 12,
-      "customerid": "staff",
-      "detail": " [Date]: 0205,  [Timeslot]: 1500,  [Movie]: Black Panther: Wakanda Forever,  [Room]: 3,  [Ticket Type]: adult,  [Seats]: B1",
-      "id": 23
-    },
-    {
-      "item": "Movie Ticket",
-      "itemstatus": "Unpaid",
-      "quantity": 1,
-      "totalamount": 12,
-      "customerid": "staff",
-      "detail": " [Date]: 0105,  [Timeslot]: 1000,  [Movie]: Captain Marvel,  [Room]: 1,  [Ticket Type]: adult,  [Seats]: A2",
-      "id": 24
-    },
-    {
-      "item": "Movie Ticket",
-      "itemstatus": "Paid",
-      "quantity": 1,
-      "totalamount": 12,
-      "customerid": 8,
-      "detail": " [Date]: 0105,  [Timeslot]: 1000,  [Movie]: Captain Marvel,  [Room]: 1,  [Ticket Type]: adult,  [Seats]: B2",
-      "id": 25
-    },
-    {
       "item": "Combo 1",
       "itemstatus": "Paid",
       "quantity": "1",
@@ -221,8 +22,105 @@
       "quantity": 1,
       "totalamount": 12,
       "customerid": "staff",
+      "movie": "Avengers: Endgame",
       "detail": " [Date]: 0105,  [Timeslot]: 1000,  [Movie]: Captain Marvel,  [Room]: 1,  [Ticket Type]: adult,  [Seats]: C1",
       "id": 28
+    },
+    {
+      "item": "Movie Ticket",
+      "itemstatus": "Unpaid",
+      "quantity": 1,
+      "totalamount": 12,
+      "customerid": 8,
+      "movie": "Captain Marvel",
+      "detail": " [Date]: 0105,  [Timeslot]: 1300, [Room]: 1,  [Ticket Type]: adult,  [Seats]: A1",
+      "id": 29
+    },
+    {
+      "item": "Movie Ticket",
+      "itemstatus": "Unpaid",
+      "quantity": 2,
+      "totalamount": 14,
+      "customerid": 8,
+      "movie": "Avengers: Endgame",
+      "detail": " [Date]: 0105,  [Timeslot]: 1000,  [Movie]: Avengers: Endgame,  [Room]: 2,  [Ticket Type]: student,  [Seats]: A1,A2",
+      "id": 30
+    },
+    {
+      "item": "Movie Ticket",
+      "itemstatus": "Unpaid",
+      "quantity": 1,
+      "totalamount": 0,
+      "customerid": 8,
+      "movie": "Avengers: Endgame",
+      "detail": " [Date]: 2023-05-15,  [Timeslot]: 10:30 - 12:30,  [Movie]: Avengers: Endgame,  [Room]: 2,  [Ticket Type]: undefined,  [Seats]: A3",
+      "id": 31
+    },
+    {
+      "item": "Movie Ticket",
+      "itemstatus": "Unpaid",
+      "quantity": 1,
+      "totalamount": 0,
+      "customerid": 8,
+      "movie": "Avengers: Endgame",
+      "detail": " [Date]: 2023-05-15,  [Timeslot]: 10:30 - 12:30,  [Movie]: Avengers: Endgame,  [Room]: 2,  [Ticket Type]: undefined,  [Seats]: A2",
+      "id": 32
+    },
+    {
+      "item": "Combo 1",
+      "itemstatus": "Unpaid",
+      "quantity": "3",
+      "totalamount": 21,
+      "customerid": 8,
+      "id": 33
+    },
+    {
+      "item": "Movie Ticket",
+      "itemstatus": "Paid",
+      "quantity": 2,
+      "totalamount": 24,
+      "customerid": 8,
+      "movie": "Avengers: Endgame",
+      "detail": " [Date]: 2023-05-15,  [Timeslot]: 12:30 - 14:30,  [Movie]: Avengers: Endgame,  [Room]: 3,  [Ticket Type]: adult,  [Seats]: A1,A2",
+      "id": 34
+    },
+    {
+      "item": "Movie Ticket",
+      "itemstatus": "Paid",
+      "quantity": 2,
+      "totalamount": 24,
+      "customerid": 8,
+      "movie": "Captain Marvel",
+      "detail": " [Date]: 2023-05-16,  [Timeslot]: 10:30 - 12:30,  [Movie]: Captain Marvel,  [Room]: 1,  [Ticket Type]: adult,  [Seats]: A1,A2",
+      "id": 35
+    },
+    {
+      "item": "Movie Ticket",
+      "itemstatus": "Paid",
+      "quantity": 1,
+      "totalamount": 12,
+      "customerid": 27,
+      "movie": "Captain Marvel",
+      "detail": " [Date]: 2023-05-16,  [Timeslot]: 12:30 - 14:30,  [Movie]: Captain Marvel,  [Room]: 2,  [Ticket Type]: adult,  [Seats]: C2",
+      "id": 36
+    },
+    {
+      "item": "Combo 2",
+      "itemstatus": "Paid",
+      "quantity": "3",
+      "totalamount": 40.5,
+      "customerid": 27,
+      "id": 37
+    },
+    {
+      "item": "Movie Ticket",
+      "itemstatus": "Paid",
+      "quantity": 2,
+      "totalamount": 24,
+      "customerid": 27,
+      "movie": "Captain Marvel",
+      "detail": " [Date]: 2023-05-16,  [Timeslot]: 12:30 - 14:30,  [Movie]: Captain Marvel,  [Room]: 2,  [Ticket Type]: adult,  [Seats]: B2,B3",
+      "id": 38
     }
   ]
 }

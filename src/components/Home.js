@@ -12,7 +12,7 @@ const Home = () => {
     const [movie, setMovie] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:8008/movie')
+        fetch('http://localhost:8008/Movie')
         .then(res =>{
             return res.json();
         })
@@ -63,9 +63,9 @@ const Home = () => {
 
                                 {movie.filter(filter => filter.id === 1).map((record) => (
                                     <div className='w3-dark-grey w3-padding' style={{minHeight:"400px"}}>
-                                        <h3>{record.movie}</h3>
-                                        <p className="w3-opacity w3-small">{record.duration}&emsp;({record.agerating})</p>
-                                        <p className="w3-opacity w3-large">{record.sysnopsis}</p>
+                                        <h3>{record.Movie}</h3>
+                                        <p className="w3-opacity w3-small">{record.Duration}&emsp;({record.AgeRating})</p>
+                                        <p className="w3-opacity w3-large">{record.Synopsis}</p>
                                     </div>
                                 ))}
                             </div>
@@ -75,9 +75,9 @@ const Home = () => {
 
                                 {movie.filter(filter => filter.id === 2).map((record) => (
                                     <div className='w3-dark-grey w3-padding' style={{minHeight:"400px"}}>
-                                        <h3>{record.movie}</h3>
-                                        <p className="w3-opacity w3-small">{record.duration}&emsp;({record.agerating})</p>
-                                        <p className="w3-opacity w3-large">{record.sysnopsis}</p>
+                                        <h3>{record.Movie}</h3>
+                                        <p className="w3-opacity w3-small">{record.Duration}&emsp;({record.AgeRating})</p>
+                                        <p className="w3-opacity w3-large">{record.Synopsis}</p>
                                     </div>
                                 ))}
                             </div>
@@ -87,9 +87,9 @@ const Home = () => {
                                 
                                 {movie.filter(filter => filter.id === 3).map((record) => (
                                     <div className='w3-dark-grey w3-padding' style={{minHeight:"400px"}}>
-                                        <h3>{record.movie}</h3>
-                                        <p className="w3-opacity w3-small">{record.duration}&emsp;({record.agerating})</p>
-                                        <p className="w3-opacity w3-large">{record.sysnopsis}</p>
+                                        <h3>{record.Movie}</h3>
+                                        <p className="w3-opacity w3-small">{record.Duration}&emsp;({record.AgeRating})</p>
+                                        <p className="w3-opacity w3-large">{record.Synopsis}</p>
                                     </div>
                                 ))}
                             </div>
