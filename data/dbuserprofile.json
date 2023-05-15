@@ -1,6 +1,22 @@
 {
   "Userprofile": [
     {
+      "id": 1,
+      "UserProfile": "customer"
+    },
+    {
+      "id": 22,
+      "UserProfile": "System Admin"
+    },
+    {
+      "id": 2,
+      "UserProfile": "staff"
+    },
+    {
+      "id": 2,
+      "UserProfile": "Manager"
+    },
+    {
       "id": 2,
       "UserProfile": "Marketing Executive"
     },
