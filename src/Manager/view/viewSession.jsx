@@ -13,7 +13,7 @@ function ViewSession() {
 
   const loadData = () => {
 
-    fetch(`${apiUrl_Session}/MovieSession`)
+    fetch(`${apiUrl_Session}/moviesession`)
       .then(res => res.json())
       .then(data => setData(data))
       .catch(SessionError => console.error(SessionError))
@@ -48,7 +48,7 @@ function ViewSession() {
 
   const handleSubmit = (e)=> {//rename
     e.preventDefault();
-    fetch(`${apiUrl_Session}/MovieSession?Movie=${query}`)
+    fetch(`${apiUrl_Session}/moviesession?movie=${query}`)
       .then(response => response.json())
       .then(data => setData(data))
       .catch(error => console.error(error));
@@ -68,8 +68,7 @@ function ViewSession() {
         <th scope="col" className="p-3">Movie</th>
           <th scope="col">Room</th>
           <th scope="col">Date</th>
-          <th scope="col">Start</th>
-          <th scope="col">End</th>
+          <th scope="col">Timeslot</th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -78,11 +77,10 @@ function ViewSession() {
         data?.map((session) => (
           <>
           <tr key={session.id}>
-            <td className="p-2">{session.Movie === null ? "Nil" : session.Movie}</td>
-            <td className="p-2">{session.Room === null ? "Nil" : session.Room}</td>
-            <td className="p-2">{session.Date}</td>
-            <td className="p-2">{session.Start}</td>
-            <td className="p-2">{session.End}</td>
+            <td className="p-2">{session.movie === null ? "Nil" : session.movie}</td>
+            <td className="p-2">{session.room === null ? "Nil" : session.room}</td>
+            <td className="p-2">{session.date}</td>
+            <td className="p-2">{session.timeslot}</td>
             <td>
                <div className="d-flex align-items-center justify-content-end"> 
                     <button type="button" className="btn text-white m-1 " style={{backgroundColor : "royalblue"}} onClick={() => handleUpdate(session.id)}>Update</button>
@@ -156,25 +154,25 @@ const UpdateSession = ({data, setData, show, handleClose}) => {
     var movie = null;
     var room = null;
     if(formData.Movie_id !== null ){   
-        movie = movies.find(movie => movie.id == formData.Movie_id) //will return undefined and break
+        movie = movies.find(movie => movie.id == formData.movie_id) //will return undefined and break
         movie = movie.Movie
       }
-    if(formData.Room_id !== null){
-      room = rooms.find(room => room.id == formData.Room_id)
+    if(formData.room_id !== null){
+      room = rooms.find(room => room.id == formData.room_id)
       room = room.Name
     }
 
-    fetch(`${apiUrl_Session}/MovieSession/${formData.id}`, {
+    fetch(`${apiUrl_Session}/moviesession/${formData.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         ...formData, 
-        Movie : movie,
-        Room : room,
-        Room_id : parseInt(formData.Room_id),
-        Movie_id : parseInt(formData.Movie_id)
+        movie : movie,
+        room : room,
+        room_id : parseInt(formData.room_id),
+        movie_id : parseInt(formData.movie_id)
       }),
     })
       .then((response) => response.json())
@@ -217,16 +215,16 @@ const UpdateSession = ({data, setData, show, handleClose}) => {
         <Modal.Body>
         <form onSubmit={handleSubmit}>
         <div class="form-group">
-            <label hmtlfor="Movie" class="col-form-label">Movie:</label>
-            <select className="form-select" onChange={handleEdit} value={formData.Movie_id} id="Movie_id">
+            <label hmtlfor="movie" class="col-form-label">Movie:</label>
+            <select className="form-select" onChange={handleEdit} value={formData.movie_id} id="movie_id">
                 {movies?.map((option) => (
                         <option key={option.id} value={option.id}>{option.Movie} </option>
                     ))}
             </select>
           </div>
           <div class="form-group">
-            <label hmtlfor="Room" class="col-form-label">Room:</label>
-            <select className="form-select" onChange={handleEdit} value={formData.Room_id} id="Room_id">
+            <label hmtlfor="room" class="col-form-label">Room:</label>
+            <select className="form-select" onChange={handleEdit} value={formData.room_id} id="room_id">
                 {rooms?.map((option) => (
                         <option key={option.id} value={option.id}>{option.Name}</option>
                     ))}
@@ -234,15 +232,11 @@ const UpdateSession = ({data, setData, show, handleClose}) => {
           </div>
           <div class="form-group">
             <label hmtlfor="Date" class="col-form-label">Date:</label>
-            <input type="Date" class="form-control" min={new Date().toISOString().split('T')[0]} onChange={handleEdit} value={formData.Date} id="Date"></input>
+            <input type="date" class="form-control" min={new Date().toISOString().split('T')[0]} onChange={handleEdit} value={formData.Date} id="Date"></input>
           </div>
           <div class="form-group">
-            <label hmtlfor="Start" class="col-form-label">Start:</label>
-            <input type="time" class="form-control" onChange={handleEdit} value={formData.Start} id="Start"></input>
-          </div>
-          <div class="form-group">
-            <label hmtlfor="End" class="col-form-label">End:</label>
-            <input type="time" class="form-control" onChange={handleEdit} value={formData.End} id="End"></input>
+            <label hmtlfor="Start" class="col-form-label">Timeslot:</label>
+            <input type="text" class="form-control" onChange={handleEdit} value={formData.Start} id="timeslot"></input>
           </div>
           <button type="submit">update</button>
         </form>
@@ -261,7 +255,7 @@ const DeleteSession = ({data, setData, show, handleClose}) => {
 
   const handleDelete = () => {
     
-    fetch(`${apiUrl_Session}/MovieSession/${id}`, {
+    fetch(`${apiUrl_Session}/moviesession/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'

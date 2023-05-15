@@ -1,24 +1,172 @@
 {
-  "MovieSession": [
+  "moviesession": [
     {
-      "id": 43,
-      "Movie_id": 4,
-      "Movie": "superman",
-      "Room_id": 4,
-      "Room": "ddd",
-      "Date": "",
-      "Start": "",
-      "End": ""
+      "id": 1,
+      "movie_id": 5,
+      "movie": "marvels",
+      "room_id": 4,
+      "room": "dddd",
+      "timeslot": "1000 - 1200",
+      "seats": [
+        {
+          "seat": "A1",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "A2",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "A3",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "B1",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "B2",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "B3",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "C1",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "C2",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "C3",
+          "occupy": "no",
+          "id": 1
+        }
+      ]
     },
-    { 
-      "id": 22,
-      "Movie_id": "1",
-      "Movie": "catwomnDDDd",
-      "Room_id": null,
-      "Room": null,
-      "Date": "2023-05-17",
-      "Start": "",
-      "End": ""
+    {
+      "id": 2,
+      "movie_id": 6,
+      "movie": "singpore",
+      "room_id": 4,
+      "room": "dddd",
+      "date": "",
+      "start": "",
+      "end": "",
+      "seats": [
+        {
+          "seat": "A1",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "A2",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "A3",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "B1",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "B2",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "B3",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "C1",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "C2",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "C3",
+          "occupy": "no",
+          "id": 1
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "movie_id": "6",
+      "movie": "singpore",
+      "room_id": "4",
+      "room": "dddd",
+      "timeslot": "1200- 1400",
+      "seats": [
+        {
+          "seat": "A1",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "A2",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "A3",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "B1",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "B2",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "B3",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "C1",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "C2",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "C3",
+          "occupy": "no",
+          "id": 1
+        }
+      ],
+      "date": "2023-05-18"
     }
   ]
 }

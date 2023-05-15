@@ -10,13 +10,59 @@ function CreateMovieSession() {
      const [rooms , setRooms] = useState([])
      const [formData, setFormData] = useState({
           id: "",
-          Movie_id:  "",
-          Movie: "",
-          Room_id: "",
-          Room: "",
-          Date: "",
-          Start: "",
-          End: "" });
+          movie_id:  "",
+          movie: "",
+          room_id: "",
+          room: "",
+          timeslot: "",
+          seats :  [
+               {
+                 "seat" : "A1",
+                 "occupy" : "no",
+                 "id" : 1
+               },
+               {
+                 "seat" : "A2",
+                 "occupy" : "no",
+                 "id" : 2
+               },
+               {
+                 "seat" : "A3",
+                 "occupy" : "no",
+                 "id" : 3
+               },
+               {
+                 "seat" : "B1",
+                 "occupy" : "no",
+                 "id" : 4
+               },
+               {
+                 "seat" : "B2",
+                 "occupy" : "no",
+                 "id" : 5
+               },
+               {
+                 "seat" : "B3",
+                 "occupy" : "no",
+                 "id" : 6
+               },
+               {
+                 "seat" : "C1",
+                 "occupy" : "no",
+                 "id" : 7
+               },
+               {
+                 "seat" : "C2",
+                 "occupy" : "no",
+                 "id" : 8
+               },
+               {
+                 "seat" : "C3",
+                 "occupy" : "no",
+                 "id" : 9
+               }
+             ]
+     });
 
      const loadMoviesnRooms = () => {
           // read the data from the JSON file when the component mounts
@@ -64,15 +110,16 @@ function CreateMovieSession() {
      const handleSubmit = (event) =>{
           event.preventDefault();
           console.log(formData)
-          const movie = movies.find(movie => movie.id === parseInt(formData.Movie_id));
-          const room = rooms.find(room => room.id === parseInt(formData.Room_id));
+          const movie = movies.find(movie => movie.id === parseInt(formData.movie_id));
+          console.log("movie", movie)
+          const room = rooms.find(room => room.id === parseInt(formData.room_id));
           console.log(movie)
-          fetch(`${apiUrl_Session}/MovieSession`, {
+          fetch(`${apiUrl_Session}/moviesession`, {
                method: 'POST',
                headers: {
                  'Content-Type': 'application/json',
                },
-               body: JSON.stringify({...formData, Movie: movie.Movie, Room : room.Name }),
+               body: JSON.stringify({...formData, movie: movie.Movie, room : room.Name }),
              })
                .then((response) => response.json())
                .then((data) => console.log(data))
@@ -85,7 +132,7 @@ function CreateMovieSession() {
           
           <div className="form-group d-flex p-3">
                <p class="col-form-label" style={{width:'100px'}}>Movie</p>
-               <select id="Movie_id" className="form-select text-wrap" style={{ width: '400px'}} onChange={handleEdit}>
+               <select id="movie_id" className="form-select text-wrap" style={{ width: '400px'}} onChange={handleEdit}>
                     {/* got data then use map to populate the dd */}
                     {movies.map((option) => (
                          <option key={option.id} value={option.id}>{option.Movie} </option>
@@ -95,7 +142,7 @@ function CreateMovieSession() {
 
           <div className="form-group d-flex align-items-center text-left p-3 ">
                <p class="col-form-label"  style={{width:'100px'}}>Room:</p>
-               <select id="Room_id" className="form-select text-wrap" style={{ width: '400px'}} onChange={handleEdit}>
+               <select id="room_id" className="form-select text-wrap" style={{ width: '400px'}} onChange={handleEdit}>
                     {/* got data then use map to populate the dd */}
                     {rooms.map((option) => (
                          <option key={option.id} value={option.id}>{option.Name} </option>
@@ -105,19 +152,13 @@ function CreateMovieSession() {
 
           <div className="form-group d-flex p-3">
                <p  style={{width:'100px'}}>Date</p>
-               <input min={new Date().toISOString().split('T')[0]} type="date" id="Date" class="form-control" style={{ width: '400px'}} onChange={handleEdit}  ></input>
+               <input min={new Date().toISOString().split('T')[0]} type="date" id="date" class="form-control" style={{ width: '400px'}} onChange={handleEdit}  ></input>
           </div>
 
           <div className="form-group d-flex align-items-center text-left p-3 ">
                <label class="col-form-label"  style={{width:'100px'}}>From:</label>
-               <input id= "Start" class="form-control" type="time" style={{ width: '400px'}}  onChange={handleEdit} ></input>
+               <input id= "timeslot" class="form-control" type="text" style={{ width: '400px'}}  onChange={handleEdit} ></input>
           </div>
-
-          <div className="form-group d-flex align-items-center text-left p-3 ">
-               <label class="col-form-label"  style={{width:'100px'}}>To:</label>
-               <input id= "End" class="form-control" type="time" style={{ width: '400px'}}  onChange={handleEdit} ></input>
-          </div>
-
 
           <div className="d-flex justify-content-center  p-3">
                <button type="submit" onClick={()=>setShowModal(true)} className="btn btn-danger">Create</button>

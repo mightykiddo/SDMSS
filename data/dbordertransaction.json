@@ -1,0 +1,24 @@
+{
+     "ordertransaction": [
+       {
+        "item": "test",
+        "itemstatus" : "test",
+        "quantity" :  2,
+        "totalamount" : 14.55 ,
+        "customerid" : 8,
+        "movie" :  "Avenger",
+        "detail" : "test",
+        "id" :  1 
+       },
+       {
+        "item": "test",
+        "itemstatus" : "test",
+        "quantity" :  1,
+        "totalamount" : 14.55 ,
+        "customerid" : 8,
+        "movie" :  "superman",
+        "detail" : "test",
+        "id" :  3 
+       }
+     ]
+   }

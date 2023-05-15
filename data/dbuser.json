@@ -1,31 +1,14 @@
 {
   "user": [
     {
-      "acctype": "Manager2",
-      "name": "shijie2",
-      "email": "shijie2@gmail.com",
-      "username": "sjd",
-      "password": "1234",
-      "loyaltypoint": 0,
-      "seatpref": "B3",
-      "status": "Active",
-      "id": 10
-    },
-    {
       "id": 11,
       "name": "ddd",
       "email": "ddd",
       "password": "dd",
       "status": "Active",
-      "acctype": "System Admin"
-    },
-    {
-      "id": 12,
-      "name": "hengsheng",
-      "email": "hs@gmail.com",
-      "password": "shed",
-      "status": "Active",
-      "acctype": "Manager"
+      "acctype": "System Admin",
+      "loyaltypoint": 0,
+      "seatpref": "B2"
     },
     {
       "id": 13,

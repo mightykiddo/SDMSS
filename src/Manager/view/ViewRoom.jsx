@@ -174,17 +174,17 @@ const DeleteRoom = ({data, setData, show, handleClose}) => {
         console.log(`Deleted room with id ${id}`);
   
         // Find all movie sessions with the deleted room's id and set the room_id and Room fields to null
-        fetch(`${apiUrl_Session}/MovieSession?Room_id=${id}`)
+        fetch(`${apiUrl_Session}/moviesession?room_id=${id}`)
           .then(sessionResponse => sessionResponse.json())
           .then(sessionData => {
             const updatedSessions = sessionData.map(session => {
-              return { ...session, Room_id: null, Room: null }
+              return { ...session, room_id: null, room: null }
             });
             console.log("Updated sessions: ", updatedSessions);
   
             // Send a PUT request to update the MovieSession data on the server for each updated session
             updatedSessions.forEach(session => {
-              fetch(`${apiUrl_Session}/MovieSession/${session.id}`, {
+              fetch(`${apiUrl_Session}/moviesession/${session.id}`, {
                 method: 'PUT',
                 headers: {
                   'Content-Type': 'application/json'

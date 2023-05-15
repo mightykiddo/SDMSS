@@ -4,13 +4,12 @@ import { useEffect, useState } from "react";
 function GenerateReport() {
   const [data, setData] = useState();
   const [sales ,setSales] = useState();
-  const [customer , setCustomer] = useState();
   const [movieRankings , setMovieRankings] = useState()
 
   const apiUrl_tx = process.env.REACT_APP_API_URL_TX;
 
   const getTotalSales = () =>{
-    const total = data.reduce((acc, curr) => acc + curr.totalprice, 0);
+    const total = data.reduce((acc, curr) => acc + curr.totalamount, 0);
     setSales(total)
     
   }
@@ -19,16 +18,16 @@ function GenerateReport() {
   useEffect(() => { //load data on page load 
 
 
-    fetch(`${apiUrl_tx}/transaction`)
+    fetch(`${apiUrl_tx}/ordertransaction`)
     .then(response => response.json())
     .then(data => {
          setData(data);
-         const totalsales = data.reduce((acc, curr) => acc + curr.totalprice, 0);
+         const totalsales = data.reduce((acc, curr) => acc + curr.totalamount, 0);
          setSales(totalsales.toFixed(2))
 
          const movieCounts = {};
          data.forEach(transaction => {
-           const movieName = transaction.movie_name;
+           const movieName = transaction.movie;
            const quantity = transaction.quantity;
            if (movieCounts[movieName]) {
              movieCounts[movieName] += quantity;

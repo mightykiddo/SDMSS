@@ -15,7 +15,7 @@ function SystemAdmin() {
   return (
     <>
     <div style={{maxWidth : '1000px', margin : '0 auto'}}>
-         <div className="d-flex">
+         <div className="d-flex justify-content-between align-items-center">
               <div className=" text-white d-flex align-items-center text-left p-3 ">
                    <p className="m-0"  style={{width:'100px'}}>Toggle:</p>
                    <select className="form-select" value={Option} onChange={handleOptionChange}  style={{width:'200px'}}>
@@ -25,6 +25,7 @@ function SystemAdmin() {
                         <option value="Vprofile">View User Profile</option>
                    </select>
               </div>
+              <button className="p-2 text-red">logout</button>
          </div>
 
          <div style={{width : '100%'}}>
