@@ -1,20 +1,13 @@
 {
   "user": [
     {
-      "acctype": "customer",
-      "name": "Albert",
-      "email": "alberttan@gmail.com",
-      "username": "alberttan97",
-      "password": "pwd1234",
-      "id": 1
-    },
-    {
       "acctype": "staff",
       "name": "nic",
       "email": "nic@gmail.com",
       "username": "nic",
       "password": "1234",
       "loyaltypoint": 0,
+      "status": "Active",
       "seatpref": "B2",
       "id": 7
     },
@@ -24,135 +17,54 @@
       "email": "JasonYaw@gmail.com",
       "username": "jason",
       "password": "1234",
-      "loyaltypoint": 100,
+      "loyaltypoint": 575,
+      "status": "Active",
       "seatpref": "C2",
       "id": 8
     },
     {
-      "acctype": "customer",
-      "name": "shijie",
-      "email": "shijie@gmail.com",
-      "username": "shijie",
+      "acctype": "Manager",
+      "name": "hs",
+      "email": "hs@gmail.com",
+      "username": "hs",
       "password": "1234",
       "loyaltypoint": 0,
+      "status": "Active",
       "seatpref": "A3",
-      "id": 9
+      "id": 22
     },
     {
-      "name": "shijie2",
-      "email": "shijie2@gmail.com",
+      "acctype": "System Admin",
+      "name": "sj",
+      "email": "sj@gmail.com",
       "username": "sj",
       "password": "1234",
-      "seatpref": "B3",
-      "id": 10
-    },
-    {
-      "name": "shijie3",
-      "email": "shijie3@gmail.com",
-      "username": "sj3",
-      "password": "1234",
-      "seatpref": "B2",
-      "id": 11
-    },
-    {
-      "acctype": "",
-      "name": "shijie4",
-      "email": "shijie4@gmail.com",
-      "username": "sj4",
-      "password": "1234",
       "loyaltypoint": 0,
-      "seatpref": "B1",
-      "id": 12
+      "status": "Active",
+      "seatpref": "C3",
+      "id": 23
     },
     {
-      "acctype": "",
-      "name": "shijie5",
-      "email": "shijie5@gmail.com",
-      "username": "sj5",
-      "password": "1234abc",
-      "loyaltypoint": 0,
-      "seatpref": "B2",
-      "id": 13
-    },
-    {
-      "acctype": "",
-      "name": "",
-      "email": "",
-      "username": "",
-      "password": "",
+      "id": 26,
+      "name": "hengsheng",
+      "username": "hengshengtan",
       "loyaltypoint": 0,
       "seatpref": "",
-      "id": 14
-    },
-    {
-      "acctype": "",
-      "name": "",
-      "email": "",
-      "username": "",
-      "password": "",
-      "loyaltypoint": 0,
-      "seatpref": "",
-      "id": 15
-    },
-    {
-      "acctype": "",
-      "name": "",
-      "email": "",
-      "username": "",
-      "password": "",
-      "loyaltypoint": 0,
-      "seatpref": "",
-      "id": 16
-    },
-    {
-      "acctype": "",
-      "name": "shijie6",
-      "email": "shijie6@gmail.com",
-      "username": "sj",
-      "password": "sj123",
-      "loyaltypoint": 0,
-      "seatpref": "B2",
-      "id": 17
-    },
-    {
-      "acctype": "",
-      "name": "jason2",
-      "email": "js@gmail.com",
-      "username": "js2",
+      "email": "hs@gmail.com",
       "password": "1234",
-      "loyaltypoint": 0,
-      "seatpref": "B2",
-      "id": 18
-    },
-    {
-      "acctype": "",
-      "name": "issaac",
-      "email": "isaac@gmail.com",
-      "username": "isaac",
-      "password": "1234",
-      "loyaltypoint": 0,
-      "seatpref": "A3",
-      "id": 19
+      "status": "Active",
+      "acctype": "System Admin"
     },
     {
       "acctype": "customer",
-      "name": "issaac2",
-      "email": "isaac2@gmail.com",
-      "username": "issaac",
-      "password": "1234",
-      "loyaltypoint": 0,
-      "seatpref": "C1",
-      "id": 20
-    },
-    {
-      "acctype": "customer",
-      "name": "test01",
-      "email": "test01@gmail.com",
-      "username": "test01",
-      "password": "1234",
-      "loyaltypoint": 0,
+      "name": "Nicholas",
+      "email": "nicholas@gmail.com",
+      "username": "nicholas100",
+      "password": "12345",
+      "loyaltypoint": 6.5,
+      "status": "Active",
       "seatpref": "B3",
-      "id": 21
+      "id": 27
     }
   ]
 }

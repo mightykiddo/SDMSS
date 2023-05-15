@@ -16,124 +16,24 @@
       "id": 5
     },
     {
-      "feedback": "Jason is very handsome",
+      "feedback": "it was a wonderful experience!!!",
       "rating": "5",
-      "id": 6
-    },
-    {
-      "feedback": "testing123",
-      "rating": "3",
-      "id": 7
-    },
-    {
-      "feedback": "test1234",
-      "rating": "5",
-      "id": 8
-    },
-    {
-      "feedback": "testing123456",
-      "rating": "2",
-      "id": 9
-    },
-    {
-      "feedback": "testing12",
-      "rating": "3",
-      "id": 10
-    },
-    {
-      "feedback": "testhaha",
-      "rating": 1,
-      "id": 11
-    },
-    {
-      "feedback": "testjs1",
-      "rating": 1,
-      "id": 12
-    },
-    {
-      "feedback": "testjs2",
-      "rating": "5",
-      "id": 13
-    },
-    {
-      "feedback": "testjs3",
-      "rating": "4",
-      "id": 14
-    },
-    {
-      "feedback": "testjs4",
-      "rating": "4",
-      "id": 15
-    },
-    {
-      "feedback": "testjs5",
-      "rating": "4",
-      "id": 16
-    },
-    {
-      "feedback": "testjs6",
-      "rating": 1,
-      "id": 17
-    },
-    {
-      "feedback": "testjs7",
-      "rating": "3",
-      "id": 18
-    },
-    {
-      "feedback": "testjs8",
-      "rating": "4",
-      "id": 19
-    },
-    {
-      "feedback": "testjs9",
-      "rating": "3",
-      "id": 20
-    },
-    {
-      "feedback": "jstest10",
-      "rating": "5",
-      "id": 21
-    },
-    {
-      "feedback": "jstest11",
-      "rating": "3",
-      "id": 22
-    },
-    {
-      "feedback": "jason testing here",
-      "rating": "5",
-      "id": 23
-    },
-    {
-      "feedback": "jason test 1",
-      "rating": "4",
-      "id": 24
-    },
-    {
-      "feedback": "testtest1",
-      "rating": "4",
-      "id": 25
-    },
-    {
-      "feedback": "testing12345",
-      "rating": "5",
-      "id": 26
-    },
-    {
-      "feedback": "shijietest",
-      "rating": "4",
       "id": 27
     },
     {
-      "feedback": "jason here",
-      "rating": "5",
+      "feedback": "the cinema is clean and tidy. love it!!!!",
+      "rating": "4",
       "id": 28
     },
     {
-      "feedback": "test again",
-      "rating": "4",
+      "feedback": "The Staff is very friendly and helpful.",
+      "rating": "5",
       "id": 29
+    },
+    {
+      "feedback": "The movie is very nice.",
+      "rating": "4",
+      "id": 30
     }
   ]
 }

@@ -20,7 +20,8 @@ const CreateAccount = () => {
         e.preventDefault();
         setacctype("customer");
         setloyaltypoint(0);
-        const customer = {acctype, name, email, username, password, loyaltypoint, seatpref}
+        const status = "Active"; 
+        const customer = {acctype, name, email, username, password, loyaltypoint, status, seatpref}
         fetch('http://localhost:8005/user',{
             method: 'POST',
             headers: {"Content-Type": "application/json"},
