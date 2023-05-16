@@ -15,9 +15,21 @@ function SystemAdmin() {
        setOption(event.target.value);
   };
 
+    
   const logout = () => {
-     history('/');
-  }
+
+     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+     console.log(currentUser)
+     fetch( `http://localhost:8030/usersession/${currentUser}`,{
+         method: 'DELETE',
+         headers: {
+           'Content-Type': 'application/json'
+         }
+     }).then(()=>{
+         
+         history("/")
+     })
+ }
   return (
     <>
     <div style={{maxWidth : '1000px', margin : '0 auto'}}>

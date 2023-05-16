@@ -33,6 +33,21 @@ const NavBarUser = () => {
         history('/loyaltypage', {state:{username, loyaltypoint, seatpref, id}});
     }
     
+    
+    const logout = () => {
+
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        console.log(currentUser)
+        fetch( `http://localhost:8030/usersession/${currentUser}`,{
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+        }).then(()=>{
+            localStorage.removeItem('currentUser');
+            history("/")
+        })
+    }
     return (
     <>
     
@@ -56,7 +71,7 @@ const NavBarUser = () => {
                     
                     <a onClick={handleSubmit4} href="">Loyalty Point</a>
                     
-                    <Link to='/'>Logout</Link>
+                    <a onClick={logout}>Logout</a>
 
                     {/* <Link to='/loyaltytransaction' >Transaction History</Link>
                     <Link to='/reviewrating' >Review & Rating</Link>

@@ -71,7 +71,7 @@ function ViewUserProfile() {
         </tr>
       </thead>
       <tbody>
-        {data.length == 0 ?  (<p className="p-3">No Matching Records</p>) : (
+        {data.length == 0 ?  (<p className="p-3 text-black">No Matching Records</p>) : (
             data?.map((userprof) => (
                 <>
                 <tr key={userprof.UserProfile}>
@@ -147,7 +147,7 @@ const UpdateUserProfile = ({data, setData, show, handleClose}) => {
                 <Modal.Body>
                     <form onSubmit={handleSubmit}>
                     <div class="form-group">
-                        <label hmtlfor="UserProfile"  class="col-form-label">User Profile:</label>
+                        <label hmtlfor="UserProfile"  class="col-form-label text-black">User Profile:</label>
                         <input type="text" onChange={handleEdit}  value={formData.Userprofile} class="form-control" id="UserProfile"></input>
                     </div>
                     <button type="submit">Update</button>

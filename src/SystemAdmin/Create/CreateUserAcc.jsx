@@ -35,7 +35,7 @@ function CreateUserAcc() {
           body: JSON.stringify(formData),
         })
           .then((response) => response.json())
-          .then((data) => console.log(data))
+          .then((data) => setShowModal(true))
           .catch((error) => console.error(error));
   }
 
@@ -78,7 +78,7 @@ function CreateUserAcc() {
                </select>
           </div>
           <div className="d-flex justify-content-center  p-3">
-               <button type="submit" onClick={()=>setShowModal(true)} className="btn btn-danger">Create</button>
+               <button type="submit"  className="btn btn-danger">Create</button>
           </div>
   </form>
        

@@ -73,7 +73,7 @@ function ViewSession() {
         </tr>
       </thead>
       <tbody >
-      {data.length == 0 ?  (<p className="p-3">No Matching Records</p>) : (
+      {data.length == 0 ?  (<p className="p-3 text-black">No Matching Records</p>) : (
         data?.map((session) => (
           <>
           <tr key={session.id}>

@@ -1,8 +1,26 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const NavBarStaff = () => {
+     const location = useLocation();
+    const history = useNavigate();
+    var id = location.state.id;
+
+    const logout = () => {
+
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        console.log(currentUser)
+        fetch( `http://localhost:8030/usersession/${currentUser}`,{
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+        }).then(()=>{
+            localStorage.removeItem('currentUser');
+            history("/")
+        })
+    }
     return (
     <>
     
@@ -18,7 +36,7 @@ const NavBarStaff = () => {
             </div>
             <div className='menuitem_login'>
 
-                    <Link to='/'>Logout</Link>
+                    <a onClick={logout}>Logout</a>
         
             </div>
 

@@ -122,7 +122,7 @@ function CreateMovieSession() {
                body: JSON.stringify({...formData, movie: movie.Movie, room : room.Name }),
              })
                .then((response) => response.json())
-               .then((data) => console.log(data))
+               .then((data) => setShowModal(true))
                .catch((error) => console.error(error));
      }
 
@@ -161,7 +161,7 @@ function CreateMovieSession() {
           </div>
 
           <div className="d-flex justify-content-center  p-3">
-               <button type="submit" onClick={()=>setShowModal(true)} className="btn btn-danger">Create</button>
+               <button type="submit"  className="btn btn-danger">Create</button>
           </div>
      </form>
           <SuccessModel 

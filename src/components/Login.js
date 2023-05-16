@@ -55,33 +55,44 @@ const Login = () => {
                     id = filterrecord.id
                     
                 })
-
-                if (successaccess) {
-
-                    if (accounttype === "customer"){
-    
-                        console.log("redirect to customer page");
-                        history('/user', {state:{username, loyaltypoint, seatpref, id}});
-                        //history({pathname: '/user', search: createSearchParams({id:username}).toString()});
-    
-                    } else if (accounttype === "staff"){
-                        console.log("redirect to staff page");
-                        history('/stafffoodanddrink', {state:{username}});
-                        
-                    } else if (accounttype === "Manager"){
-                        console.log("redirect to manager page");
-                        history('/manager', {state:{username}});
-                        
-                    } else if (accounttype === "System Admin"){
-                        console.log("redirect to admin page");
-                        history('/admin', {state:{username}});
-                        
-                    }
+                if(successaccess) {
+                    fetch(`http://localhost:8030/usersession`,
+                    {
+                        method: 'POST',
+                        headers: {"Content-Type": "application/json"},
+                        body: JSON.stringify({userid : id})
+                    })
+                    .then((response) => response.json())
                     
-                } else {
+                    .then(data => {
+                        var userid = data.id
+                        localStorage.setItem('currentUser', JSON.stringify(userid));//store global 
+
+                        if (accounttype === "customer"){
+        
+                            console.log("redirect to customer page");
+                            history('/user', {state:{username, loyaltypoint, seatpref, id }});
+                            //history({pathname: '/user', search: createSearchParams({id:username}).toString()});
+        
+                        } else if (accounttype === "staff"){
+                            console.log("redirect to staff page");
+                            history('/stafffoodanddrink', {state:{username , id}});
+                            
+                        } else if (accounttype === "Manager"){
+                            console.log("redirect to manager page");
+                            history('/manager', {state:{username , id}});
+                            
+                        } else if (accounttype === "System Admin"){
+                            console.log("redirect to admin page");
+                            history('/admin', {state:{username , id}});
+                            
+                        }
+                    })
+                }
+                else {
                     setModalIsOpen4(true);
                 }
-            });
+            })
     }
 
 

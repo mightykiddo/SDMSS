@@ -28,7 +28,7 @@ function CreateRoom() {
                body: JSON.stringify(formData),
              })
                .then((response) => response.json())
-               .then((data) => console.log(data))
+               .then((data) => setShowModal(true))
                .catch((error) => console.error(error));
      }
 
@@ -40,7 +40,7 @@ function CreateRoom() {
                     <input id="Name" class="form-control" type="text" style={{ width: '400px'}}  onChange={handleEdit} ></input>
                </div>
                <div className="d-flex justify-content-center  p-3">
-                    <button onClick={() => setShowModal(true)} type="submit" className="btn btn-danger">Create</button>
+                    <button type="submit" className="btn btn-danger">Create</button>
                </div>
        </form >
                <SuccessModel 

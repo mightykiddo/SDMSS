@@ -65,6 +65,17 @@
       "status": "Active",
       "seatpref": "B3",
       "id": 27
+    },
+    {
+      "id": 28,
+      "name": "dd",
+      "username": "ddd",
+      "loyaltypoint": 0,
+      "seatpref": "",
+      "email": "dd",
+      "password": "dd",
+      "status": "Active",
+      "acctype": "Manager2"
     }
   ]
 }

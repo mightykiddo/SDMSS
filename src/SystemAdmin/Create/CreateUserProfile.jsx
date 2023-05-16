@@ -13,7 +13,7 @@ function CreateUserProfile(){
 
      const handleSubmit = e =>{
           e.preventDefault();
-          console.log(formData)
+
           fetch(`${apiUrl}/Userprofile`, {
                method: 'POST',
                headers: {
@@ -22,7 +22,7 @@ function CreateUserProfile(){
                body: JSON.stringify(formData),
              })
                .then((response) => response.json())
-               .then((data) => console.log(data))
+               .then((data) => setShowModal(true))
                .catch((error) => console.error(error));
      }
 
@@ -43,7 +43,7 @@ function CreateUserProfile(){
                     <input id="UserProfile" class="form-control" type="text" style={{ width: '400px'}}  onChange={handleEdit} ></input>
                </div>
                <div className="d-flex justify-content-center  p-3">
-                    <button type="submit" onClick={()=>setShowModal(true)} className="btn btn-danger">Create</button>
+                    <button type="submit" className="btn btn-danger">Create</button>
                </div>
           </form>
 
