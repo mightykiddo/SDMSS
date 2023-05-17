@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 import { useState, useEffect } from "react";
 import SelectSeats from './SelectSeats';
+import CustomerViewReviewRating from './CustomerViewReviewRating';
 
 const Home = () => {
 
@@ -25,7 +26,7 @@ const Home = () => {
         <>
         
         <NavBar />
-        
+        <CustomerViewReviewRating/>
         <div className="w3-padding">
 
             <div className=" " id="pets">
