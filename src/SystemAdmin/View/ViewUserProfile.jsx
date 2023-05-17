@@ -41,9 +41,14 @@ function ViewUserProfile() {
         setType('');
       };
 
-      const confirmModal = (id) => {
+      const confirmModal = (id, status) => {
         setFilteredData(data.filter((userData) => userData.id === id));
-        setType("delete");
+        if (status === "Active") {
+          setType("suspend")
+        }
+        else if (status === "Suspended") {
+          setType("unsuspend")
+        }
         setConfirmModal(true); 
       };
 
@@ -67,6 +72,7 @@ function ViewUserProfile() {
       <thead>
         <tr className="d-flex-column" style={{backgroundColor : "orange"}}>
             <th scope="col">User Profile</th>
+            <th scope="col">Status</th>
             <th scope="col"></th>
         </tr>
       </thead>
@@ -76,13 +82,15 @@ function ViewUserProfile() {
                 <>
                 <tr key={userprof.UserProfile}>
                     <td className="p-2">{userprof.UserProfile}</td>
+                    <td className='p-2' style={{ color: userprof.status === "Active" ? "royalblue" : "red"}}>{userprof.status}</td>
+
                     <td>
                         <div className="d-flex align-items-center justify-content-end"> 
                             <button type="button" className="btn text-white m-1 " style={{backgroundColor : "royalblue"}}
                                 onClick={() => handleUpdate(userprof.id)}>
                                 Update
                             </button>
-                            <button type="button" className="btn text-white m-1" style={{backgroundColor : "red"}} onClick={()=> confirmModal(userprof.id, "delete")}>Delete</button>
+                            <button type="button" className="btn text-white m-1" style={{backgroundColor : "red"}} onClick={()=> confirmModal(userprof.id, userprof.status)}>{userprof.status === "Active" ? "Suspend" : "Unsuspend"}</button>
                         </div>
                     </td>
                 </tr>
@@ -100,8 +108,9 @@ function ViewUserProfile() {
             show = {showModal}
             handleClose = {handleCloseModal}/>
       }
-      {showConfirmModal === true && type === "delete" &&
-        <DeleteUserProfile
+      {showConfirmModal === true && (type === "suspend" || type === "unsuspend") &&
+        <SuspendUserProfile
+            type = {type}
             data =  {filteredData}
             setData = {setFilteredData}
             show =  {showConfirmModal}
@@ -148,7 +157,7 @@ const UpdateUserProfile = ({data, setData, show, handleClose}) => {
                     <form onSubmit={handleSubmit}>
                     <div class="form-group">
                         <label hmtlfor="UserProfile"  class="col-form-label text-black">User Profile:</label>
-                        <input type="text" onChange={handleEdit}  value={formData.Userprofile} class="form-control" id="UserProfile"></input>
+                        <input type="text" onChange={handleEdit}  value={formData.UserProfile} class="form-control" id="UserProfile"></input>
                     </div>
                     <button type="submit">Update</button>
                     </form>
@@ -158,31 +167,49 @@ const UpdateUserProfile = ({data, setData, show, handleClose}) => {
     )
     }
 
-const DeleteUserProfile = ({data, setData, show , handleClose}) => {
+const SuspendUserProfile = ({type, data, setData, show , handleClose}) => {
+  console.log("suspesnd user profile", data[0])
     const apiUrl_UserProf = process.env.REACT_APP_API_URL_USEPROFILE;
-    const handleDelete = e => {
-        fetch(`${apiUrl_UserProf}/Userprofile/${data[0].id}`, {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-        }})
-            .then((response) => response.json())
-            .then(data => {
-              setData("reload")
-            .catch((error) => console.error(error));
-        
-        handleClose()
-        })
-
-        }
+        const handleSuspend = e =>{
+          if (type === "unsuspend"){
+            fetch(`${apiUrl_UserProf}/userprofile/${data[0].id}`, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify( {...data[0], status : "Active"}),
+            })
+              .then(response => response.json())
+              .then(data => 
+                setData("reload"))
+              .catch(error => console.error(error))
+      
+            handleClose()
+          }
+          else if (type === "suspend") {
+            fetch(`${apiUrl_UserProf}/userprofile/${data[0].id}`, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify( {...data[0], status : "Suspended"}),
+            })
+              .then(response => response.json())
+              .then(data => 
+                setData("reload"))
+              .catch(error => console.error(error))
+      
+            handleClose()
+          }
+        } 
     return (
       <>
         <Modal show={show} onHide={handleClose}>
-          <Modal.Body>
-            Confirm Delete User Profile?
+          <Modal.Body className="text-black">
+            Confirm Suspend User Profile?
           </Modal.Body>
           <Modal.Footer>
-            <Button variant = "secondary" onClick={handleDelete}>
+            <Button variant = "secondary" onClick={handleSuspend}>
               Yes {/*handle Delete / update */}
             </Button>
           </Modal.Footer>

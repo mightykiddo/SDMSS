@@ -7,13 +7,13 @@ function CreateUserProfile(){
      const [showModal, setShowModal] = useState(false);
      const [formData, setFormData] = useState({
           id: "",
-          UserProfile:""
+          UserProfile:"",
+          status : "Active"
      });
      const apiUrl = process.env.REACT_APP_API_URL_USEPROFILE;
 
      const handleSubmit = e =>{
           e.preventDefault();
-
           fetch(`${apiUrl}/Userprofile`, {
                method: 'POST',
                headers: {

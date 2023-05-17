@@ -42,14 +42,12 @@ function ViewUserAcc(){
 
   const confirmModal = (id, status) => {
     setFilteredData(data.filter((userData) => userData.id === id));
-    //delete modal
     if (status === "Active") {
       setType("suspend")
     }
     else if (status === "Suspended") {
       setType("unsuspend")
     }
-    else (setType("delete"))
     setConfirmModal(true); 
   }
 
@@ -94,7 +92,7 @@ function ViewUserAcc(){
                         onClick={() => handleUpdate(acc.id)}>
                         Update
                       </button>
-                  <button type="button" className="btn text-white m-1" style={{backgroundColor : "red"}} onClick={()=> confirmModal(acc.id, "delete")}>Delete</button>
+                    {/*<button type="button" className="btn text-white m-1" style={{backgroundColor : "red"}} onClick={()=> confirmModal(acc.id, "delete")}>Delete</button> */}
                     <button type="button" className="btn text-white m-1" style={{backgroundColor : "red"}} onClick={()=> confirmModal(acc.id, acc.status)}>{acc.status === "Active" ? "Suspend" : "Unsuspend"}</button>
                </div>
             </td>
@@ -113,13 +111,6 @@ function ViewUserAcc(){
         show={showModal}
         handleClose={handleCloseModal}/>
      }
-      {showConfirmModal === true && type === "delete" &&
-     <DeleteUserAcc
-          data={filteredData}
-          setData = {setFilteredData}
-          show={showConfirmModal}
-          handleClose={handleCloseModal}/>
-      }
       {showConfirmModal === true && (type === "suspend" || type === "unsuspend") &&
      <SuspendUserAcc
           type = {type}
@@ -197,7 +188,7 @@ const UpdateUserAccount = ({data, setData, show, handleClose}) => {
             <select className="form-select" onChange={handleEdit} value={formData.acctype} id="acctype">
                     {profile?.map((item) => (
                          <>
-                              <option value={item.profile} key={item.id}>{item.profile}</option>
+                              <option value={item.UserProfile} key={item.id}>{item.UserProfile}</option>
                          </>
                     ))}
             </select>
@@ -211,6 +202,7 @@ const UpdateUserAccount = ({data, setData, show, handleClose}) => {
   )
 }
 
+/*
 const DeleteUserAcc = ({data, setData, show , handleClose}) => {
   const apiUrl_User = process.env.REACT_APP_API_URL_USERACC;
   const handleDelete = e =>{
@@ -235,7 +227,7 @@ const DeleteUserAcc = ({data, setData, show , handleClose}) => {
      </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleDelete}>
-          Yes {/*handle delete/update*/}
+          Yes 
         </Button>
       </Modal.Footer>
     </Modal>
@@ -243,6 +235,7 @@ const DeleteUserAcc = ({data, setData, show , handleClose}) => {
     </>
   )
 }
+*/
 
 const SuspendUserAcc = ({type, data, setData, show , handleClose}) => {
   const apiUrl_User = process.env.REACT_APP_API_URL_USERACC;
