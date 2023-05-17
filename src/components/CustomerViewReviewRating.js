@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 const CustomerViewReviewRating = () => {
   const [reviews, setReviews] = useState(null);
     useEffect(() => {
-        fetch('http://localhost:8000/reviews')
+        fetch('http://localhost:8002/reviews')
         .then(res =>{
             return res.json();
         })
@@ -10,24 +10,18 @@ const CustomerViewReviewRating = () => {
             setReviews(data);
         })
     }, []);  
-    const handleClick =((e) => {
-      fetch('http://localhost:8000/reviews/' + e.target.value, {
-        method: 'DELETE'
-      })
-    })
+    
 
   return ( 
-        <div className="review-list">
-          <h1>Review and Rating Section</h1>
-      {reviews && reviews.map(review => (
-        <div className="review-preview" key={review.id} >
-            <p>{ review.feedback }</p>
-            <p>{ review.rating }</p>
-            <button value={review.id} onClick={handleClick}>Delete</button>
+    <div className="review-list">
+      {reviews && reviews.slice(0).reverse().map((review) => (
+        <div className="w3-panel w3-leftbar w3-dark-grey w3-round" key={review.id} >
+          <p><i>"{ review.feedback }"</i></p>
+          <p><i>Rating: { review.rating } / 5</i></p>
         </div>
       ))}
     </div>
-     );
+  );
 }
  
 export default CustomerViewReviewRating;
