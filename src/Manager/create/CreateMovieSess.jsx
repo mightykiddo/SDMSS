@@ -73,7 +73,7 @@ function CreateMovieSession() {
              ]);
      }
       
-     const postMovieSession = async (formData, movie,room) => {
+     const createMovieSession = async (formData, movie,room) => {
           return fetch(`${apiUrl_Session}/moviesession`, {
                method: 'POST',
                headers: {
@@ -118,7 +118,7 @@ function CreateMovieSession() {
           const formData = getFormData()
           const movie = movies.find(movie => movie.id === parseInt(formData.movie_id));
           const room = rooms.find(room => room.id === parseInt(formData.room_id));
-          postMovieSession(formData,movie,room)
+          createMovieSession(formData,movie,room)
                .then(() => setShowModal(true))
                .catch((error) => console.error(error));
      }

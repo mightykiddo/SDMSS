@@ -64,7 +64,7 @@ function UpdateMovie ({data, reload, show, handleClose}){
             <div class="form-group">
               <label hmtlfor="AgeRating" class="col-form-label text-dark">Age Rating:</label>
               <select className="form-select" onChange={handleEdit} value={formData.AgeRating} id="AgeRating">
-                    <option value="PG-13">PG-12</option>
+                    <option value="PG-13">PG-13</option>
                     <option value="PG">PG</option>
                     <option value="R21">R21</option>
               </select>

@@ -26,7 +26,7 @@ const UpdateRoom = ({data, reload, show, handleClose}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = getFormData();
-        updateRoom(formData)
+        updateRoom(formData)//call model
         .then(() => {
           reload("re-load parent")
           handleClose();

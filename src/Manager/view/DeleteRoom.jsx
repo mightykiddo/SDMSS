@@ -6,10 +6,10 @@ const DeleteRoom = ({data, reload, show, handleClose}) => {
     const apiUrl_Session = process.env.REACT_APP_API_URL_SESSION;
   
     const id =data[0].id
-  
-    //delete room in movie session // do here instead of in movie sessions
-    const handleDelete = () => {
-      fetch(`${apiUrl_Room}/Room/${id}`, {
+
+    //model
+    const deleteRoom = async (id) => {
+      return  fetch(`${apiUrl_Room}/Room/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -37,17 +37,23 @@ const DeleteRoom = ({data, reload, show, handleClose}) => {
                   },
                   body: JSON.stringify(session)
                 })
-                  .then(response => response.json())
-                  .then(data => console.log(data))
                   .catch(error => console.error(error));
               });
             })
             .catch(sessionError => console.error(sessionError));
-    
+          })
+    }
+  
+    //delete room in movie session // do here instead of in movie sessions
+    //controller
+    const handleDelete = (e, id) => {
+      e.preventDefault();
+      deleteRoom(id)//call model
+      .then(() => { 
           reload("reload");
           handleClose();
-        })
-        .catch(error => console.error(error));
+      })
+      .catch(error => console.error(error));
     };
     
   
@@ -58,7 +64,7 @@ const DeleteRoom = ({data, reload, show, handleClose}) => {
             Confirm Delete Room ?
        </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleDelete}>
+          <Button variant="secondary" onClick={(e) => handleDelete(e, id)}>
             Yes {/*handle delete/update*/}
           </Button>
         </Modal.Footer>
