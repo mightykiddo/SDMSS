@@ -394,8 +394,8 @@
     },
     {
       "id": 9,
-      "movie_id": "4",
-      "movie": "Superman",
+      "movie_id": null,
+      "movie": null,
       "room_id": "7",
       "room": "2",
       "timeslot": "10:30 - 12:30",
@@ -447,6 +447,62 @@
         }
       ],
       "date": "2023-05-23"
+    },
+    {
+      "id": 10,
+      "movie_id": "2",
+      "movie": "Avengers: Endgame",
+      "room_id": "7",
+      "room": "2",
+      "timeslot": "3",
+      "seats": [
+        {
+          "seat": "A1",
+          "occupy": "no",
+          "id": 1
+        },
+        {
+          "seat": "A2",
+          "occupy": "no",
+          "id": 2
+        },
+        {
+          "seat": "A3",
+          "occupy": "no",
+          "id": 3
+        },
+        {
+          "seat": "B1",
+          "occupy": "no",
+          "id": 4
+        },
+        {
+          "seat": "B2",
+          "occupy": "no",
+          "id": 5
+        },
+        {
+          "seat": "B3",
+          "occupy": "no",
+          "id": 6
+        },
+        {
+          "seat": "C1",
+          "occupy": "no",
+          "id": 7
+        },
+        {
+          "seat": "C2",
+          "occupy": "no",
+          "id": 8
+        },
+        {
+          "seat": "C3",
+          "occupy": "no",
+          "id": 9
+        }
+      ],
+      "date": "2023-05-19"
     }
   ]
 }

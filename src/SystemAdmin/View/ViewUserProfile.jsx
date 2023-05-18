@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
-
+import SuspendUserProfile from "./SuspendUserProfile";
+import UpdateUserProfile  from "./UpdateUserProfile";
 function ViewUserProfile() {
     const [showModal, setShowModal] = useState(false);
     const [showConfirmModal, setConfirmModal] = useState(false);
@@ -11,7 +12,7 @@ function ViewUserProfile() {
 
     const apiUrl = process.env.REACT_APP_API_URL_USEPROFILE;
 
-
+    //model
     const getUserProfile = async () => {
       return  fetch(`${apiUrl}/UserProfile`)
       .then(response => response.json())
@@ -21,6 +22,8 @@ function ViewUserProfile() {
       fetch(`${apiUrl}/Userprofile?UserProfile=${query}`)
       .then(response => response.json())
     }
+
+    //controller
     useEffect(() => { //load data on page load 
       getUserProfile()
         .then(data => {
@@ -35,7 +38,7 @@ function ViewUserProfile() {
         setShowModal(true);
     };
 
-    const handleChange = event => {
+    const handleEdit = event => {
         setQuery(event.target.value);
     };
     
@@ -125,100 +128,3 @@ function ViewUserProfile() {
 
 export default ViewUserProfile;
 
-const UpdateUserProfile = ({data, reload, show, handleClose}) => {
-    const apiUrl_UserProf = process.env.REACT_APP_API_URL_USEPROFILE;
-    const [formData, setFormData] = useState(data[0]);
-
-
-    const putProfileByID = async (formData) => {
-      return fetch(`${apiUrl_UserProf}/Userprofile/${formData.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-        .then((response) => response.json())
-    }
-
-    const handleEdit = (e) => {
-        const {id,value} = e.target;
-        setFormData((prevFormData) => ({...prevFormData, [id]: value}));
-    }
-
-    const handleSubmit = e => {
-        e.preventDefault();
-        putProfileByID(formData)
-        .then(() => {
-          reload("re-load parent")//call view to reload to reflect change
-          handleClose();})
-        .catch((error) => console.error(error));
-    }
-    return (
-        <>
-            <Modal show={show} onHide = {handleClose}>
-                <Modal.Body>
-                    <form onSubmit={handleSubmit}>
-                    <div class="form-group">
-                        <label hmtlfor="UserProfile"  class="col-form-label text-black">User Profile:</label>
-                        <input type="text" onChange={(e) => handleEdit(e)}  value={formData.UserProfile} class="form-control" id="UserProfile"></input>
-                    </div>
-                    <button type="submit">Update</button>
-                    </form>
-                </Modal.Body>
-            </Modal>
-        </>
-    )
-    }
-
-const SuspendUserProfile = ({type, data, reload, show , handleClose}) => {
-
-    const apiUrl_UserProf = process.env.REACT_APP_API_URL_USEPROFILE;
-
-    //modal
-      const putProfileByID = async(data, type) => {
-        fetch(`${apiUrl_UserProf}/userprofile/${data[0].id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify( {...data[0], status :type}),
-        })
-          .then(response => response.json())
-      }
-      
-      //controller
-        const handleSuspend = (e, data) =>{
-          if (type === "unsuspend"){
-            putProfileByID(data, "Active")
-              .then(() => 
-                reload("reload"))
-                handleClose()
-              .catch(error => console.error(error))
-      
-          }
-          else if (type === "suspend") {
-            putProfileByID(data, "Suspended")
-              .then(() => 
-                reload("reload"))
-                handleClose()
-              .catch(error => console.error(error))
-          }
-        } 
-
-    return (
-      <>
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Body className="text-black">
-            Confirm Suspend User Profile?
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant = "secondary" onClick={(e) => handleSuspend(e, data)}>
-              Yes {/*handle Delete / update */}
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </>
-    )
-}
- 

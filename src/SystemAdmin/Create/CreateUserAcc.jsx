@@ -37,8 +37,9 @@ function CreateUserAcc() {
      }
 
      //controller
-     const handleSubmit = (e,formData) =>{ //controller to submit
+     const handleSubmit = (e) =>{ //controller to submit
           e.preventDefault();
+          const formData = getFormData();
           postUser(formData) 
           .then(() => setShowModal(true))
           .catch((error) => console.error(error));
@@ -61,10 +62,14 @@ function CreateUserAcc() {
           setShowModal(false); //view
      };
 
-          
+     //view function
+     const getFormData = () => {
+          return formData
+     }
+
      return (
           <>
-          <form onSubmit={(e) => handleSubmit(e, formData)} className="CreateMovie text-white bg-dark d-flex-column " style={{height : "1000px"}}>
+          <form onSubmit={(e) => handleSubmit(e)} className="CreateMovie text-white bg-dark d-flex-column " style={{height : "1000px"}}>
           <div className="form-group d-flex align-items-center text-left p-3 ">
                <label className="col-form-label"  style={{width:'100px'}}>Name:</label>
                <input id="name" className="form-control" type="text" style={{ width: '400px'}}  onChange={(e) => handleEdit(e)} ></input>

@@ -9,8 +9,19 @@ function CreateRoom() {
                Name : ""
      });
 
-     const handleEdit = (event) => {
-          const { id, value } = event.target;
+     //modal
+     const postRoom = async (formData) => {
+          return fetch(`${apiUrl}/Room`, {
+               method: 'POST',
+               headers: {
+                 'Content-Type': 'application/json',
+               },
+               body: JSON.stringify(formData),
+             }) .then((response) => response.json()) 
+     }
+
+     const handleEdit = (e) => {
+          const { id, value } = e.target;
           setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
      };
 
@@ -18,26 +29,25 @@ function CreateRoom() {
           setShowModal(false); 
      };
 
-     const handleSubmit = (event) =>{
-          event.preventDefault();
-          fetch(`${apiUrl}/Room`, {
-               method: 'POST',
-               headers: {
-                 'Content-Type': 'application/json',
-               },
-               body: JSON.stringify(formData),
-             })
-               .then((response) => response.json())
-               .then((data) => setShowModal(true))
+     const handleSubmit = (e) =>{
+          e.preventDefault();
+          const formData = getFormData();
+          postRoom(formData)
+               .then(() => setShowModal(true))
                .catch((error) => console.error(error));
+     }
+
+     //view function
+     const getFormData = () => {
+          return formData
      }
 
      return (
      <>
-       <form onSubmit={handleSubmit}  className="CreateRoom text-white bg-dark d-flex-column ">
+       <form onSubmit={(e) => handleSubmit(e)}  className="CreateRoom text-white bg-dark d-flex-column ">
                <div className="form-group d-flex align-items-center text-left p-3 ">
                     <label class="col-form-label"  style={{width:'100px'}}>Room:</label>
-                    <input id="Name" class="form-control" type="text" style={{ width: '400px'}}  onChange={handleEdit} ></input>
+                    <input id="Name" class="form-control" type="text" style={{ width: '400px'}}  onChange={(e) => handleEdit(e)} ></input>
                </div>
                <div className="d-flex justify-content-center  p-3">
                     <button type="submit" className="btn btn-danger">Create</button>

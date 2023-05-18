@@ -24,11 +24,11 @@ function CreateUserProfile(){
                .then((response) => response.json())
      }
      //controller
-     const handleSubmit = (e, formData) =>{
+     const handleSubmit = (e) =>{
           e.preventDefault();
+          const formData = getFormData();
           PostUserProfile(formData)
-          .then((response) => response.json())
-          .then((data) => setShowModal(true))
+          .then(() => setShowModal(true))
           .catch((error) => console.error(error));
      }
 
@@ -40,10 +40,14 @@ function CreateUserProfile(){
        const handleCloseModal = () => {
           setShowModal(false); 
      };
-
+       //view function
+       const getFormData = () => {
+            return formData
+       }
+  
      return(
           <>
-          <form onSubmit={(e) => handleSubmit(e, formData)} className="CreateMovie text-white bg-dark d-flex-column " style={{height : "1000px"}}>
+          <form onSubmit={(e) => handleSubmit(e)} className="CreateMovie text-white bg-dark d-flex-column " style={{height : "1000px"}}>
                <div className="form-group d-flex align-items-center text-left p-3 ">
                     <label class="col-form-label"  style={{width:'100px'}}>User Profile:</label>
                     <input id="UserProfile" class="form-control" type="text" style={{ width: '400px'}}  onChange={(e) => handleEdit(e)} ></input>

@@ -30,16 +30,23 @@ function CreateMovie() {
              }).then((response) => response.json())
      }
 
-     const handleSubmit = (e, formData) =>{
+     const handleSubmit = (e) =>{
           e.preventDefault();
+          const formData = getFormData();
           postMovie(formData)
                .then(() => setShowModal(true))
                .catch((error) => console.error(error));
           
      }
+
+
+     //view function
+     const getFormData = () => {
+          return formData
+     }
      return (
           <>
-       <form onSubmit={(e) => handleSubmit(e, formData)} className="CreateMovie text-white bg-dark d-flex-column " style={{height : "1000px"}}>
+       <form onSubmit={(e) => handleSubmit(e)} className="CreateMovie text-white bg-dark d-flex-column " style={{height : "1000px"}}>
                <div className="form-group d-flex align-items-center text-left p-3 ">
                     <label class="col-form-label"  style={{width:'100px'}}>Movie:</label>
                     <input id="Movie" class="form-control" type="text" style={{ width: '400px'}}  onChange={(e) => handleEdit(e)} ></input>

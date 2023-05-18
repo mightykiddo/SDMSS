@@ -76,6 +76,39 @@
       "password": "dd",
       "status": "Active",
       "acctype": "Manager"
+    },
+    {
+      "id": 29,
+      "name": "fff",
+      "username": "fffddd",
+      "loyaltypoint": 0,
+      "seatpref": "",
+      "email": "22@dd",
+      "password": "dd",
+      "status": "Active",
+      "acctype": "Manager"
+    },
+    {
+      "id": 30,
+      "name": "testing",
+      "username": "12312",
+      "loyaltypoint": 0,
+      "seatpref": "",
+      "email": "123@",
+      "password": "3131",
+      "status": "Active",
+      "acctype": "333"
+    },
+    {
+      "id": 31,
+      "name": "33",
+      "username": "33",
+      "loyaltypoint": 0,
+      "seatpref": "",
+      "email": "33@",
+      "password": "33",
+      "status": "Active",
+      "acctype": "Manager"
     }
   ]
 }
