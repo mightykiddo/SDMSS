@@ -13,43 +13,58 @@ function CreateUserAcc() {
      password : "",
      status: "Active",
      acctype : ""});
-  const apiUrl = process.env.REACT_APP_API_URL_USERACC;
-  const apiUrl_profile =  process.env.REACT_APP_API_URL_USEPROFILE;
-  const [profile, setProfile] = useState()
+     const apiUrl = process.env.REACT_APP_API_URL_USERACC;
+     const apiUrl_profile =  process.env.REACT_APP_API_URL_USEPROFILE;
+     const [profile, setProfile] = useState() 
 
-  useEffect(() => {
-     fetch(`${apiUrl_profile}/Userprofile`)
-          .then((response) => response.json())
-          .then((data) => setProfile(data))
+
+
+     //model 
+     const postUser = async (formData) => {
+          return  fetch(`${apiUrl}/user`, {
+               method: 'POST',
+               headers: {
+               'Content-Type': 'application/json',
+               },
+               body: JSON.stringify(formData),
+          })
+          .then((response) => response.json());
+     }
+
+     const getUserProfile = async() => {
+          return fetch(`${apiUrl_profile}/Userprofile`)
+          .then((response) => response.json());
+     }
+
+     //controller
+     const handleSubmit = (e,formData) =>{ //controller to submit
+          e.preventDefault();
+          postUser(formData) 
+          .then(() => setShowModal(true))
           .catch((error) => console.error(error));
-  } , [])
+     }
 
-
-  const handleSubmit = e =>{
-     e.preventDefault();
-     fetch(`${apiUrl}/user`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        })
-          .then((response) => response.json())
-          .then((data) => setShowModal(true))
+     useEffect(() => {  //controller also 
+          getUserProfile()
+          .then((data) => setProfile(data))//setprofile --> updates the view 
           .catch((error) => console.error(error));
-  }
+     } , [])
 
-  const handleEdit = e => {
-     const { id, value } = e.target;
-     setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
-  }
 
-  const handleCloseModal = () => {
-     setShowModal(false); 
-};
+     //view function/controller
+     const handleEdit = e => { 
+          const { id, value } = e.target;
+          setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
+     }
+
+     const handleCloseModal = () => {
+          setShowModal(false); //view
+     };
+
+          
      return (
           <>
-          <form onSubmit={handleSubmit} className="CreateMovie text-white bg-dark d-flex-column " style={{height : "1000px"}}>
+          <form onSubmit={(e) => handleSubmit(e, formData)} className="CreateMovie text-white bg-dark d-flex-column " style={{height : "1000px"}}>
           <div className="form-group d-flex align-items-center text-left p-3 ">
                <label className="col-form-label"  style={{width:'100px'}}>Name:</label>
                <input id="name" className="form-control" type="text" style={{ width: '400px'}}  onChange={handleEdit} ></input>

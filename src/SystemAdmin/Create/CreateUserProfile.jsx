@@ -12,8 +12,8 @@ function CreateUserProfile(){
      });
      const apiUrl = process.env.REACT_APP_API_URL_USEPROFILE;
 
-     const handleSubmit = e =>{
-          e.preventDefault();
+     //model
+     const PostUserProfile = async (formData) => {
           fetch(`${apiUrl}/Userprofile`, {
                method: 'POST',
                headers: {
@@ -22,8 +22,14 @@ function CreateUserProfile(){
                body: JSON.stringify(formData),
              })
                .then((response) => response.json())
-               .then((data) => setShowModal(true))
-               .catch((error) => console.error(error));
+     }
+     //controller
+     const handleSubmit = (e, formData) =>{
+          e.preventDefault();
+          PostUserProfile(formData)
+          .then((response) => response.json())
+          .then((data) => setShowModal(true))
+          .catch((error) => console.error(error));
      }
 
      const handleEdit = e => {
@@ -37,7 +43,7 @@ function CreateUserProfile(){
 
      return(
           <>
-          <form onSubmit={handleSubmit} className="CreateMovie text-white bg-dark d-flex-column " style={{height : "1000px"}}>
+          <form onSubmit={(e) => handleSubmit(e, formData)} className="CreateMovie text-white bg-dark d-flex-column " style={{height : "1000px"}}>
                <div className="form-group d-flex align-items-center text-left p-3 ">
                     <label class="col-form-label"  style={{width:'100px'}}>User Profile:</label>
                     <input id="UserProfile" class="form-control" type="text" style={{ width: '400px'}}  onChange={handleEdit} ></input>

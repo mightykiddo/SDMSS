@@ -11,7 +11,8 @@ function ViewUserAcc(){
 
   const apiUrl = process.env.REACT_APP_API_URL_USERACC;
 
-  const loadData = () => {
+  //modal
+  const getUser = () => {
     fetch(`${apiUrl}/user`)
     .then(response => response.json())
     .then(data => {
@@ -19,28 +20,34 @@ function ViewUserAcc(){
     })
     .catch(error => console.error(error));
   }
+
+
+  const queryUserByEmail = async (query) => {
+    return fetch(`${apiUrl}/user?email=${query}`)
+    .then(response => response.json())
+  } 
+
   useEffect(() => { //load data on page load 
-    loadData()
+    getUser()
   }, [filteredData, query]);
 
 
   const handleUpdate = (id) => { //filter by id and pass to modal
-    setFilteredData(data.filter((userData) => userData.id === id));
-    // filteredData will now contain an array with only the movie data objects that match the given id
-    setShowModal(true);
+    setFilteredData(data.filter((userData) => userData.id === id));//boundary variable
+    setShowModal(true);//boundary opens modal
   };
 
-  const handleChange = event => {
-    setQuery(event.target.value);
+  const handleChange = e => {
+    setQuery(e.target.value);
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false); 
+  const handleCloseModal = () => { //to close all modal for view
+    setShowModal(false);    
     setConfirmModal(false);
     setType('');
   };
 
-  const confirmModal = (id, status) => {
+  const confirmModal = (id, status) => {  //open specific modal for view
     setFilteredData(data.filter((userData) => userData.id === id));
     if (status === "Active") {
       setType("suspend")
@@ -51,18 +58,18 @@ function ViewUserAcc(){
     setConfirmModal(true); 
   }
 
-  const handleSubmit = (e)=> {
+
+  const handleSubmit = (e, query)=> { //for search 
     e.preventDefault();
-    fetch(`${apiUrl}/user?email=${query}`)
-      .then(response => response.json())
-      .then(data => setData(data))
-      .catch(error => console.error(error));
+    queryUserByEmail(query) //fetch alr then controller tell boundary to change view
+    .then(data => setData(data))
+    .catch(error => console.error(error));
   };
 
      return(
       <>
        <div className="d-flex justify-content-end">
-        <form className="input-group p-3" style={{width : "350px"}}   onSubmit={handleSubmit}>
+        <form className="input-group p-3" style={{width : "350px"}}   onSubmit={(e) =>handleSubmit(e, query)}>
           <input class="form-control border " type={"text"} value={query} onChange={handleChange} ></input>
         <button  className="btn btn-light" type="submit">search</button>
         </form>
@@ -104,10 +111,11 @@ function ViewUserAcc(){
         ))) }
       </tbody>
      </table>
+
      {showModal === true  && 
       <UpdateUserAccount
         data={filteredData}
-        setData = {setFilteredData} //setData to reload parent
+        reload = {setFilteredData} //setData to reload parent
         show={showModal}
         handleClose={handleCloseModal}/>
      }
@@ -115,7 +123,7 @@ function ViewUserAcc(){
      <SuspendUserAcc
           type = {type}
           data={filteredData}
-          setData = {setFilteredData}
+          reload = {setFilteredData}
           show={showConfirmModal}
           handleClose={handleCloseModal}/>
       }
@@ -126,29 +134,20 @@ function ViewUserAcc(){
 export default ViewUserAcc;
 
 
-const UpdateUserAccount = ({data, setData, show, handleClose}) => {
+const UpdateUserAccount = ({data, reload, show, handleClose}) => {
   const apiUrl_User = process.env.REACT_APP_API_URL_USERACC;
   const apiUrl_profile =  process.env.REACT_APP_API_URL_USEPROFILE;
   const [profile, setProfile] = useState()
   const [formData, setFormData] = useState(data[0]);
 
+  //modal
+  const getUserProfile = async () => {
+      return fetch(`${apiUrl_profile}/Userprofile`)
+      .then((response) => response.json())
+  }
 
-  useEffect(() => {
-    fetch(`${apiUrl_profile}/Userprofile`)
-         .then((response) => response.json())
-         .then((data) => setProfile(data))
-         .catch((error) => console.error(error));
- } , [])
-
-  const handleEdit = (event) => {
-    const { id, value } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    fetch(`${apiUrl_User}/user/${formData.id}`, {
+  const putUserById = async (formData) => {
+    return fetch(`${apiUrl_User}/user/${formData.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -156,10 +155,27 @@ const UpdateUserAccount = ({data, setData, show, handleClose}) => {
       body: JSON.stringify(formData),
     })
       .then((response) => response.json())
+  }
+
+  //controller
+  useEffect(() => {
+    getUserProfile()
+        .then((data) => setProfile(data))
+        .catch((error) => console.error(error));
+  } , [])
+
+  const handleEdit = (event) => {
+    const { id, value } = event.target;
+    setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
+  };
+
+
+  const handleSubmit = (e, formData) => {
+    e.preventDefault();
+    putUserById(formData)
       .then((data) => {
-        setData("re-load parent")
+        reload("re-load parent")
         handleClose();
-        
       })
       .catch((error) => console.error(error));
   }
@@ -167,7 +183,7 @@ const UpdateUserAccount = ({data, setData, show, handleClose}) => {
     <>
       <Modal show={show} onHide={handleClose}>
       <Modal.Body>
-      <form  onSubmit={handleSubmit}>
+      <form  onSubmit={(e) => handleSubmit(e,formData)}>
           <div class="form-group">
             <label hmtlfor="username"  class="col-form-label text-dark">username:</label>
             <input type="text" onChange={handleEdit}  value={formData.username} class="form-control " id="username"></input>
@@ -203,7 +219,7 @@ const UpdateUserAccount = ({data, setData, show, handleClose}) => {
 }
 
 /*
-const DeleteUserAcc = ({data, setData, show , handleClose}) => {
+const DeleteUserAcc = ({data, reload, show , handleClose}) => {
   const apiUrl_User = process.env.REACT_APP_API_URL_USERACC;
   const handleDelete = e =>{
     fetch(`${apiUrl_User}/user/${data[0].id}`, {
@@ -214,7 +230,7 @@ const DeleteUserAcc = ({data, setData, show , handleClose}) => {
     })
       .then(response => response.json())
       .then(data => 
-        setData("reload"))
+        reload("reload"))
       .catch(error => console.error(error))
 
     handleClose()
@@ -237,38 +253,33 @@ const DeleteUserAcc = ({data, setData, show , handleClose}) => {
 }
 */
 
-const SuspendUserAcc = ({type, data, setData, show , handleClose}) => {
+const SuspendUserAcc = ({type, data, reload, show , handleClose}) => {
   const apiUrl_User = process.env.REACT_APP_API_URL_USERACC;
-  const handleSuspend = e =>{
-    if (type === "unsuspend"){
-      fetch(`${apiUrl_User}/user/${data[0].id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify( {...data[0], status : "Active"}),
-      })
-        .then(response => response.json())
-        .then(data => 
-          setData("reload"))
-        .catch(error => console.error(error))
 
-      handleClose()
+  const putUserbyId = async (data, type) => {
+    return fetch(`${apiUrl_User}/user/${data[0].id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify( {...data[0], status : type}),
+    })
+      .then(response => response.json())
+  }
+  const handleSuspend = (data) =>{
+    if (type === "unsuspend"){
+      putUserbyId(data, 'Active')
+        .then(() => 
+          reload("reload"))
+          handleClose()
+        .catch(error => console.error(error))
     }
     else if (type === "suspend") {
-      fetch(`${apiUrl_User}/user/${data[0].id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify( {...data[0], status : "Suspended"}),
-      })
-        .then(response => response.json())
-        .then(data => 
-          setData("reload"))
+      putUserbyId(data, "Suspended")
+        .then(() => 
+          reload("reload"))
+          handleClose()
         .catch(error => console.error(error))
-
-      handleClose()
     }
   } 
   return(
@@ -278,7 +289,7 @@ const SuspendUserAcc = ({type, data, setData, show , handleClose}) => {
           {type === "suspend" ?  "Confirm Suspend User ?" : "Confirm Unsuspend User ?"}
      </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleSuspend}>
+        <Button variant="secondary" onClick={() => handleSuspend(data)}>
           Yes {/*handle delete/update*/}
         </Button>
       </Modal.Footer>

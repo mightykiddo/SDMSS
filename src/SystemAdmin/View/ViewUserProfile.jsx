@@ -11,59 +11,62 @@ function ViewUserProfile() {
 
     const apiUrl = process.env.REACT_APP_API_URL_USEPROFILE;
 
-    const loadData = () => {
-        fetch(`${apiUrl}/UserProfile`)
-        .then(response => response.json())
+
+    const getUserProfile = async () => {
+      return  fetch(`${apiUrl}/UserProfile`)
+      .then(response => response.json())
+    }
+    
+    const queryUserProfile = async (query) => {
+      fetch(`${apiUrl}/Userprofile?UserProfile=${query}`)
+      .then(response => response.json())
+    }
+    useEffect(() => { //load data on page load 
+      getUserProfile()
         .then(data => {
-          setData(data)
-          
+          setData(data)   
         })
         .catch(error => console.error(error));
-      }
-    
-    useEffect(() => { //load data on page load 
-        loadData()
-        }, [filteredData, query]);
+    }, [filteredData, query]);
 
     const handleUpdate = (id) => { //filter by id and pass to modal
         setFilteredData(data.filter((userData) => userData.id === id));
         // filteredData will now contain an array with only the movie data objects that match the given id
         setShowModal(true);
-      };
+    };
 
-      const handleChange = event => {
+    const handleChange = event => {
         setQuery(event.target.value);
-      };
+    };
     
-      const handleCloseModal = () => {
+    const handleCloseModal = () => {
         setShowModal(false); 
         setConfirmModal(false);
         setType('');
-      };
+    };
 
-      const confirmModal = (id, status) => {
-        setFilteredData(data.filter((userData) => userData.id === id));
-        if (status === "Active") {
-          setType("suspend")
-        }
-        else if (status === "Suspended") {
-          setType("unsuspend")
-        }
-        setConfirmModal(true); 
-      };
+    const confirmModal = (id, status) => {
+      setFilteredData(data.filter((userData) => userData.id === id));
+      if (status === "Active") {
+        setType("suspend")
+      }
+      else if (status === "Suspended") {
+        setType("unsuspend")
+      }
+      setConfirmModal(true); 
+    };
 
-      const handleSubmit = (e)=> {
-        e.preventDefault();
-        fetch(`${apiUrl}/Userprofile?UserProfile=${query}`)
-          .then(response => response.json())
-          .then(data => setData(data))
-          .catch(error => console.error(error));
-      };
+    const handleSubmit = (e, query)=> {
+      e.preventDefault();
+      queryUserProfile(query)
+        .then(data => setData(data))
+        .catch(error => console.error(error));
+    };
 
       return (
         <>
         <div className="d-flex justify-content-end">
-            <form className="input-group p-3" style={{width : "350px"}}   onSubmit={handleSubmit}>
+            <form className="input-group p-3" style={{width : "350px"}}   onSubmit={(e) => handleSubmit(e, query)}>
                 <input class="form-control border " type={"text"} value={query} onChange={handleChange} ></input>
                 <button  className="btn btn-light" type="submit">Search</button>
             </form>
@@ -104,7 +107,7 @@ function ViewUserProfile() {
       {showModal === true &&
         <UpdateUserProfile 
             data = {filteredData}
-            setData = {setFilteredData}
+            reload = {setFilteredData}
             show = {showModal}
             handleClose = {handleCloseModal}/>
       }
@@ -112,7 +115,7 @@ function ViewUserProfile() {
         <SuspendUserProfile
             type = {type}
             data =  {filteredData}
-            setData = {setFilteredData}
+            reload = {setFilteredData}
             show =  {showConfirmModal}
             handleClose = {handleCloseModal}/>
       }  
@@ -122,9 +125,21 @@ function ViewUserProfile() {
 
 export default ViewUserProfile;
 
-const UpdateUserProfile = ({data, setData, show, handleClose}) => {
+const UpdateUserProfile = ({data, reload, show, handleClose}) => {
     const apiUrl_UserProf = process.env.REACT_APP_API_URL_USEPROFILE;
     const [formData, setFormData] = useState(data[0]);
+
+
+    const putProfileByID = async (formData) => {
+      return fetch(`${apiUrl_UserProf}/Userprofile/${formData.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => response.json())
+    }
 
     const handleEdit = (event) => {
         const {id,value} = event.target;
@@ -133,21 +148,10 @@ const UpdateUserProfile = ({data, setData, show, handleClose}) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-    
-
-    fetch(`${apiUrl_UserProf}/Userprofile/${formData.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setData("re-load parent")
-          handleClose();
-          
-        })
+        putProfileByID(formData)
+        .then(() => {
+          reload("re-load parent")//call view to reload to reflect change
+          handleClose();})
         .catch((error) => console.error(error));
     }
     return (
@@ -167,39 +171,36 @@ const UpdateUserProfile = ({data, setData, show, handleClose}) => {
     )
     }
 
-const SuspendUserProfile = ({type, data, setData, show , handleClose}) => {
-  console.log("suspesnd user profile", data[0])
+const SuspendUserProfile = ({type, data, reload, show , handleClose}) => {
+
     const apiUrl_UserProf = process.env.REACT_APP_API_URL_USEPROFILE;
-        const handleSuspend = e =>{
+
+      const putProfileByID = async(data, type) => {
+        fetch(`${apiUrl_UserProf}/userprofile/${data[0].id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify( {...data[0], status :type}),
+        })
+          .then(response => response.json())
+      }
+      
+        const handleSuspend = (e, data) =>{
           if (type === "unsuspend"){
-            fetch(`${apiUrl_UserProf}/userprofile/${data[0].id}`, {
-              method: 'PUT',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify( {...data[0], status : "Active"}),
-            })
-              .then(response => response.json())
-              .then(data => 
-                setData("reload"))
+            putProfileByID(data, "Active")
+              .then(() => 
+                reload("reload"))
+                handleClose()
               .catch(error => console.error(error))
       
-            handleClose()
           }
           else if (type === "suspend") {
-            fetch(`${apiUrl_UserProf}/userprofile/${data[0].id}`, {
-              method: 'PUT',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify( {...data[0], status : "Suspended"}),
-            })
-              .then(response => response.json())
-              .then(data => 
-                setData("reload"))
+            putProfileByID(data, "Suspended")
+              .then(() => 
+                reload("reload"))
+                handleClose()
               .catch(error => console.error(error))
-      
-            handleClose()
           }
         } 
     return (
@@ -209,7 +210,7 @@ const SuspendUserProfile = ({type, data, setData, show , handleClose}) => {
             Confirm Suspend User Profile?
           </Modal.Body>
           <Modal.Footer>
-            <Button variant = "secondary" onClick={handleSuspend}>
+            <Button variant = "secondary" onClick={(e) => handleSuspend(e, data)}>
               Yes {/*handle Delete / update */}
             </Button>
           </Modal.Footer>

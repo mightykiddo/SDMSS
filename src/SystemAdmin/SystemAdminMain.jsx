@@ -17,7 +17,6 @@ function SystemAdmin() {
 
     
   const logout = () => {
-
      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
      console.log(currentUser)
      fetch( `http://localhost:8030/usersession/${currentUser}`,{
