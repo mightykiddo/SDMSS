@@ -8,35 +8,35 @@ function GenerateReport() {
 
   const apiUrl_tx = process.env.REACT_APP_API_URL_TX;
 
-
-  console.log(movieRankings)
-  useEffect(() => { //load data on page load 
-
-
-    fetch(`${apiUrl_tx}/ordertransaction`)
+  const getOrderTransaction = async () => {
+    return fetch(`${apiUrl_tx}/ordertransaction`)
     .then(response => response.json())
+  }
+  console.log(movieRankings)
+
+  useEffect(() => { //lload order tx and handle logic for getting sales and movie ranking
+    getOrderTransaction()
     .then(data => {
-         setData(data);
+         //setData(data);
          const ticket = data.filter(item => item.item === "Movie Ticket")
          const totalsales = ticket.reduce((acc, curr) => acc + curr.totalamount, 0);
-         setSales(totalsales.toFixed(2))
-
          const movieCounts = {};
          ticket.forEach(transaction => {
            const movieName = transaction.movie;
            const quantity = transaction.quantity;
            if (movieCounts[movieName]) {
              movieCounts[movieName] += quantity;
-           } else {
-             movieCounts[movieName] = quantity;
-           }
-         });
-     
-         const movieRankings = Object.keys(movieCounts)
-           .map(movieName => ({ movieName, count: movieCounts[movieName] }))
-           .sort((a, b) => b.count - a.count);
-     
-         setMovieRankings(movieRankings);
+            } else {
+              movieCounts[movieName] = quantity;
+            }
+          });
+          
+          const movieRankings = Object.keys(movieCounts)
+          .map(movieName => ({ movieName, count: movieCounts[movieName] }))
+          .sort((a, b) => b.count - a.count);
+          
+        setSales(totalsales.toFixed(2))
+        setMovieRankings(movieRankings);
     })
     .catch(error => console.error(error));
   }, []);

@@ -46,7 +46,7 @@ function CreateUserProfile(){
           <form onSubmit={(e) => handleSubmit(e, formData)} className="CreateMovie text-white bg-dark d-flex-column " style={{height : "1000px"}}>
                <div className="form-group d-flex align-items-center text-left p-3 ">
                     <label class="col-form-label"  style={{width:'100px'}}>User Profile:</label>
-                    <input id="UserProfile" class="form-control" type="text" style={{ width: '400px'}}  onChange={handleEdit} ></input>
+                    <input id="UserProfile" class="form-control" type="text" style={{ width: '400px'}}  onChange={(e) => handleEdit(e)} ></input>
                </div>
                <div className="d-flex justify-content-center  p-3">
                     <button type="submit" className="btn btn-danger">Create</button>

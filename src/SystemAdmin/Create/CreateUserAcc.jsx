@@ -46,7 +46,7 @@ function CreateUserAcc() {
 
      useEffect(() => {  //controller also 
           getUserProfile()
-          .then((data) => setProfile(data))//setprofile --> updates the view 
+          .then((data) => setProfile(data))//setprofile --> updates the boundary
           .catch((error) => console.error(error));
      } , [])
 
@@ -67,23 +67,23 @@ function CreateUserAcc() {
           <form onSubmit={(e) => handleSubmit(e, formData)} className="CreateMovie text-white bg-dark d-flex-column " style={{height : "1000px"}}>
           <div className="form-group d-flex align-items-center text-left p-3 ">
                <label className="col-form-label"  style={{width:'100px'}}>Name:</label>
-               <input id="name" className="form-control" type="text" style={{ width: '400px'}}  onChange={handleEdit} ></input>
+               <input id="name" className="form-control" type="text" style={{ width: '400px'}}  onChange={(e) => handleEdit(e)} ></input>
           </div>
           <div className="form-group d-flex align-items-center text-left p-3 ">
                <label className="col-form-label"  style={{width:'100px'}}>Username:</label>
-               <input id="username" className="form-control" type="text" style={{ width: '400px'}}  onChange={handleEdit} ></input>
+               <input id="username" className="form-control" type="text" style={{ width: '400px'}}  onChange={(e) => handleEdit(e)} ></input>
           </div>
           <div className="form-group d-flex align-items-center text-left p-3 ">
                <label className="col-form-label"  style={{width:'100px'}}>Email:</label>
-               <input id="email" className="form-control" type="text" style={{ width: '400px'}}  onChange={handleEdit} ></input>
+               <input id="email" className="form-control" type="text" style={{ width: '400px'}}  onChange={(e) => handleEdit(e)} ></input>
           </div>
           <div className="form-group d-flex align-items-center text-left p-3 ">
                <p className="col-form-label"  style={{width:'100px'}}>Password:</p>
-               <input id="password" className="form-control" type="text" style={{ width: '400px'}} onChange={handleEdit} ></input>
+               <input id="password" className="form-control" type="text" style={{ width: '400px'}} onChange={(e) => handleEdit(e)} ></input>
           </div>
           <div className="form-group d-flex p-3">
                <p className="col-form-label" style={{width:'100px'}}>Select Account Type:  </p>
-               <select id="acctype" className="form-select text-wrap" style={{ width: '400px'}} onChange={handleEdit}>
+               <select id="acctype" className="form-select text-wrap" style={{ width: '400px'}} onChange={(e) => handleEdit(e)}>
                     {/* got data then use map to populate the dd */}
                     {profile?.map((item) => (
                          <>

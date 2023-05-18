@@ -67,7 +67,7 @@ function ViewUserProfile() {
         <>
         <div className="d-flex justify-content-end">
             <form className="input-group p-3" style={{width : "350px"}}   onSubmit={(e) => handleSubmit(e, query)}>
-                <input class="form-control border " type={"text"} value={query} onChange={handleChange} ></input>
+                <input class="form-control border " type={"text"} value={query} onChange={(e) => handleEdit(e)} ></input>
                 <button  className="btn btn-light" type="submit">Search</button>
             </form>
         </div>
@@ -141,8 +141,8 @@ const UpdateUserProfile = ({data, reload, show, handleClose}) => {
         .then((response) => response.json())
     }
 
-    const handleEdit = (event) => {
-        const {id,value} = event.target;
+    const handleEdit = (e) => {
+        const {id,value} = e.target;
         setFormData((prevFormData) => ({...prevFormData, [id]: value}));
     }
 
@@ -161,7 +161,7 @@ const UpdateUserProfile = ({data, reload, show, handleClose}) => {
                     <form onSubmit={handleSubmit}>
                     <div class="form-group">
                         <label hmtlfor="UserProfile"  class="col-form-label text-black">User Profile:</label>
-                        <input type="text" onChange={handleEdit}  value={formData.UserProfile} class="form-control" id="UserProfile"></input>
+                        <input type="text" onChange={(e) => handleEdit(e)}  value={formData.UserProfile} class="form-control" id="UserProfile"></input>
                     </div>
                     <button type="submit">Update</button>
                     </form>
@@ -175,6 +175,7 @@ const SuspendUserProfile = ({type, data, reload, show , handleClose}) => {
 
     const apiUrl_UserProf = process.env.REACT_APP_API_URL_USEPROFILE;
 
+    //modal
       const putProfileByID = async(data, type) => {
         fetch(`${apiUrl_UserProf}/userprofile/${data[0].id}`, {
           method: 'PUT',
@@ -186,6 +187,7 @@ const SuspendUserProfile = ({type, data, reload, show , handleClose}) => {
           .then(response => response.json())
       }
       
+      //controller
         const handleSuspend = (e, data) =>{
           if (type === "unsuspend"){
             putProfileByID(data, "Active")
@@ -203,6 +205,7 @@ const SuspendUserProfile = ({type, data, reload, show , handleClose}) => {
               .catch(error => console.error(error))
           }
         } 
+
     return (
       <>
         <Modal show={show} onHide={handleClose}>

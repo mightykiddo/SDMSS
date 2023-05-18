@@ -70,7 +70,7 @@ function ViewUserAcc(){
       <>
        <div className="d-flex justify-content-end">
         <form className="input-group p-3" style={{width : "350px"}}   onSubmit={(e) =>handleSubmit(e, query)}>
-          <input class="form-control border " type={"text"} value={query} onChange={handleChange} ></input>
+          <input class="form-control border " type={"text"} value={query} onChange={(e) => handleEdit(e)} ></input>
         <button  className="btn btn-light" type="submit">search</button>
         </form>
       </div>
@@ -164,8 +164,8 @@ const UpdateUserAccount = ({data, reload, show, handleClose}) => {
         .catch((error) => console.error(error));
   } , [])
 
-  const handleEdit = (event) => {
-    const { id, value } = event.target;
+  const handleEdit = (e) => {
+    const { id, value } = e.target;
     setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
   };
 
@@ -186,22 +186,22 @@ const UpdateUserAccount = ({data, reload, show, handleClose}) => {
       <form  onSubmit={(e) => handleSubmit(e,formData)}>
           <div class="form-group">
             <label hmtlfor="username"  class="col-form-label text-dark">username:</label>
-            <input type="text" onChange={handleEdit}  value={formData.username} class="form-control " id="username"></input>
+            <input type="text" onChange={(e) => handleEdit(e)}  value={formData.username} class="form-control " id="username"></input>
           </div>
           <div class="form-group">
             <label hmtlfor="Email"  class="col-form-label text-dark">Email:</label>
-            <input type="text" disabled onChange={handleEdit}  value={formData.email} class="form-control" id="email"></input>
+            <input type="text" disabled onChange={(e) => handleEdit(e)}  value={formData.email} class="form-control" id="email"></input>
           </div>
           <div class="form-group">
             <label hmtlfor="Status" class="col-form-label text-dark">Status:</label>
-            <select class="form-control" disabled onChange={handleEdit} value={formData.status} id="status">
+            <select class="form-control" disabled onChange={(e) => handleEdit(e)} value={formData.status} id="status">
               <option value="Suspend">Suspend</option>
               <option value="Active">Active</option>
             </select>
           </div>
           <div class="form-group">
             <label hmtlfor="Type" class="col-form-label text-dark">Type</label>
-            <select className="form-select" onChange={handleEdit} value={formData.acctype} id="acctype">
+            <select className="form-select" onChange={(e) => handleEdit(e)} value={formData.acctype} id="acctype">
                     {profile?.map((item) => (
                          <>
                               <option value={item.UserProfile} key={item.id}>{item.UserProfile}</option>
@@ -218,40 +218,6 @@ const UpdateUserAccount = ({data, reload, show, handleClose}) => {
   )
 }
 
-/*
-const DeleteUserAcc = ({data, reload, show , handleClose}) => {
-  const apiUrl_User = process.env.REACT_APP_API_URL_USERACC;
-  const handleDelete = e =>{
-    fetch(`${apiUrl_User}/user/${data[0].id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(data => 
-        reload("reload"))
-      .catch(error => console.error(error))
-
-    handleClose()
-  }
-  return(
-    <>
-    <Modal show={show} onHide={handleClose}>
-     <Modal.Body className="text-dark">
-          Confirm Delete User ?
-     </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleDelete}>
-          Yes 
-        </Button>
-      </Modal.Footer>
-    </Modal>
-
-    </>
-  )
-}
-*/
 
 const SuspendUserAcc = ({type, data, reload, show , handleClose}) => {
   const apiUrl_User = process.env.REACT_APP_API_URL_USERACC;
