@@ -121,6 +121,52 @@
       "movie": "Captain Marvel",
       "detail": " [Date]: 2023-05-16,  [Timeslot]: 12:30 - 14:30,  [Movie]: Captain Marvel,  [Room]: 2,  [Ticket Type]: adult,  [Seats]: B2,B3",
       "id": 38
+    },
+    {
+      "item": "Movie Ticket",
+      "itemstatus": "Unpaid",
+      "quantity": 2,
+      "totalamount": 24,
+      "customerid": 8,
+      "movie": "Avengers: Endgame",
+      "detail": " [Date]: 2023-05-15,  [Timeslot]: 10:30 - 12:30,  [Movie]: Avengers: Endgame,  [Room]: 2,  [Ticket Type]: adult,  [Seats]: A1,B1",
+      "id": 39
+    },
+    {
+      "item": "Movie Ticket",
+      "itemstatus": "Paid",
+      "quantity": 1,
+      "totalamount": 12,
+      "customerid": 8,
+      "movie": "Avengers: Endgame",
+      "detail": " [Date]: 2023-05-15,  [Timeslot]: 10:30 - 12:30,  [Movie]: Avengers: Endgame,  [Room]: 2,  [Ticket Type]: adult,  [Seats]: B2",
+      "id": 40
+    },
+    {
+      "item": "Combo 1",
+      "itemstatus": "Paid",
+      "quantity": "1",
+      "totalamount": 7,
+      "customerid": 8,
+      "id": 41
+    },
+    {
+      "item": "Combo 3",
+      "itemstatus": "Paid",
+      "quantity": "1",
+      "totalamount": 20,
+      "customerid": "staff",
+      "id": 42
+    },
+    {
+      "item": "Movie Ticket",
+      "itemstatus": "Paid",
+      "quantity": 2,
+      "totalamount": 18,
+      "customerid": "staff",
+      "movie": "Avengers: Endgame",
+      "detail": " [Date]: 2023-05-15,  [Timeslot]: 10:30 - 12:30,  [Movie]: Avengers: Endgame,  [Room]: 2,  [Ticket Type]: senior,  [Seats]: B3,C3",
+      "id": 43
     }
   ]
 }

@@ -15,8 +15,14 @@ const User = () => {
     var seatpref = location.state.seatpref;
     var id = location.state.id;
     
+    // Movie Entity Component
+    const MovieEntity = async () => {
+        return fetch('http://localhost:8008/Movie')
+    }
+
+    // Movie Controller Component
     useEffect(() => {
-        fetch('http://localhost:8008/Movie')
+        MovieEntity()
         .then(res =>{
             return res.json();
         })

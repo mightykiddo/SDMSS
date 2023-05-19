@@ -5,14 +5,19 @@ import NavBar from './NavBar';
 import { Link } from 'react-router-dom';
 
 import { useState, useEffect } from "react";
-import SelectSeats from './SelectSeats';
 
 const Home = () => {
 
     const [movie, setMovie] = useState([]);
 
+    // Movie Entity Component
+    const MovieEntity = async () => {
+        return fetch('http://localhost:8008/Movie')
+    }
+
+    // Movie Controller Component
     useEffect(() => {
-        fetch('http://localhost:8008/Movie')
+        MovieEntity()
         .then(res =>{
             return res.json();
         })

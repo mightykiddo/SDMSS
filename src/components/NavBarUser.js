@@ -33,7 +33,6 @@ const NavBarUser = () => {
         history('/loyaltypage', {state:{username, loyaltypoint, seatpref, id}});
     }
     
-    
     const logout = () => {
 
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -45,9 +44,10 @@ const NavBarUser = () => {
             }
         }).then(()=>{
             localStorage.removeItem('currentUser');
-            history("/")
+            history('/')
         })
     }
+
     return (
     <>
     

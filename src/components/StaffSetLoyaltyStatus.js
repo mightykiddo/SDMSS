@@ -8,13 +8,17 @@ const StaffSetLoyaltyStatus = () => {
     const [LoyaltyTransaction, setLoyaltyTransaction] = useState([]);
     const [isPending, setIsPending] = useState(false);
     const [id2, setId] = useState(0);
-    const [item, setitem] = useState('');
-    const location = useLocation();
     const history = useNavigate();
 
+    // Search Loyalty Transaction Entity Component
+    const SearchLoyaltyTransactionEntity = async () => {
+        return fetch('http://localhost:8003/loyaltytransaction')
+    }
+
+    // Search Loyalty Transaction Controller Component
     const handleSubmit = (e) =>{
         e.preventDefault()
-        fetch('http://localhost:8003/loyaltytransaction')
+        SearchLoyaltyTransactionEntity()
          .then(res =>{
              return res.json();
          })
@@ -24,14 +28,29 @@ const StaffSetLoyaltyStatus = () => {
          });     
              console.log(searched)
              setIsPending(true);
-                // console.log(xtype(parseInt(searched)));
     }
 
+    // Update Status Entity Component
+    const UpdateStatusEntity = async () => {
+        return fetch(`http://localhost:8003/loyaltytransaction/${id2}`) 
+    }
+
+    const UpdateStatusEntity2 = async (data, status) => {
+        return fetch(`http://localhost:8003/loyaltytransaction/${id2}`,
+        {
+            method: 'PUT',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({...data, itemstatus : status})
+        })
+    }
+
+    // Update Status Controller Component
     const handleSubmit2 = (e) => {
         e.preventDefault()
         console.log(id2);
         const status ="Completed"
-        fetch(`http://localhost:8003/loyaltytransaction/${id2}`) 
+        
+        UpdateStatusEntity()
         .then(res=>{
             return res.json();
          })
@@ -41,12 +60,7 @@ const StaffSetLoyaltyStatus = () => {
             // setitem(data.item)
             console.log(data)
 
-            fetch(`http://localhost:8003/loyaltytransaction/${id2}`,
-            {
-                method: 'PUT',
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({...data, itemstatus : status})
-            }) 
+            UpdateStatusEntity2(data, status) 
 
             console.log("update successfully")
             console.log("refresh page")

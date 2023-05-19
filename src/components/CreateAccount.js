@@ -16,17 +16,24 @@ const CreateAccount = () => {
     const [seatpref, setseatpref] = useState("");
     const history = useNavigate();
 
+    // Entity Component
+    const CreateAccountEntity = async (customer) => {
+        return fetch('http://localhost:8005/user',{
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(customer)
+        })
+    }
+
+    // Controller Component
     const handleSubmit = (e) =>{
         e.preventDefault();
         setacctype("customer");
         setloyaltypoint(0);
         const status = "Active"; 
         const customer = {acctype, name, email, username, password, loyaltypoint, status, seatpref}
-        fetch('http://localhost:8005/user',{
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(customer)
-        }).then(()=>{
+        CreateAccountEntity(customer)
+        .then(()=>{
             console.log("new customer added");
             history('/login');
             

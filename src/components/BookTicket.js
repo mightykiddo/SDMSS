@@ -15,8 +15,14 @@ const BookTicket = () => {
     var seatpref = location.state.seatpref;
     var id = location.state.id;
 
+    // Entity Component
+    const BookTicketEntity = async () => {
+        return fetch('http://localhost:8009/moviesession')
+    }
+
+    // Controller Component
     useEffect(() => {
-        fetch('http://localhost:8009/moviesession')
+        BookTicketEntity()
         .then(res =>{
             return res.json();
         })
@@ -24,6 +30,18 @@ const BookTicket = () => {
             setData(data);
         })
     }, []); 
+
+    const handleTimeslotClick = (e) => {
+
+        e.preventDefault();
+        const selectedRecord = data.find(record => record.id === parseInt(e.target.value));
+        var selectedTimeslot = selectedRecord.timeslot;
+        var selectedDate = selectedRecord.date;
+        var selectedMovie = selectedRecord.movie;
+        var selectedId = selectedRecord.id;
+        var selectedRoom = selectedRecord.room;
+        history('/selectseats', {state:{username, loyaltypoint, seatpref, id, selectedDate, selectedId, selectedMovie, selectedTimeslot, selectedRoom}});
+    }
       
     const groupedData = data.reduce((result, item) => {
         const key = item.movie;
@@ -42,18 +60,6 @@ const BookTicket = () => {
         result[key].push(item);
         return result;
     }, {});
-
-    const handleTimeslotClick = (e) => {
-
-        e.preventDefault();
-        const selectedRecord = data.find(record => record.id === parseInt(e.target.value));
-        var selectedTimeslot = selectedRecord.timeslot;
-        var selectedDate = selectedRecord.date;
-        var selectedMovie = selectedRecord.movie;
-        var selectedId = selectedRecord.id;
-        var selectedRoom = selectedRecord.room;
-        history('/selectseats', {state:{username, loyaltypoint, seatpref, id, selectedDate, selectedId, selectedMovie, selectedTimeslot, selectedRoom}});
-    }
   
     return ( 
         <>

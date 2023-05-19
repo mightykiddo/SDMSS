@@ -21,7 +21,6 @@ const LoyaltyPage = () => {
     const [item, setItem] = useState('');
     const [modalIsOpen4, setModalIsOpen4] = useState(false);
     const [points, setPoints] = useState('');
-    const [itemstatus, setitemstatus] = useState("Unclaimed");
     const [quantity, setquantity] = useState(" ");
     const [isPending, setIsPending] = useState(false);
     const location = useLocation();
@@ -31,9 +30,14 @@ const LoyaltyPage = () => {
     var id = location.state.id;
     var totalpoints = " ";
     
+    // View Loyalty Item Entity Component
+    const ViewLoyaltyItemEntity = async () => {
+        return fetch('http://localhost:8004/loyaltyitems')
+    }
 
+    // View Loyalty Item Controller Component
     useEffect(() => {
-        fetch('http://localhost:8004/loyaltyitems')
+        ViewLoyaltyItemEntity()
         .then(res =>{
             return res.json();
         })
@@ -42,10 +46,30 @@ const LoyaltyPage = () => {
         })
     }, []); 
 
-    const handleSubmit2 = () =>{
-        setModalIsOpen4(false)
+
+    // Redeem Loyalty Item Entity Component
+    const RedeemLoyaltyItemEntity = async (customerid) => {
+        return fetch(`http://localhost:8005/user/${customerid}`)
     }
 
+    const RedeemLoyaltyItemEntity2 = async (customerid, data, deduction) => {
+        return fetch(`http://localhost:8005/user/${customerid}`,
+        {
+            method: 'PUT',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({...data, loyaltypoint : deduction})
+        }) 
+    }
+
+    const RedeemLoyaltyItemEntity3 = async (loyaltytransaction) => {
+        return fetch('http://localhost:8003/loyaltytransaction',{
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(loyaltytransaction)
+        })
+    }
+
+    // Redeem Loyalty Item Controller Component
     const handleSubmit = (e) =>{
         e.preventDefault();
 
@@ -66,7 +90,8 @@ const LoyaltyPage = () => {
 
             loyaltypoint = deduction
 
-            fetch(`http://localhost:8005/user/${customerid}`) 
+             
+            RedeemLoyaltyItemEntity(customerid)
             .then(res=>{
                 return res.json();
             })
@@ -74,22 +99,12 @@ const LoyaltyPage = () => {
                 
                 console.log(data)
 
-                fetch(`http://localhost:8005/user/${customerid}`,
-                {
-                    method: 'PUT',
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({...data, loyaltypoint : deduction})
-                }) 
+                RedeemLoyaltyItemEntity2(customerid, data, deduction)
                 
             }); 
-
             
-            
-            fetch('http://localhost:8003/loyaltytransaction',{
-                method: 'POST',
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(loyaltytransaction)
-            }).then(()=>{
+            RedeemLoyaltyItemEntity3(loyaltytransaction)
+            .then(()=>{
                 console.log("Item is redeemed");
                 history('/user', {state:{username, loyaltypoint, seatpref, id}});
             })
@@ -102,6 +117,10 @@ const LoyaltyPage = () => {
 
         }
         
+    }
+
+    const handleSubmit2 = () =>{
+        setModalIsOpen4(false)
     }
 
     const tableStyles = {

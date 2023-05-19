@@ -22,8 +22,14 @@ const StaffSelectSeats = () => {
   var selectedId = location.state.selectedId;
   var selectedRoom = location.state.selectedRoom;
 
+  // View Seats Entity Component
+  const ViewSeatsEntity = async () => {
+    return fetch("http://localhost:8009/moviesession")
+  }
+
+  // View Seats Controller Component
   useEffect(() => {
-    fetch("http://localhost:8009/moviesession")
+    ViewSeatsEntity()
       .then((res) => {
         return res.json();
       })
@@ -46,6 +52,87 @@ const StaffSelectSeats = () => {
   useEffect(() => {
     handleSomething();
   }, [data2]);
+
+  
+  // Purchase Ticket Entity Component
+  const PurchaseTicketEntity = async (ordertransaction) => {
+    return fetch('http://localhost:8007/ordertransaction',{
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(ordertransaction)
+  })
+  }
+
+  const PurchaseTicketEntity2 = async (movieSessionId) => {
+    return fetch(`http://localhost:8009/moviesession/${movieSessionId}`)
+  }    
+
+  const PurchaseTicketEntity3 = async (data, movieSessionId, updatedSeats) => {
+    return fetch(`http://localhost:8009/moviesession/${movieSessionId}`, 
+    {
+      method: "PUT",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({...data, seats: updatedSeats})
+    })
+  } 
+
+  // Purchase Ticket Controller Component
+  const handleSubmit = (e) => {
+    console.log(e.target.value);
+    console.log("Selected seats:", selectedSeats);
+    const movieSessionId = selectedId;
+    console.log(movieSessionId)
+    var customerid = "staff";
+    var quantity = numberOfSelectedSeats;
+    var itemstatus = "Paid";
+    var item = "Movie Ticket";
+    var movie = selectedMovie;
+    var detail = " [Date]: "+selectedDate+",  [Timeslot]: "+selectedTimeslot+",  [Movie]: "+selectedMovie+",  [Room]: "+selectedRoom+",  [Ticket Type]: "+tickettype+",  [Seats]: "+selectedSeats;
+    console.log("Detail", detail);
+
+    const ordertransaction = {item, itemstatus, quantity, totalamount, customerid, movie, detail};
+    e.preventDefault();
+    
+    PurchaseTicketEntity(ordertransaction)
+    .then(()=>{
+        console.log("Order have been placed");
+        
+    })
+
+    PurchaseTicketEntity2(movieSessionId)
+    .then(res=>{
+      return res.json();
+    })
+    .then(data => {
+
+      console.log(data)
+      const updatedSeats = data.seats.map(seat => {
+        if (selectedSeats.includes(seat.seat)) {
+          return { seat: seat.seat, occupy: "yes", id: seat.id };
+        } else {
+          return seat;
+        }
+      });
+
+      PurchaseTicketEntity3(data, movieSessionId, updatedSeats)
+      .then(response => {
+        if (response.ok) {
+          // handle successful update
+          console.log("update successfully")
+          history('/stafffoodanddrink'); 
+        } else {
+          throw new Error("Failed to update seats.");
+        }
+      })
+      .catch(error => {
+        // handle error
+        console.log("something error")
+      });
+
+    })
+    
+  };
+
 
   const handleTicketChange = (e) => {
     const selectedTicketType = e.target.value;
@@ -81,72 +168,6 @@ const StaffSelectSeats = () => {
         return s;
       })
     );
-  };
-
-  const handleSubmit = (e) => {
-    console.log(e.target.value);
-    console.log("Selected seats:", selectedSeats);
-
-    //const updatedSeats = selectedSeats;
-    const movieSessionId = selectedId;
-    console.log(movieSessionId)
-
-    var customerid = "staff";
-    var quantity = numberOfSelectedSeats;
-    var itemstatus = "Paid";
-    var item = "Movie Ticket";
-    var detail = " [Date]: "+selectedDate+",  [Timeslot]: "+selectedTimeslot+",  [Movie]: "+selectedMovie+",  [Room]: "+selectedRoom+",  [Ticket Type]: "+tickettype+",  [Seats]: "+selectedSeats;
-    console.log("Detail", detail);
-
-    const ordertransaction = {item, itemstatus, quantity, totalamount, customerid, detail};
-    e.preventDefault();
-    
-    fetch('http://localhost:8007/ordertransaction',{
-        method: 'POST',
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(ordertransaction)
-    }).then(()=>{
-        console.log("Order have been placed");
-        
-    })
-
-    fetch(`http://localhost:8009/moviesession/${movieSessionId}`)
-    .then(res=>{
-      return res.json();
-    })
-    .then(data => {
-
-      console.log(data)
-      const updatedSeats = data.seats.map(seat => {
-        if (selectedSeats.includes(seat.seat)) {
-          return { seat: seat.seat, occupy: "yes", id: seat.id };
-        } else {
-          return seat;
-        }
-      });
-
-      fetch(`http://localhost:8009/moviesession/${movieSessionId}`, 
-      {
-        method: "PUT",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({...data, seats: updatedSeats})
-      })
-      .then(response => {
-        if (response.ok) {
-          // handle successful update
-          console.log("update successfully")
-          history('/stafffoodanddrink');
-        } else {
-          throw new Error("Failed to update seats.");
-        }
-      })
-      .catch(error => {
-        // handle error
-        console.log("something error")
-      });
-
-    })
-    
   };
 
   const handleSeatClick = (seat) => {

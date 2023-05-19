@@ -13,8 +13,14 @@ const StaffFoodandDrink = () => {
     const [price, setPrice] = useState();
     var totalamount = quantity * price;
     
+    // View Food And Drink Entity Component
+    const ViewFoodAndDrinkEntity = async () => {
+        return fetch('http://localhost:9000/foodanddrink')
+    }
+
+    // View Food And Drink Controller Component
     useEffect(()=>{
-        fetch('http://localhost:9000/foodanddrink')
+        ViewFoodAndDrinkEntity()
         .then(res =>{
             return res.json();
         })
@@ -23,17 +29,23 @@ const StaffFoodandDrink = () => {
         });
     },[]);
 
+    // Purchase Food And Drink Entity Component
+    const PurchaseFoodAndDrinkEntity = async (ordertransaction) => {
+        return fetch('http://localhost:8007/ordertransaction',{
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(ordertransaction)
+        })
+    }
+
+    // Purchase Food And Drink Controller Component
     const handleSubmit = (e) => {
         var customerid = "staff";
         const ordertransaction = {item, itemstatus, quantity, totalamount, customerid};
         //e.preventDefault();
         setIsPending(true);
-        
-        fetch('http://localhost:8007/ordertransaction',{
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(ordertransaction)
-        }).then(()=>{
+        PurchaseFoodAndDrinkEntity(ordertransaction)
+        .then(()=>{
             console.log("Order have been placed");
             //history('/user', {state:{username, loyaltypoint, seatpref, id}});
         })

@@ -1,15 +1,23 @@
 import { useEffect, useState } from "react";
 const GetReviewRating = () => {
+
   const [reviews, setReviews] = useState(null);
-    useEffect(() => {
-        fetch('http://localhost:8002/reviews')
-        .then(res =>{
-            return res.json();
-        })
-        .then(data => {
-            setReviews(data);
-        })
-    }, []);  
+
+  // Get Review Rating Entity Component
+  const GetReviewRatingEntity = async () => {
+    return fetch('http://localhost:8002/reviews')
+  }
+
+  // Get Review Rating Controller Component
+  useEffect(() => {
+      GetReviewRatingEntity()
+      .then(res =>{
+          return res.json();
+      })
+      .then(data => {
+          setReviews(data);
+      })
+  }, []);  
     
 
   return ( 

@@ -10,7 +10,7 @@
       "seats": [
         {
           "seat": "A1",
-          "occupy": "no",
+          "occupy": "yes",
           "id": 1
         },
         {
@@ -25,17 +25,17 @@
         },
         {
           "seat": "B1",
-          "occupy": "no",
+          "occupy": "yes",
           "id": 4
         },
         {
           "seat": "B2",
-          "occupy": "no",
+          "occupy": "yes",
           "id": 5
         },
         {
           "seat": "B3",
-          "occupy": "no",
+          "occupy": "yes",
           "id": 6
         },
         {
@@ -50,7 +50,7 @@
         },
         {
           "seat": "C3",
-          "occupy": "no",
+          "occupy": "yes",
           "id": 9
         }
       ],

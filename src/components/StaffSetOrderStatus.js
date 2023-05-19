@@ -8,42 +8,68 @@ const StaffSetOrderStatus = () => {
     const [LoyaltyTransaction, setLoyaltyTransaction] = useState([]);
     const [isPending, setIsPending] = useState(false);
     const [id2, setId2] = useState(0);
-    const [item, setitem] = useState('');
-    const location = useLocation();
     const history = useNavigate();
-    // const [point, setPoint] = useState();
-    // const [id, setId] = useState();
 
-    const handleSubmit = (e) =>{
-        e.preventDefault()
-        fetch('http://localhost:8007/ordertransaction')
-         .then(res =>{
-             return res.json();
-         })
-         .then(data => {
-             console.log(data);
-             setLoyaltyTransaction(data);
-         });     
-             console.log(searched)
-             setIsPending(true);
-                // console.log(xtype(parseInt(searched)));
+
+    // Search Order Transaction Entity Component
+    const SearchOrderTransactionEntity = async () => {
+        return fetch('http://localhost:8007/ordertransaction')
     }
 
+    // Search Order Transaction Controller Component
+    const handleSubmit = (e) =>{
+        e.preventDefault()
+        SearchOrderTransactionEntity()
+        .then(res =>{
+            return res.json();
+        })
+        .then(data => {
+            console.log(data);
+            setLoyaltyTransaction(data);
+        });     
+            console.log(searched)
+            setIsPending(true);
+            // console.log(xtype(parseInt(searched)));
+    }
+
+    // Update Status Entity Component
+    const UpdateStatusEntity = async () => {
+        return fetch(`http://localhost:8007/ordertransaction/${id2}`) 
+    }
+
+    const UpdateStatusEntity2 = async (data, status) => {
+        return fetch(`http://localhost:8007/ordertransaction/${id2}`,
+        {
+            method: 'PUT',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({...data, itemstatus : status})
+        })  
+    }
+
+    const UpdateStatusEntity3 = async (id) => {
+        return fetch(`http://localhost:8005/user/${id}`)  
+    }
+
+    const UpdateStatusEntity4 = async (id, data, addition) => {
+        return fetch(`http://localhost:8005/user/${id}`,
+        {
+            method: 'PUT',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({...data, loyaltypoint : addition})
+        })  
+    }
+
+    // Update Status Controller Component
     const handleSubmit2 = (e) => {
         e.preventDefault()
         console.log(id2);
         const status ="Paid"
         
-        
-
-        fetch(`http://localhost:8007/ordertransaction/${id2}`) 
+        UpdateStatusEntity()
         .then(res=>{
             return res.json();
          })
         .then(data => {
-            // console.log(data)
-            // console.log(data.item)
-            // setitem(data.item)
             console.log(data)
             var point = data.totalamount
             var id = data.customerid
@@ -52,16 +78,12 @@ const StaffSetOrderStatus = () => {
             console.log("customer id:")
             console.log(id)
 
-            fetch(`http://localhost:8007/ordertransaction/${id2}`,
-            {
-                method: 'PUT',
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({...data, itemstatus : status})
-            }) 
+            UpdateStatusEntity2(data, status)
 
             console.log("update successfully")
 
-            fetch(`http://localhost:8005/user/${id}`) 
+            UpdateStatusEntity3(id)
+            
             .then(res=>{
                 return res.json();
             })
@@ -71,21 +93,14 @@ const StaffSetOrderStatus = () => {
                 var addition =  data.loyaltypoint + point
                 console.log(addition)
 
-                fetch(`http://localhost:8005/user/${id}`,
-                {
-                    method: 'PUT',
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({...data, loyaltypoint : addition})
-                }) 
+                UpdateStatusEntity4(id, data, addition)
 
                 console.log("customer gain new point")
                 console.log("refresh page")
                 history(0)  
                 
             });  
-
         });  
-
     }
 
     const tableStyles = {

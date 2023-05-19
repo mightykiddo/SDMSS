@@ -34,22 +34,23 @@ const ReviewRating = () => {
     var seatpref = location.state.seatpref;
     var id = location.state.id;
 
-    const handleSubmit2 = (e) =>{
-        e.preventDefault();
-        history('/user', {state:{username, loyaltypoint, seatpref, id}});
-        setModalIsOpen4(false)
+    // Create Review Rating Entity Component
+    const CreateReviewRatingEntity = async (review) => {
+        return fetch('http://localhost:8002/reviews',{
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(review)
+        })
     }
 
+    // Create Review Rating Controller Component
     const handleSubmit = (e) =>{
         e.preventDefault();
         const review = { feedback, rating };
         setIsPending(true);
 
-        fetch('http://localhost:8002/reviews',{
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(review)
-        }).then(()=>{
+        CreateReviewRatingEntity(review)
+        .then(()=>{
             console.log("new review added");
             setIsPending(false);
             setModalIsOpen3(false);
@@ -58,6 +59,12 @@ const ReviewRating = () => {
             //history('/user');
             
         })
+    }
+
+    const handleSubmit2 = (e) =>{
+        e.preventDefault();
+        history('/user', {state:{username, loyaltypoint, seatpref, id}});
+        setModalIsOpen4(false)
     }
 
     return (

@@ -8,18 +8,28 @@ const LoyaltyTransaction = () => {
     const location = useLocation();
     var id = location.state.id;
 
+    // Transaction History Entity Component
+    const TransactionHistoryEntity = async () => {
+        return fetch('http://localhost:8003/loyaltytransaction')
+    }
+
+    const TransactionHistoryEntity2 = async () => {
+        return fetch('http://localhost:8007/ordertransaction')
+    }
+
+    // Transaction History Controller Component
     useEffect(()=>{
-         fetch('http://localhost:8003/loyaltytransaction')
-         .then(res =>{
-             return res.json();
-         })
-         .then(data => {
-             setLoyaltyTransaction(data);
-         });
+        TransactionHistoryEntity()
+        .then(res =>{
+            return res.json();
+        })
+        .then(data => {
+            setLoyaltyTransaction(data);
+        });
     },[]);
 
     useEffect(()=>{
-        fetch('http://localhost:8007/ordertransaction')
+        TransactionHistoryEntity2()
         .then(res =>{
             return res.json();
         })
@@ -27,6 +37,7 @@ const LoyaltyTransaction = () => {
             setOrderTransaction(data);
         });
     },[]);
+    
 
     const tableStyles = {
         borderCollapse: 'collapse',
