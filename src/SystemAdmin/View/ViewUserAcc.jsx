@@ -15,20 +15,22 @@ function ViewUserAcc(){
 
   //modal
   const getUser = async () => {
-    return fetch(`${apiUrl}/user`)
-    .then(response => response.json())
+    const response = await fetch(`${apiUrl}/user`)
+    const user = await response.json();
+    return user;
   }
   
   
   const queryUserByEmail = async (query) => {
-    return fetch(`${apiUrl}/user?email=${query}`)
-    .then(response => response.json())
+    const response = await fetch(`${apiUrl}/user?email=${query}`)
+    const user = await response.json();
+    return user;
   } 
   
   useEffect(() => { //load data on page load 
     getUser()
-    .then(data => {
-      setData(data)
+    .then(users => {
+      setData(users)
     })
     .catch(error => console.error(error));
   }, [filteredData, query]);
@@ -61,11 +63,13 @@ function ViewUserAcc(){
   }
 
 
-  const handleSubmit = (e, query)=> { //for search 
+  const handleSubmit = async (e, query)=> { //for search 
     e.preventDefault();
-    queryUserByEmail(query) //fetch alr then controller tell boundary to change view
-    .then(data => setData(data))
-    .catch(error => console.error(error));
+    var users = await queryUserByEmail(query); //fetch alr then controller tell boundary to change view
+    setData(users)
+   //queryUserByEmail(query) 
+    //.then(user => setData(user))
+    //.catch(error => console.error(error));
   };
 
      return(

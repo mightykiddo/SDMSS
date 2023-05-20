@@ -7,23 +7,20 @@ const DeleteSession = ({data, reload, show, handleClose}) => {
 
     //model
     const deleteMovieSession = async (id) => {
-        return fetch(`${apiUrl_Session}/moviesession/${id}`, {
+        await fetch(`${apiUrl_Session}/moviesession/${id}`, {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json'
             }
           })
-            .then(response => response.json())
     }
 
     //controller
-    const handleDelete = (e, id) => {
+    const handleDelete = async (e, id) => {
         e.preventDefault();
-      deleteMovieSession(id)
-        .then(() => {
-          reload("reload")
-          handleClose()})
-        .catch(error => console.error(error))
+        await deleteMovieSession(id)
+        reload("reload")
+        handleClose()
     }
   
     return(

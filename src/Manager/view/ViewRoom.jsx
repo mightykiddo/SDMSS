@@ -14,11 +14,17 @@ function ViewRoom() {
 
   //model
   const getRoom = async () => {
-    return fetch(`${apiUrl}/Room`)
-    .then(response => response.json())
+    const response = await fetch(`${apiUrl}/Room`)
+    const room = response.json();
+    return room;
   }
   
 
+  const queryRoomByEmail = async (query) =>{
+    const response =  await fetch(`${apiUrl}/Room?Name=${query}`)
+    const rooms = response.json();
+    return rooms;
+  }
   //controller
   useEffect(() => { //load data on page load 
     getRoom()
@@ -49,13 +55,11 @@ function ViewRoom() {
     setConfirmModal(true); 
   }
 
-  const handleSubmit = (e)=> {
+  const handleSubmit = async (e)=> {
     e.preventDefault();
     console.log(query)
-    fetch(`${apiUrl}/Room?Name=${query}`)
-      .then(response => response.json())
-      .then(data => setData(data))
-      .catch(error => console.error(error));
+    const rooms = await queryRoomByEmail(query);
+    setData(rooms)
   };
 
   return (

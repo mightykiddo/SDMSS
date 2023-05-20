@@ -14,20 +14,23 @@ function ViewUserProfile() {
 
     //model
     const getUserProfile = async () => {
-      return  fetch(`${apiUrl}/UserProfile`)
-      .then(response => response.json())
+      const response = await  fetch(`${apiUrl}/UserProfile`)
+      const userProfile = await response.json();
+      return userProfile; //return list of userprofile
     }
     
     const queryUserProfile = async (query) => {
-      fetch(`${apiUrl}/Userprofile?UserProfile=${query}`)
-      .then(response => response.json())
+      const response = await  fetch(`${apiUrl}/Userprofile?UserProfile=${query}`)
+      const userProfile = await response.json();
+      return userProfile; //return list of userprofile
+
     }
 
     //controller
     useEffect(() => { //load data on page load 
       getUserProfile()
-        .then(data => {
-          setData(data)   
+        .then(userprofile => {
+          setData(userprofile)   
         })
         .catch(error => console.error(error));
     }, [filteredData, query]);
@@ -59,11 +62,10 @@ function ViewUserProfile() {
       setConfirmModal(true); 
     };
 
-    const handleSubmit = (e, query)=> {
+    const handleSubmit = async (e, query)=> {
       e.preventDefault();
-      queryUserProfile(query)
-        .then(data => setData(data))
-        .catch(error => console.error(error));
+      const userProfile = await queryUserProfile(query)
+      setData(userProfile) //update the page
     };
 
       return (

@@ -20,29 +20,27 @@ function CreateUserAcc() {
 
 
      //model 
-     const postUser = async (formData) => {
-          return  fetch(`${apiUrl}/user`, {
+     const postUser = async (formData) => { //void
+          await fetch(`${apiUrl}/user`, {
                method: 'POST',
                headers: {
                'Content-Type': 'application/json',
                },
                body: JSON.stringify(formData),
           })
-          .then((response) => response.json());
      }
 
-     const getUserProfile = async() => {
+     const getUserProfile = async() => {//return a list of user
           return fetch(`${apiUrl_profile}/Userprofile`)
           .then((response) => response.json());
      }
 
      //controller
-     const handleSubmit = (e) =>{ //controller to submit
+     const handleSubmit = async (e) =>{ //controller to submit
           e.preventDefault();
-          const formData = getFormData();
-          postUser(formData) 
-          .then(() => setShowModal(true))
-          .catch((error) => console.error(error));
+          const data = getFormData();
+          await postUser(data);
+          setShowModal(true);
      }
 
      useEffect(() => {  //controller also 

@@ -13,21 +13,21 @@ function CreateUserProfile(){
      const apiUrl = process.env.REACT_APP_API_URL_USEPROFILE;
 
      //model
-     const PostUserProfile = async (formData) => {
-          fetch(`${apiUrl}/Userprofile`, {
+     const PostUserProfile = async (data) => {
+          return fetch(`${apiUrl}/Userprofile`, {
                method: 'POST',
                headers: {
                  'Content-Type': 'application/json',
                },
-               body: JSON.stringify(formData),
+               body: JSON.stringify(data),
              })
                .then((response) => response.json())
      }
      //controller
      const handleSubmit = (e) =>{
           e.preventDefault();
-          const formData = getFormData();
-          PostUserProfile(formData)
+          const data = getFormData();
+          PostUserProfile(data)
           .then(() => setShowModal(true))
           .catch((error) => console.error(error));
      }

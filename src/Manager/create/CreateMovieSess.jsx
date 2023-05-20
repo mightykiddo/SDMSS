@@ -66,21 +66,26 @@ function CreateMovieSession() {
 
 
      //model
-     const loadMoviesnRooms = () => {
-          return Promise.all([
-               fetch(`${apiUrl_Movie}/Movie`).then(response => response.json()),
-               fetch(`${apiUrl_Room}/Room`).then(response => response.json())
+     const loadMoviesnRooms = async () => {
+          const [movieResponse, roomResponse] = await Promise.all([
+               fetch(`${apiUrl_Movie}/Movie`),
+               fetch(`${apiUrl_Room}/Room`)
              ]);
+          const movieData = await movieResponse.json();
+          const roomData = await roomResponse.json();
+         
+          return [movieData, roomData]; //return movie and room
+          
      }
       
      const createMovieSession = async (formData, movie,room) => {
-          return fetch(`${apiUrl_Session}/moviesession`, {
+          await fetch(`${apiUrl_Session}/moviesession`, {
                method: 'POST',
                headers: {
                  'Content-Type': 'application/json',
                },
                body: JSON.stringify({...formData, movie: movie.Movie, room : room.Name }),
-             }).then(response => response.json())
+             })
      }
 
 
@@ -113,14 +118,13 @@ function CreateMovieSession() {
              
      }
 
-     const handleSubmit = (e) =>{
+     const handleSubmit = async (e) =>{
           e.preventDefault();
           const formData = getFormData()
           const movie = movies.find(movie => movie.id === parseInt(formData.movie_id));
           const room = rooms.find(room => room.id === parseInt(formData.room_id));
-          createMovieSession(formData,movie,room)
-               .then(() => setShowModal(true))
-               .catch((error) => console.error(error));
+          await createMovieSession(formData,movie,room)
+          setShowModal(true)
      }
 
      //view function

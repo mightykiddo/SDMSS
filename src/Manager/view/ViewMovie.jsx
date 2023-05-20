@@ -14,18 +14,20 @@ function ViewMovie() {
 
   //model
   const getMovie = async () => {
-    return fetch(`${apiUrl}/Movie`)
-    .then(response => response.json())
+    const response = await fetch(`${apiUrl}/Movie`)
+    const movie = response.json();
+    return movie;
   }
   const queryMovie = async (query) => {
-    return fetch(`${apiUrl}/Movie?Movie=${query}`)
-    .then(response => response.json())
+    const response = await fetch(`${apiUrl}/Movie?Movie=${query}`)
+    const movie = response.json();
+    return movie;
   }
 
   //controller
   useEffect(() => { //load data on page load 
     getMovie()
-    .then(data => setData(data))
+    .then(movie => setData(movie))
     .catch(error => console.error(error));
   }, [filteredData,query]);
 
@@ -50,11 +52,10 @@ function ViewMovie() {
     setConfirmModal(true); 
   }
 
-  const handleSearch = (e, query)=> {
+  const handleSearch = async (e, query)=> {
     e.preventDefault();
-    queryMovie(query)
-      .then(data => setData(data))
-      .catch(error => console.error(error));
+    const movie = await queryMovie(query)
+    setData(movie)
   };
 
   return (

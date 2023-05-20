@@ -4,34 +4,29 @@ import { Modal, Button } from "react-bootstrap";
 const SuspendUserAccount = ({type, data, reload, show , handleClose}) => {
     const apiUrl_User = process.env.REACT_APP_API_URL_USERACC;
   
-    const updateStatus = async (data, type) => {
-      return fetch(`${apiUrl_User}/user/${data[0].id}`, {
+    const updateStatus = async (data, type) => { //void
+      await fetch(`${apiUrl_User}/user/${data[0].id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify( {...data[0], status : type}),
       })
-        .then(response => response.json())
     }
   
   
-    const handleSuspend = (e) =>{
-        e.preventDefault();
+    const handleSuspend = async (e) =>{
+      e.preventDefault();
       const data = getFormData();
       if (type === "unsuspend"){
-        updateStatus(data, 'Active') //call model
-          .then(() => {
-            reload("reload")
-            handleClose()})
-          .catch(error => console.error(error))
+        await updateStatus(data, 'Active')//call model
+        reload("reload")
+        handleClose()
       }
       else if (type === "suspend") {
-        updateStatus(data, "Suspended") //call model
-           .then(() => {
-             reload("reload")
-             handleClose()})
-          .catch(error => console.error(error))
+        await updateStatus(data, 'Suspended')//call model
+        reload("reload")
+        handleClose()
       }
     } 
   

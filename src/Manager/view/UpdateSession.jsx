@@ -12,13 +12,18 @@ const UpdateSession = ({data, reload, show, handleClose}) => {
 
     //modal
     const getRoomMovie = async () => {
-        const fetchMovies = fetch(`${apiUrl_Movie}/Movie`).then(response => response.json());
-        const fetchRooms = fetch(`${apiUrl_Room}/Room`).then(response => response.json());
-       return Promise.all([fetchMovies, fetchRooms])
+      const [movieResponse, roomResponse] = await Promise.all([
+        fetch(`${apiUrl_Movie}/Movie`),
+        fetch(`${apiUrl_Room}/Room`)
+      ]);
+      const movieData = await movieResponse.json();
+      const roomData = await roomResponse.json();
+     
+      return [movieData, roomData]; //return movie and room
     }
 
     const updateMovieSession = async (formData, movie, room) => {
-        return fetch(`${apiUrl_Session}/moviesession/${formData.id}`, {
+        await fetch(`${apiUrl_Session}/moviesession/${formData.id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -31,14 +36,13 @@ const UpdateSession = ({data, reload, show, handleClose}) => {
               movie_id : parseInt(formData.movie_id)
             }),
           })
-            .then((response) => response.json())
     }
     //controller
     useEffect(() => {
         getRoomMovie()
             .then(([moviesData, roomsData]) => {
-            setMovies(moviesData);
-            setRooms(roomsData);
+              setMovies(moviesData);
+              setRooms(roomsData);
             })
             .catch(error => console.error(error));
     }, []);
@@ -48,7 +52,7 @@ const UpdateSession = ({data, reload, show, handleClose}) => {
     setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
   };
 
-  const handleSubmit = (e) => { 
+  const handleSubmit = async (e) => { 
     e.preventDefault();
     var movie = null;
     var room = null;
@@ -61,11 +65,9 @@ const UpdateSession = ({data, reload, show, handleClose}) => {
       room = room.Name
     }
     updateMovieSession(formData, movie, room)
-      .then(() => {
-        reload("reload parent")
-        handleClose();
-      })
-      .catch((error) => console.error(error));
+    reload("reload parent")
+    handleClose();
+
   }
 
 
@@ -92,7 +94,7 @@ const UpdateSession = ({data, reload, show, handleClose}) => {
           </div>
           <div class="form-group">
             <label hmtlfor="Date" class="col-form-label text-dark">Date:</label>
-            <input type="date" class="form-control" min={new Date().toISOString().split('T')[0]} onChange={(e) => handleEdit(e)} value={formData.Date} id="Date"></input>
+            <input type="date" class="form-control" min={new Date().toISOString().split('T')[0]} onChange={(e) => handleEdit(e)} value={formData.Date} id="date"></input>
           </div>
           <div class="form-group">
             <label hmtlfor="Start" class="col-form-label text-dark">Timeslot:</label>

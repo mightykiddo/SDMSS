@@ -9,51 +9,40 @@ const DeleteRoom = ({data, reload, show, handleClose}) => {
 
     //model
     const deleteRoom = async (id) => {
-      return  fetch(`${apiUrl_Room}/Room/${id}`, {
+      const res = await fetch(`${apiUrl_Room}/Room/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
         }
       })
-        .then(response => response.json())
-        .then(deletedRoom => {
-          console.log(`Deleted room with id ${id}`);
-    
-          // Find all movie sessions with the deleted room's id and set the room_id and Room fields to null
-          fetch(`${apiUrl_Session}/moviesession?room_id=${id}`)
-            .then(sessionResponse => sessionResponse.json())
-            .then(sessionData => {
-              const updatedSessions = sessionData.map(session => {
-                return { ...session, room_id: null, room: null }
-              });
-              console.log("Updated sessions: ", updatedSessions);
-    
-              // Send a PUT request to update the MovieSession data on the server for each updated session
-              updatedSessions.forEach(session => {
-                fetch(`${apiUrl_Session}/moviesession/${session.id}`, {
-                  method: 'PUT',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify(session)
-                })
-                  .catch(error => console.error(error));
-              });
-            })
-            .catch(sessionError => console.error(sessionError));
-          })
+
+      res.json();
+      const session_res = await fetch(`${apiUrl_Session}/moviesession?movie_id=${id}`)
+      const sessionData = await session_res.json();
+
+      const updatedSessions = sessionData.map(session => {
+        return { ...session, room_id: null, room: null }
+      });
+
+      for (const session of updatedSessions) {
+        fetch(`${apiUrl_Session}/moviesession/${session.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(session)
+        })
+      }
     }
   
     //delete room in movie session // do here instead of in movie sessions
     //controller
-    const handleDelete = (e, id) => {
+    const handleDelete = async (e, id) => {
       e.preventDefault();
-      deleteRoom(id)//call model
-      .then(() => { 
-          reload("reload");
-          handleClose();
-      })
-      .catch(error => console.error(error));
+      await deleteRoom(id)//call model
+      reload("reload");
+      handleClose();
+
     };
     
   

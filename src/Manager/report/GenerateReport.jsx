@@ -9,10 +9,11 @@ function GenerateReport() {
   const apiUrl_tx = process.env.REACT_APP_API_URL_TX;
 
   const getOrderTransaction = async () => {
-    return fetch(`${apiUrl_tx}/ordertransaction`)
-    .then(response => response.json())
+    const response = await  fetch(`${apiUrl_tx}/ordertransaction`)
+    const tx = response.json();
+    return tx;
   }
-  console.log(movieRankings)
+
 
   useEffect(() => { //lload order tx and handle logic for getting sales and movie ranking
     getOrderTransaction()
@@ -81,36 +82,3 @@ function GenerateReport() {
 }
 
 export default GenerateReport;
-/*
-     <div className="text-white d-flex-column "  style={{backgroundColor : "whitesmoke"}}>
-          <ul className="list-group p-4 bg-dark" style={{width : "max-content"}}>  
-            <li className="list-group-item d-flex justify-content-between align-items-start">
-                <div className="ms-2 me-auto">
-                <p className="fs-3">Total Revenue: </p>
-                <p className="fs-4"><strong>${sales}</strong></p>
-                </div>
-            </li>
-          </ul>
-          <div>
-            <ul className="list-group p-4"  style={{width : "500px"}}>  
-              <li className="list-group-item d-flex justify-content-between align-items-start">
-                  <div className="ms-2 me-auto">
-                  <p className="fs-3">Movie by sales: </p>
-                  </div>
-              </li>
-            {
-              movieRankings?.map((movie) => (
-                <>
-                  <li className="list-group-item d-flex justify-content-between align-items-start">
-                    <div className="ms-2 me-auto">
-                      {movie.movieName}
-                    </div>
-                    <span className="badge bg-primary rounded-pill">{movie.count}</span>
-                  </li>
-                </>
-              ))
-            }
-            </ul>
-          </div>
-     </div>
-*/

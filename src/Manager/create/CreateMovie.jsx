@@ -21,22 +21,20 @@ function CreateMovie() {
       
 
      const postMovie = async (formData) => {
-          return fetch(`${apiUrl}/Movie`, {
+          await fetch(`${apiUrl}/Movie`, { //RETURN VOID
                method: 'POST',
                headers: {
                  'Content-Type': 'application/json',
                },
                body: JSON.stringify(formData),
-             }).then((response) => response.json())
+             })
      }
 
-     const handleSubmit = (e) =>{
+     const handleSubmit = async (e) =>{
           e.preventDefault();
-          const formData = getFormData();
-          postMovie(formData)
-               .then(() => setShowModal(true))
-               .catch((error) => console.error(error));
-          
+          const data = getFormData();
+          await postMovie(data)
+          setShowModal(true)    
      }
 
 

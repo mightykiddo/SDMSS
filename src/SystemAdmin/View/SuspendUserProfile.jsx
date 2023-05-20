@@ -7,33 +7,30 @@ const SuspendUserProfile = ({type, data, reload, show , handleClose}) => {
 
     //modal
       const updateStatus = async(data, type) => {
-        fetch(`${apiUrl_UserProf}/userprofile/${data[0].id}`, {
+        await fetch(`${apiUrl_UserProf}/userprofile/${data[0].id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify( {...data[0], status :type}),
         })
-          .then(response => response.json())
       }
       
       //controller
-        const handleSuspend = (e) =>{
+        const handleSuspend = async (e) =>{
+          e.preventDefault();
           const data = getFormData(); //get from view
           if (type === "unsuspend"){
-            updateStatus(data, "Active") //call model
-              .then(() => 
-                reload("reload"))
-                handleClose()
-              .catch(error => console.error(error))
-      
+            await updateStatus(data, 'Active')//call model
+            reload("reload")
+            handleClose()
+
           }
           else if (type === "suspend") {
-            updateStatus(data, "Suspended") //call model
-              .then(() => 
-                reload("reload"))
-                handleClose()
-              .catch(error => console.error(error))
+            await updateStatus(data, "Suspended")//call model
+            reload("reload")
+            handleClose()
+
           }
         } 
 

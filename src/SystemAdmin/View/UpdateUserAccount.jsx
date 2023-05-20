@@ -13,15 +13,14 @@ const UpdateUserAccount = ({data, reload, show, handleClose}) => {
         .then((response) => response.json())
     }
   
-    const updateUserById = async (formData) => {
-      return fetch(`${apiUrl_User}/user/${formData.id}`, {
+    const updateUserById = async (data) => {
+      await fetch(`${apiUrl_User}/user/${data.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(data),
       })
-        .then((response) => response.json())
     }
   
     //controller
@@ -37,14 +36,19 @@ const UpdateUserAccount = ({data, reload, show, handleClose}) => {
     };
   
   
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
-      const formData = getFormData();
-      updateUserById(formData)
-        .then((data) => {
-          reload("re-load parent")
+      const data = getFormData();
+      await updateUserById(data)
+      reload("re-load parent");
+      handleClose();
+      /*
+      updateUserById(data)
+        .then(() => {
+          reload("re-load parent");
           handleClose();})
         .catch((error) => console.error(error));
+        */
     }
   
     //view function

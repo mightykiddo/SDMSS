@@ -14,13 +14,15 @@ function ViewSession() {
 
 
   const getMovieSession = async() => {
-    return fetch(`${apiUrl_Session}/moviesession`)
-      .then(res => res.json())
+    const response = await fetch(`${apiUrl_Session}/moviesession`)
+    const sessions = response.json();
+    return sessions;
   }
 
   const queryMovieSession = async(query) => {
-    return fetch(`${apiUrl_Session}/moviesession?movie=${query}`)
-    .then(response => response.json())
+    const res = await fetch(`${apiUrl_Session}/moviesession?movie=${query}`)
+    const sessions = res.json();
+    return sessions;
   }
     
   useEffect(() => { //load data on page load 
@@ -52,11 +54,10 @@ function ViewSession() {
   }
 
 
-  const handleSubmit = (e,query)=> {//rename
+  const handleSubmit = async (e,query)=> {//rename
     e.preventDefault();
-    queryMovieSession(query)
-      .then(data => setData(data))
-      .catch(error => console.error(error));
+    const sessions = await queryMovieSession(query)
+    setData(sessions);
   };
 
   return (

@@ -6,15 +6,14 @@ const UpdateUserProfile = ({data, reload, show, handleClose}) => {
     const [formData, setFormData] = useState(data[0]);
 
 
-    const updateProfileByID = async (formData) => {
-      return fetch(`${apiUrl_UserProf}/Userprofile/${formData.id}`, {
+    const updateProfileByID = async (data) => {
+      await fetch(`${apiUrl_UserProf}/Userprofile/${data.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(data),
       })
-        .then((response) => response.json())
     }
 
     const handleEdit = (e) => {
@@ -22,14 +21,12 @@ const UpdateUserProfile = ({data, reload, show, handleClose}) => {
         setFormData((prevFormData) => ({...prevFormData, [id]: value}));
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        const formData = getFormData();
-        updateProfileByID(formData)
-        .then(() => {
-          reload("re-load parent")//call view to reload to reflect change
-          handleClose();})
-        .catch((error) => console.error(error));
+        const data = getFormData();
+        await updateProfileByID(data)
+        reload("re-load parent")   //call view to reload to reflect change
+        handleClose();
     }
 
 

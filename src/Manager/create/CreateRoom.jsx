@@ -10,14 +10,14 @@ function CreateRoom() {
      });
 
      //modal
-     const postRoom = async (formData) => {
-          return fetch(`${apiUrl}/Room`, {
+     const postRoom = async (formData) => { //return void
+          await fetch(`${apiUrl}/Room`, {
                method: 'POST',
                headers: {
                  'Content-Type': 'application/json',
                },
                body: JSON.stringify(formData),
-             }) .then((response) => response.json()) 
+             })
      }
 
      const handleEdit = (e) => {
@@ -29,12 +29,11 @@ function CreateRoom() {
           setShowModal(false); 
      };
 
-     const handleSubmit = (e) =>{
+     const handleSubmit = async (e) =>{
           e.preventDefault();
           const formData = getFormData();
-          postRoom(formData)
-               .then(() => setShowModal(true))
-               .catch((error) => console.error(error));
+          await postRoom(formData)
+          setShowModal(true)
      }
 
      //view function

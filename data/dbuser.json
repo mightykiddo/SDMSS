@@ -109,6 +109,17 @@
       "password": "33",
       "status": "Active",
       "acctype": "Manager"
+    },
+    {
+      "id": 32,
+      "name": "test",
+      "username": "ddd",
+      "loyaltypoint": 0,
+      "seatpref": "",
+      "email": "dd@dddd",
+      "password": "2222",
+      "status": "Active",
+      "acctype": "staff"
     }
   ]
 }

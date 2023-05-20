@@ -7,7 +7,7 @@ const UpdateRoom = ({data, reload, show, handleClose}) => {
   
     //model
     const updateRoom = async(formData) =>{
-        return fetch(`${apiUrl_Room}/Room/${formData.id}`, {
+        await fetch(`${apiUrl_Room}/Room/${formData.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -23,15 +23,13 @@ const UpdateRoom = ({data, reload, show, handleClose}) => {
       const { id, value } = e.target;
       setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
     };
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = getFormData();
-        updateRoom(formData)//call model
-        .then(() => {
-          reload("re-load parent")
-          handleClose();
-        })
-        .catch((error) => console.error(error));
+        await updateRoom(formData)//call model
+        reload("re-load parent")
+        handleClose();
     }
 
     const getFormData = () => {
@@ -41,7 +39,7 @@ const UpdateRoom = ({data, reload, show, handleClose}) => {
       <>
         <Modal show={show} onHide={handleClose}>
         <Modal.Body>
-        <form  onSubmit={handleSubmit}>
+        <form  onSubmit={(e) => handleSubmit(e)}>
             <div class="form-group">
               <label hmtlfor="Name"  class="col-form-label text-dark">Room Name:</label>
               <input type="text" onChange={(e) => handleEdit(e)}  value={formData.Name} class="form-control" id="Name"></input>
