@@ -16,9 +16,9 @@ const StaffSetLoyaltyStatus = () => {
     }
 
     // Search Loyalty Transaction Controller Component
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault()
-        SearchLoyaltyTransactionEntity()
+        await SearchLoyaltyTransactionEntity()
          .then(res =>{
              return res.json();
          })
@@ -45,19 +45,16 @@ const StaffSetLoyaltyStatus = () => {
     }
 
     // Update Status Controller Component
-    const handleSubmit2 = (e) => {
+    const handleSubmit2 = async (e) => {
         e.preventDefault()
         console.log(id2);
         const status ="Completed"
         
-        UpdateStatusEntity()
+        await UpdateStatusEntity()
         .then(res=>{
             return res.json();
          })
         .then(data => {
-            // console.log(data)
-            // console.log(data.item)
-            // setitem(data.item)
             console.log(data)
 
             UpdateStatusEntity2(data, status) 
@@ -65,7 +62,6 @@ const StaffSetLoyaltyStatus = () => {
             console.log("update successfully")
             console.log("refresh page")
             history(0)   
-
         });  
     }
 

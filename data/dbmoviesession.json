@@ -76,12 +76,12 @@
         },
         {
           "seat": "A3",
-          "occupy": "no",
+          "occupy": "yes",
           "id": 3
         },
         {
           "seat": "B1",
-          "occupy": "no",
+          "occupy": "yes",
           "id": 4
         },
         {
@@ -91,12 +91,12 @@
         },
         {
           "seat": "B3",
-          "occupy": "no",
+          "occupy": "yes",
           "id": 6
         },
         {
           "seat": "C1",
-          "occupy": "no",
+          "occupy": "yes",
           "id": 7
         },
         {

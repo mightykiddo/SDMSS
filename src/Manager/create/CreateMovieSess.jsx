@@ -64,75 +64,80 @@ function CreateMovieSession() {
              ]
      });
 
-     const loadMoviesnRooms = () => {
-          // read the data from the JSON file when the component mounts
-          fetch(`${apiUrl_Movie}/Movie`)
-          .then(response => response.json())
-          .then(data => {
-               const extractedMovies = data.map(item => ({
-                    Movie: item.Movie,
-                    id: item.id
-                  }));
-               setMovies(extractedMovies);
-               
-          })
-          .catch(error => console.error(error));
-          //fetch room too
-          fetch(`${apiUrl_Room}/Room`)
-          .then(response => response.json())
-          .then(data => {
-               const extractedRooms = data.map(item => ({
-                    Name: item.Name,
-                    id: item.id
-                  }));
-               setRooms(extractedRooms);
-          })
-          .catch(error => console.error(error));
-     }
 
-     
-     //on page load
-     useEffect(() => {
-          loadMoviesnRooms()
-     }, []);
-
-
-     const handleCloseModal = () => {
-          setShowModal(false); 
-     };
+     //model
+     const loadMoviesnRooms = async () => {
+          const [movieResponse, roomResponse] = await Promise.all([
+               fetch(`${apiUrl_Movie}/Movie`),
+               fetch(`${apiUrl_Room}/Room`)
+             ]);
+          const movieData = await movieResponse.json();
+          const roomData = await roomResponse.json();
+         
+          return [movieData, roomData]; //return movie and room
           
-     const handleEdit = (event) => {
-          const { id, value } = event.target;
-          setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
-             
      }
       
-     const handleSubmit = (event) =>{
-          event.preventDefault();
-          console.log(formData)
-          const movie = movies.find(movie => movie.id === parseInt(formData.movie_id));
-          console.log("movie", movie)
-          const room = rooms.find(room => room.id === parseInt(formData.room_id));
-          console.log(movie)
-          fetch(`${apiUrl_Session}/moviesession`, {
+     const createMovieSession = async (formData, movie,room) => {
+          await fetch(`${apiUrl_Session}/moviesession`, {
                method: 'POST',
                headers: {
                  'Content-Type': 'application/json',
                },
                body: JSON.stringify({...formData, movie: movie.Movie, room : room.Name }),
              })
-               .then((response) => response.json())
-               .then((data) => setShowModal(true))
-               .catch((error) => console.error(error));
      }
 
+
+     useEffect(() => {
+          loadMoviesnRooms()
+               .then(([moviesData, roomsData]) => {
+               const extractedMovies = moviesData.map(item => ({
+                    Movie: item.Movie,
+                    id: item.id
+               }));
+               const extractedRooms = roomsData.map(item => ({
+                    Name: item.Name,
+                    id: item.id
+               }));
+               setMovies(extractedMovies);
+               setRooms(extractedRooms);
+               })
+               .catch(error => console.error(error));
+          }, []);
+
+
+
+     const handleCloseModal = () => {
+          setShowModal(false); 
+     };
+          
+     const handleEdit = (e) => {
+          const { id, value } = e.target;
+          setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
+             
+     }
+
+     const handleSubmit = async (e) =>{
+          e.preventDefault();
+          const formData = getFormData()
+          const movie = movies.find(movie => movie.id === parseInt(formData.movie_id));
+          const room = rooms.find(room => room.id === parseInt(formData.room_id));
+          await createMovieSession(formData,movie,room)
+          setShowModal(true)
+     }
+
+     //view function
+     const getFormData = () => {
+          return formData
+     }
      return (
           <>
-          <form onSubmit={handleSubmit} className="CreateMovie text-white bg-dark d-flex-column ">
+          <form onSubmit={(e) => handleSubmit(e)} className="CreateMovie text-white bg-dark d-flex-column ">
           
           <div className="form-group d-flex p-3">
                <p class="col-form-label" style={{width:'100px'}}>Movie</p>
-               <select id="movie_id" className="form-select text-wrap" style={{ width: '400px'}} onChange={handleEdit}>
+               <select id="movie_id" className="form-select text-wrap" style={{ width: '400px'}} onChange={(e) => handleEdit(e)}>
                     {/* got data then use map to populate the dd */}
                     {movies.map((option) => (
                          <option key={option.id} value={option.id}>{option.Movie} </option>
@@ -142,7 +147,7 @@ function CreateMovieSession() {
 
           <div className="form-group d-flex align-items-center text-left p-3 ">
                <p class="col-form-label"  style={{width:'100px'}}>Room:</p>
-               <select id="room_id" className="form-select text-wrap" style={{ width: '400px'}} onChange={handleEdit}>
+               <select id="room_id" className="form-select text-wrap" style={{ width: '400px'}} onChange={(e) => handleEdit(e)}>
                     {/* got data then use map to populate the dd */}
                     {rooms.map((option) => (
                          <option key={option.id} value={option.id}>{option.Name} </option>
@@ -152,16 +157,16 @@ function CreateMovieSession() {
 
           <div className="form-group d-flex p-3">
                <p  style={{width:'100px'}}>Date</p>
-               <input min={new Date().toISOString().split('T')[0]} type="date" id="date" class="form-control" style={{ width: '400px'}} onChange={handleEdit}  ></input>
+               <input min={new Date().toISOString().split('T')[0]} type="date" id="date" class="form-control" style={{ width: '400px'}} onChange={(e) => handleEdit(e)}  ></input>
           </div>
 
           <div className="form-group d-flex align-items-center text-left p-3 ">
                <label class="col-form-label"  style={{width:'100px'}}>From:</label>
-               <input id= "timeslot" class="form-control" type="text" style={{ width: '400px'}}  onChange={handleEdit} ></input>
+               <input id= "timeslot" class="form-control" type="text" style={{ width: '400px'}}  onChange={(e) => handleEdit(e)} ></input>
           </div>
 
           <div className="d-flex justify-content-center  p-3">
-               <button type="submit"  className="btn btn-danger">Create</button>
+               <button type="submit" className="btn btn-danger">Create</button>
           </div>
      </form>
           <SuccessModel 

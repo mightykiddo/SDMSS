@@ -33,16 +33,22 @@ const NavBarUser = () => {
         history('/loyaltypage', {state:{username, loyaltypoint, seatpref, id}});
     }
     
-    const logout = () => {
-
-        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        console.log(currentUser)
-        fetch( `http://localhost:8030/usersession/${currentUser}`,{
+    // User Session Entity Component
+    const UserSessionEntity = async (currentUser) => {
+        return fetch( `http://localhost:8030/usersession/${currentUser}`,{
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json'
             }
-        }).then(()=>{
+        })
+    }
+
+    // User Session Controller Component
+    const logout = () => {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        console.log(currentUser)
+        UserSessionEntity(currentUser)
+        .then(()=>{
             localStorage.removeItem('currentUser');
             history('/')
         })

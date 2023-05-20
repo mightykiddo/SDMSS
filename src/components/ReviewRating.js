@@ -44,21 +44,17 @@ const ReviewRating = () => {
     }
 
     // Create Review Rating Controller Component
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault();
         const review = { feedback, rating };
         setIsPending(true);
 
-        CreateReviewRatingEntity(review)
-        .then(()=>{
-            console.log("new review added");
-            setIsPending(false);
-            setModalIsOpen3(false);
-            setModalIsOpen4(true);
-            //history(-1);
-            //history('/user');
-            
-        })
+        await CreateReviewRatingEntity(review)
+        
+        console.log("new review added");
+        setIsPending(false);
+        setModalIsOpen3(false);
+        setModalIsOpen4(true);
     }
 
     const handleSubmit2 = (e) =>{

@@ -16,29 +16,24 @@ function Main() {
      //Select from dd   
      const [Option, setOption] = useState('');//set default val
 
-       const history = useNavigate();
-     const currentUrl = window.location.pathname.split('/').pop();
+     const history = useNavigate();
 
      const handleOptionChange = (event) => {
-       setOption(event.target.value);
-       //navigate(`${event.target.value}`);
-       
+       setOption(event.target.value);       
      };
-     //console.log(Option);
-     
-     const logout = () => {
 
-          const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-          console.log(currentUser)
-          fetch( `http://localhost:8030/usersession/${currentUser}`,{
-              method: 'DELETE',
-              headers: {
-                'Content-Type': 'application/json'
-              }
-          }).then(()=>{
-              
-              history("/")
-          })
+     const deleteUserSession = async (currentUser) => {
+          return fetch( `http://localhost:8030/usersession/${currentUser}`,{
+               method: 'DELETE',
+               headers: {
+                 'Content-Type': 'application/json'
+               }
+           })
+       }
+       const logout = () => {
+          const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+          deleteUserSession(currentUser)  
+          .then(()=>{history("/")})
       }
      //set max-width to main body, then align content left
      return (

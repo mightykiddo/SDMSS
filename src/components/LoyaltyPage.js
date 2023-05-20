@@ -70,7 +70,7 @@ const LoyaltyPage = () => {
     }
 
     // Redeem Loyalty Item Controller Component
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault();
 
         totalpoints = points * quantity;
@@ -91,7 +91,7 @@ const LoyaltyPage = () => {
             loyaltypoint = deduction
 
              
-            RedeemLoyaltyItemEntity(customerid)
+            await RedeemLoyaltyItemEntity(customerid)
             .then(res=>{
                 return res.json();
             })
@@ -103,12 +103,9 @@ const LoyaltyPage = () => {
                 
             }); 
             
-            RedeemLoyaltyItemEntity3(loyaltytransaction)
-            .then(()=>{
-                console.log("Item is redeemed");
-                history('/user', {state:{username, loyaltypoint, seatpref, id}});
-            })
- 
+            await RedeemLoyaltyItemEntity3(loyaltytransaction)
+            console.log("Item is redeemed");
+            history('/user', {state:{username, loyaltypoint, seatpref, id}});
 
         } else if (loyaltypoint < totalpoints){
 

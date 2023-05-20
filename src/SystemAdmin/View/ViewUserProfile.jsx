@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
-
+import SuspendUserProfile from "./SuspendUserProfile";
+import UpdateUserProfile  from "./UpdateUserProfile";
 function ViewUserProfile() {
     const [showModal, setShowModal] = useState(false);
     const [showConfirmModal, setConfirmModal] = useState(false);
@@ -11,55 +12,67 @@ function ViewUserProfile() {
 
     const apiUrl = process.env.REACT_APP_API_URL_USEPROFILE;
 
-    const loadData = () => {
-        fetch(`${apiUrl}/UserProfile`)
-        .then(response => response.json())
-        .then(data => {
-          setData(data)
-          
+    //model
+    const getUserProfile = async () => {
+      const response = await  fetch(`${apiUrl}/UserProfile`)
+      const userProfile = await response.json();
+      return userProfile; //return list of userprofile
+    }
+    
+    const queryUserProfile = async (query) => {
+      const response = await  fetch(`${apiUrl}/Userprofile?UserProfile=${query}`)
+      const userProfile = await response.json();
+      return userProfile; //return list of userprofile
+
+    }
+
+    //controller
+    useEffect(() => { //load data on page load 
+      getUserProfile()
+        .then(userprofile => {
+          setData(userprofile)   
         })
         .catch(error => console.error(error));
-      }
-    
-    useEffect(() => { //load data on page load 
-        loadData()
-        }, [filteredData, query]);
+    }, [filteredData, query]);
 
     const handleUpdate = (id) => { //filter by id and pass to modal
         setFilteredData(data.filter((userData) => userData.id === id));
         // filteredData will now contain an array with only the movie data objects that match the given id
         setShowModal(true);
-      };
+    };
 
-      const handleChange = event => {
+    const handleEdit = event => {
         setQuery(event.target.value);
-      };
+    };
     
-      const handleCloseModal = () => {
+    const handleCloseModal = () => {
         setShowModal(false); 
         setConfirmModal(false);
         setType('');
-      };
+    };
 
-      const confirmModal = (id) => {
-        setFilteredData(data.filter((userData) => userData.id === id));
-        setType("delete");
-        setConfirmModal(true); 
-      };
+    const confirmModal = (id, status) => {
+      setFilteredData(data.filter((userData) => userData.id === id));
+      if (status === "Active") {
+        setType("suspend")
+      }
+      else if (status === "Suspended") {
+        setType("unsuspend")
+      }
+      setConfirmModal(true); 
+    };
 
-      const handleSubmit = (e)=> {
-        e.preventDefault();
-        fetch(`${apiUrl}/Userprofile?UserProfile=${query}`)
-          .then(response => response.json())
-          .then(data => setData(data))
-          .catch(error => console.error(error));
-      };
+    const handleSubmit = async (e, query)=> {
+      e.preventDefault();
+      const userProfile = await queryUserProfile(query)
+      setData(userProfile) //update the page
+    };
 
       return (
         <>
         <div className="d-flex justify-content-end">
-            <form className="input-group p-3" style={{width : "350px"}}   onSubmit={handleSubmit}>
-                <input class="form-control border " type={"text"} value={query} onChange={handleChange} ></input>
+            <form className="input-group p-3" style={{width : "350px"}}   onSubmit={(e) => handleSubmit(e, query)}>
+                <input class="form-control border " type={"text"} value={query} onChange={(e) => handleEdit(e)} ></input>
                 <button  className="btn btn-light" type="submit">Search</button>
             </form>
         </div>
@@ -67,6 +80,7 @@ function ViewUserProfile() {
       <thead>
         <tr className="d-flex-column" style={{backgroundColor : "orange"}}>
             <th scope="col">User Profile</th>
+            <th scope="col">Status</th>
             <th scope="col"></th>
         </tr>
       </thead>
@@ -76,13 +90,15 @@ function ViewUserProfile() {
                 <>
                 <tr key={userprof.UserProfile}>
                     <td className="p-2">{userprof.UserProfile}</td>
+                    <td className='p-2' style={{ color: userprof.status === "Active" ? "royalblue" : "red"}}>{userprof.status}</td>
+
                     <td>
                         <div className="d-flex align-items-center justify-content-end"> 
                             <button type="button" className="btn text-white m-1 " style={{backgroundColor : "royalblue"}}
                                 onClick={() => handleUpdate(userprof.id)}>
                                 Update
                             </button>
-                            <button type="button" className="btn text-white m-1" style={{backgroundColor : "red"}} onClick={()=> confirmModal(userprof.id, "delete")}>Delete</button>
+                            <button type="button" className="btn text-white m-1" style={{backgroundColor : "red"}} onClick={()=> confirmModal(userprof.id, userprof.status)}>{userprof.status === "Active" ? "Suspend" : "Unsuspend"}</button>
                         </div>
                     </td>
                 </tr>
@@ -96,14 +112,15 @@ function ViewUserProfile() {
       {showModal === true &&
         <UpdateUserProfile 
             data = {filteredData}
-            setData = {setFilteredData}
+            reload = {setFilteredData}
             show = {showModal}
             handleClose = {handleCloseModal}/>
       }
-      {showConfirmModal === true && type === "delete" &&
-        <DeleteUserProfile
+      {showConfirmModal === true && (type === "suspend" || type === "unsuspend") &&
+        <SuspendUserProfile
+            type = {type}
             data =  {filteredData}
-            setData = {setFilteredData}
+            reload = {setFilteredData}
             show =  {showConfirmModal}
             handleClose = {handleCloseModal}/>
       }  
@@ -113,81 +130,3 @@ function ViewUserProfile() {
 
 export default ViewUserProfile;
 
-const UpdateUserProfile = ({data, setData, show, handleClose}) => {
-    const apiUrl_UserProf = process.env.REACT_APP_API_URL_USEPROFILE;
-    const [formData, setFormData] = useState(data[0]);
-
-    const handleEdit = (event) => {
-        const {id,value} = event.target;
-        setFormData((prevFormData) => ({...prevFormData, [id]: value}));
-    }
-
-    const handleSubmit = e => {
-        e.preventDefault();
-    
-
-    fetch(`${apiUrl_UserProf}/Userprofile/${formData.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setData("re-load parent")
-          handleClose();
-          
-        })
-        .catch((error) => console.error(error));
-    }
-    return (
-        <>
-            <Modal show={show} onHide = {handleClose}>
-                <Modal.Body>
-                    <form onSubmit={handleSubmit}>
-                    <div class="form-group">
-                        <label hmtlfor="UserProfile"  class="col-form-label text-black">User Profile:</label>
-                        <input type="text" onChange={handleEdit}  value={formData.Userprofile} class="form-control" id="UserProfile"></input>
-                    </div>
-                    <button type="submit">Update</button>
-                    </form>
-                </Modal.Body>
-            </Modal>
-        </>
-    )
-    }
-
-const DeleteUserProfile = ({data, setData, show , handleClose}) => {
-    const apiUrl_UserProf = process.env.REACT_APP_API_URL_USEPROFILE;
-    const handleDelete = e => {
-        fetch(`${apiUrl_UserProf}/Userprofile/${data[0].id}`, {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-        }})
-            .then((response) => response.json())
-            .then(data => {
-              setData("reload")
-            .catch((error) => console.error(error));
-        
-        handleClose()
-        })
-
-        }
-    return (
-      <>
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Body>
-            Confirm Delete User Profile?
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant = "secondary" onClick={handleDelete}>
-              Yes {/*handle Delete / update */}
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </>
-    )
-}
- 

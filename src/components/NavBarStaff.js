@@ -6,20 +6,47 @@ const NavBarStaff = () => {
 
     const history = useNavigate();
 
-    const logout = () => {
-
-        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        console.log(currentUser)
-        fetch( `http://localhost:8030/usersession/${currentUser}`,{
+    // User Session Entity Component
+    const UserSessionEntity = async (currentUser) => {
+        return fetch( `http://localhost:8030/usersession/${currentUser}`,{
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json'
             }
-        }).then(()=>{
-            localStorage.removeItem('currentUser');
-            history("/")
         })
     }
+
+    // User Session Controller Component
+    const logout = () => {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        console.log(currentUser)
+        UserSessionEntity(currentUser)
+        .then(()=>{
+            localStorage.removeItem('currentUser');
+            history('/')
+        })
+    }
+
+    const handleSubmit1 = () => {
+        console.log("redirect to staff food and drink page");
+        history('/stafffoodanddrink');
+    }
+
+    const handleSubmit2 = () => {
+        console.log("redirect to staff book ticket page");
+        history('/staffbookticket');
+    }
+
+    const handleSubmit3 = () => {
+        console.log("redirect to staff update loyalty status page");
+        history('/staffsetloyaltystatus');
+    }
+
+    const handleSubmit4 = () => {
+        console.log("redirect to staff update order status page");
+        history('/staffsetorderstatus');
+    }
+
     return (
     <>
     
@@ -27,10 +54,10 @@ const NavBarStaff = () => {
         
             <div className='menuitem'>
 
-                    <Link to='/stafffoodanddrink'>Food & Drink</Link>
-                    <Link to='/staffbookticket'>Book Ticket</Link>     
-                    <Link to='/staffsetloyaltystatus'>Update Loyalty Status</Link>
-                    <Link to='/staffsetorderstatus'>Update Order Status</Link>
+                    <a onClick={handleSubmit1} href="">Food & Drink</a>
+                    <a onClick={handleSubmit2} href="">Book Ticket</a>
+                    <a onClick={handleSubmit3} href="">Update Loyalty Status</a>  
+                    <a onClick={handleSubmit4} href="">Update Order Status</a> 
         
             </div>
             <div className='menuitem_login'>

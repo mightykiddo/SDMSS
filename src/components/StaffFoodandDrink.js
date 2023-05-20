@@ -39,16 +39,13 @@ const StaffFoodandDrink = () => {
     }
 
     // Purchase Food And Drink Controller Component
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         var customerid = "staff";
         const ordertransaction = {item, itemstatus, quantity, totalamount, customerid};
         //e.preventDefault();
         setIsPending(true);
-        PurchaseFoodAndDrinkEntity(ordertransaction)
-        .then(()=>{
-            console.log("Order have been placed");
-            //history('/user', {state:{username, loyaltypoint, seatpref, id}});
-        })
+        await PurchaseFoodAndDrinkEntity(ordertransaction)
+        console.log("Order have been placed");
     }
     
     const tableStyles = {

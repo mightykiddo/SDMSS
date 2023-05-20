@@ -13,62 +13,81 @@ function CreateUserAcc() {
      password : "",
      status: "Active",
      acctype : ""});
-  const apiUrl = process.env.REACT_APP_API_URL_USERACC;
-  const apiUrl_profile =  process.env.REACT_APP_API_URL_USEPROFILE;
-  const [profile, setProfile] = useState()
+     const apiUrl = process.env.REACT_APP_API_URL_USERACC;
+     const apiUrl_profile =  process.env.REACT_APP_API_URL_USEPROFILE;
+     const [profile, setProfile] = useState() 
 
-  useEffect(() => {
-     fetch(`${apiUrl_profile}/Userprofile`)
-          .then((response) => response.json())
-          .then((data) => setProfile(data))
+
+
+     //model 
+     const postUser = async (formData) => { //void
+          await fetch(`${apiUrl}/user`, {
+               method: 'POST',
+               headers: {
+               'Content-Type': 'application/json',
+               },
+               body: JSON.stringify(formData),
+          })
+     }
+
+     const getUserProfile = async() => {//return a list of user
+          const res = await fetch(`${apiUrl_profile}/Userprofile`)
+          const userProfiles = res.json();
+          return userProfiles;
+     }
+
+     //controller
+     const handleSubmit = async (e) =>{ //controller to submit
+          e.preventDefault();
+          const data = getFormData();
+          await postUser(data);
+          setShowModal(true);
+     }
+
+     useEffect(() => {  //controller also 
+          getUserProfile()
+          .then((data) => setProfile(data))//setprofile --> updates the boundary
           .catch((error) => console.error(error));
-  } , [])
+     } , [])
 
 
-  const handleSubmit = e =>{
-     e.preventDefault();
-     fetch(`${apiUrl}/user`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        })
-          .then((response) => response.json())
-          .then((data) => setShowModal(true))
-          .catch((error) => console.error(error));
-  }
+     //view function/controller
+     const handleEdit = e => { 
+          const { id, value } = e.target;
+          setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
+     }
 
-  const handleEdit = e => {
-     const { id, value } = e.target;
-     setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
-  }
+     const handleCloseModal = () => {
+          setShowModal(false); //view
+     };
 
-  const handleCloseModal = () => {
-     setShowModal(false); 
-};
+     //view function
+     const getFormData = () => {
+          return formData
+     }
+
      return (
           <>
-          <form onSubmit={handleSubmit} className="CreateMovie text-white bg-dark d-flex-column " style={{height : "1000px"}}>
+          <form onSubmit={(e) => handleSubmit(e)} className="CreateMovie text-white bg-dark d-flex-column " style={{height : "1000px"}}>
           <div className="form-group d-flex align-items-center text-left p-3 ">
                <label className="col-form-label"  style={{width:'100px'}}>Name:</label>
-               <input id="name" className="form-control" type="text" style={{ width: '400px'}}  onChange={handleEdit} ></input>
+               <input id="name" className="form-control" type="text" style={{ width: '400px'}}  onChange={(e) => handleEdit(e)} ></input>
           </div>
           <div className="form-group d-flex align-items-center text-left p-3 ">
                <label className="col-form-label"  style={{width:'100px'}}>Username:</label>
-               <input id="username" className="form-control" type="text" style={{ width: '400px'}}  onChange={handleEdit} ></input>
+               <input id="username" className="form-control" type="text" style={{ width: '400px'}}  onChange={(e) => handleEdit(e)} ></input>
           </div>
           <div className="form-group d-flex align-items-center text-left p-3 ">
                <label className="col-form-label"  style={{width:'100px'}}>Email:</label>
-               <input id="email" className="form-control" type="text" style={{ width: '400px'}}  onChange={handleEdit} ></input>
+               <input id="email" className="form-control" type="text" style={{ width: '400px'}}  onChange={(e) => handleEdit(e)} ></input>
           </div>
           <div className="form-group d-flex align-items-center text-left p-3 ">
                <p className="col-form-label"  style={{width:'100px'}}>Password:</p>
-               <input id="password" className="form-control" type="text" style={{ width: '400px'}} onChange={handleEdit} ></input>
+               <input id="password" className="form-control" type="text" style={{ width: '400px'}} onChange={(e) => handleEdit(e)} ></input>
           </div>
           <div className="form-group d-flex p-3">
                <p className="col-form-label" style={{width:'100px'}}>Select Account Type:  </p>
-               <select id="acctype" className="form-select text-wrap" style={{ width: '400px'}} onChange={handleEdit}>
+               <select id="acctype" className="form-select text-wrap" style={{ width: '400px'}} onChange={(e) => handleEdit(e)}>
                     {/* got data then use map to populate the dd */}
                     {profile?.map((item) => (
                          <>

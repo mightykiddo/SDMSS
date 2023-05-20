@@ -57,7 +57,7 @@ const SelectSeats = () => {
     handleSomething();
   }, [data2]);
 
-  
+
   // Purchase Ticket Entity Component
   const PurchaseTicketEntity = async (ordertransaction) => {
     return fetch('http://localhost:8007/ordertransaction',{
@@ -81,7 +81,7 @@ const SelectSeats = () => {
   } 
 
   // Purchase Ticket Controller Component
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     console.log(e.target.value);
     console.log("Selected seats:", selectedSeats);
     const movieSessionId = selectedId;
@@ -97,13 +97,11 @@ const SelectSeats = () => {
     const ordertransaction = {item, itemstatus, quantity, totalamount, customerid, movie, detail};
     e.preventDefault();
     
-    PurchaseTicketEntity(ordertransaction)
-    .then(()=>{
-        console.log("Order have been placed");
-        
-    })
+    await PurchaseTicketEntity(ordertransaction)
+    
+    console.log("Order have been placed");
 
-    PurchaseTicketEntity2(movieSessionId)
+    await PurchaseTicketEntity2(movieSessionId)
     .then(res=>{
       return res.json();
     })

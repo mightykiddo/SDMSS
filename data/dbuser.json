@@ -17,7 +17,7 @@
       "email": "JasonYaw@gmail.com",
       "username": "jason",
       "password": "1234",
-      "loyaltypoint": 524,
+      "loyaltypoint": 388,
       "status": "Active",
       "seatpref": "C2",
       "id": 8
@@ -87,6 +87,17 @@
       "status": "Active",
       "seatpref": "C2",
       "id": 29
+    },
+    {
+      "acctype": "customer",
+      "name": "test2",
+      "email": "test@gmail.com",
+      "username": "test2",
+      "password": "1234",
+      "loyaltypoint": 0,
+      "status": "Active",
+      "seatpref": "A1",
+      "id": 30
     }
   ]
 }

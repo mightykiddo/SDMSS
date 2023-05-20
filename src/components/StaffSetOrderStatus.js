@@ -17,9 +17,9 @@ const StaffSetOrderStatus = () => {
     }
 
     // Search Order Transaction Controller Component
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault()
-        SearchOrderTransactionEntity()
+        await SearchOrderTransactionEntity()
         .then(res =>{
             return res.json();
         })
@@ -29,7 +29,6 @@ const StaffSetOrderStatus = () => {
         });     
             console.log(searched)
             setIsPending(true);
-            // console.log(xtype(parseInt(searched)));
     }
 
     // Update Status Entity Component
@@ -60,12 +59,12 @@ const StaffSetOrderStatus = () => {
     }
 
     // Update Status Controller Component
-    const handleSubmit2 = (e) => {
+    const handleSubmit2 = async (e) => {
         e.preventDefault()
         console.log(id2);
         const status ="Paid"
         
-        UpdateStatusEntity()
+        await UpdateStatusEntity()
         .then(res=>{
             return res.json();
          })

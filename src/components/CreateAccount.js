@@ -26,18 +26,15 @@ const CreateAccount = () => {
     }
 
     // Controller Component
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault();
         setacctype("customer");
         setloyaltypoint(0);
         const status = "Active"; 
         const customer = {acctype, name, email, username, password, loyaltypoint, status, seatpref}
-        CreateAccountEntity(customer)
-        .then(()=>{
-            console.log("new customer added");
-            history('/login');
-            
-        })
+        await CreateAccountEntity(customer)
+        console.log("new customer added");
+        history('/login');
     }
     
 

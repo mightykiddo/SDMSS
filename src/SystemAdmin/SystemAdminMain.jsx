@@ -15,20 +15,19 @@ function SystemAdmin() {
        setOption(event.target.value);
   };
 
-    
+  const deleteUserSession = async (currentUser) => {
+     return fetch( `http://localhost:8030/usersession/${currentUser}`,{
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+      })
+  }
   const logout = () => {
-
      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
      console.log(currentUser)
-     fetch( `http://localhost:8030/usersession/${currentUser}`,{
-         method: 'DELETE',
-         headers: {
-           'Content-Type': 'application/json'
-         }
-     }).then(()=>{
-         
-         history("/")
-     })
+     deleteUserSession(currentUser)  
+     .then(()=>{history("/")})
  }
   return (
     <>
