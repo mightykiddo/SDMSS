@@ -1,70 +1,170 @@
-# Getting Started with Create React App
+Software Development Methodologies Sole Solution - SDMSS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+======================================================================================================
 
-## Available Scripts
+SDMSS is a cinema ticket booking system bootstrapped with Create React App and node.js
 
-In the project directory, you can run:
+------------------------------------------------------------------------------------------------------
 
-### `npm start`
+The system encompasses the the following: 
+1.	User Management: Provide support for managing various types of users with 
+	distinct profiles and preferences
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2.	Cinema Room Management: Support the administration of cinema rooms,
+	including the management of seats, and assigning movie sessions to specific
+	rooms.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3.	Ticketing System: Facilitate the process of purchasing and issuance of tickets
+	for movies sessions. Different ticket types are available for purchase. Automated
+	seat allocation can be done based on user preference. On top of that, customers
+	have the option to pre-purchase food and beverages.
 
-### `npm test`
+4.	Customer Reviews and Ratings: Allow customers to submit their feedback and ratings
+	based on their experience.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+5.	Loyalty Program: Assist in loyalty points accumulation and redemption.
 
-### `npm run build`
+6. 	Reporting Generation: Generate report for relevant information, to gain insight of
+	the cinema operations.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+======================================================================================================
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Installation Instructions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+------------------------------------------------------------------------------------------------------
+-	Start by following the link, https://github.com/mightykiddo/SDMSS to access the repository.
 
-### `npm run eject`
+- 	Check if repository is in the main branch, if not change the branch to main. Proceed to download 
+	the zip file by selecting the "Code" button and selecting the "Download ZIP" option.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+-	Unzip the folder.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-	Check version of node.js installed on machine by using the command,
+	"node -v". 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+-	If node.js is not installed, follow the link, https://nodejs.org/en/download to download node.js.
+	Select the correct installer for the machine OS.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- 	Visual Studio Code is the recommended compiler. Use the following link: 
+	https://code.visualstudio.com/download to install Visual Studio Code. Choose the 
+	respective installer for your machine.
+	
+-	Upon installation of Visual Studio Code, use shortcut "Ctl+Shift+X" to browse extensions.
+	In Extensions search bar, search up react. Select "ES7+ React/Redux/React-Native snippets"
+	by publisher "dsznajder". 
+	
+-	Search up and install "Simple React Snippets" by publisher "Burke Holland".
 
-## Learn More
+-	Upon installing the extensions, open the unzipped SDMSS folder in Visual Studio Code.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-	After opening the SDMSS folder, open terminal either by using the task bar at the top or using 
+	shortcut, "Ctl+Shift+`". Open 11 separate terminals.
+	
+-	In the individual terminals, run the following 10 commands separately:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+	--> npx json-server --watch data/dbreview.json --port 8002
+	
+	--> npx json-server --watch data/dbloyaltytransaction.json --port 8003
+	
+	--> npx json-server --watch data/dbloyaltyitems.json --port 8004
+	
+	--> npx json-server --watch data/dbuser.json --port 8005
 
-### Code Splitting
+	--> npx json-server --watch data/dbfoodanddrink.json --port 9000
+	
+	--> npx json-server --watch data/dbordertransaction.json --port 8007
+	
+	--> npx json-server --watch data/dbmovie.json --port 8008
+	
+	--> npx json-server --watch data/dbmoviesession.json --port 8009
+	
+	--> npx json-server --watch data/dbRoom.json --port 8010
+	
+	--> npx json-server --watch data/dbuserprofile.json --port 8011
+	
+	--> npx json-server --watch data/dbusersession.json --port 8030
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+	Lastly, after executing the above commands, run the following in the last terminal:
+	
+	--> npm start
+	
+	This should automatically open the web application and direct in the machine's default browser.
+	
+======================================================================================================
 
-### Analyzing the Bundle Size
+Usage Guide
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+------------------------------------------------------------------------------------------------------
 
-### Making a Progressive Web App
+-	New Users can create new account by selecting the "Sign Up" Button
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+-	Existing Users can proceed to the login page by selecting "Sign In" Button
 
-### Advanced Configuration
+-	For testing purposes, the following user accounts are:
+		System Admin: 
+			Username: sj
+			Password: 1234
+			
+		Customer:
+			Username: jason
+			Password: 1234
+		
+		Staff: 
+			Username: nic
+			Password: 1234
+			
+		Manager:
+			Username: hs
+			Password: 1234
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+-	Different users will be redirected to their default pages after logging in.
+		
+	By adjusting the toggles, system admin are able to do the following:
+		-	System Admin can manage user accounts, email address will be used during the search.
+		-	System Admin can manage	user profiles (account types).
+	
+	By adjusting the toggles, managers are able to do the following:
+		-	Managers can manage movie titles, movie title will be used during the search.
+		-	Managers can manage movie sessions, movie title will be used during the search.
+		-	Managers can manage cinema rooms, room name will be used during the search.
+		-	Managers can generate reports for total revenue, including the most popular movies.
 
-### Deployment
+	After logging in, staffs are able to do the following:
+		-	Staff can place order for food and beverages.
+		-	Staff can book movie tickets for customers.
+		-	Staff can update loyalty status of customers, loyalty transaction ID will be used during
+			the search.
+		-	Staff can update order status of open orders, order transaction ID will be use during 
+			the search.
+	
+	After logging in, customers are able to do the following:
+		-	Customer can book tickets for various movie sessions.
+		-	Customer have the option to book different types of tickets.
+		- 	Customer can accumulate loyalty points and use them to redeem items.
+		-	Customer can submit review and ratings.
+		-	Customer can order food and beverages in advance.
+		-	New customer can sign up and choose their preferred seats.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+======================================================================================================
+		
+Room for Improvement
 
-### `npm run build` fails to minify
+------------------------------------------------------------------------------------------------------
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Since there is a limited time for this project, there are some areas could be improved.
+
+	1.	User Interface can be improved.
+	2.	Upload and host the application in a web server.
+
+======================================================================================================	
+
+Acknowledgements
+	
+------------------------------------------------------------------------------------------------------
+
+This project is based on Full Modern React Tutorial 
+https://youtube.com/playlist?list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d	
+
+Many thanks to Mr Lionel Lim for his guidance during the development of this project.
+
+======================================================================================================
