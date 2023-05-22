@@ -20,17 +20,21 @@ function UpdateMovie ({data, reload, show, handleClose}){
             },
             body: JSON.stringify(formData),
           })
+
+        return true;
     }
 
     //controller
     const handleSubmit = async (e) => {
       e.preventDefault();
       const formData = getFormData();
-      await updateMovie(formData)
-      reload("re-load parent")
-      handleClose();
+      const state = await updateMovie(formData)
+      reload(state)
+      handleClose()
 
+    
     }
+
 
     //view
     const getFormData  = () => {

@@ -14,6 +14,7 @@ const UpdateUserProfile = ({data, reload, show, handleClose}) => {
         },
         body: JSON.stringify(data),
       })
+      return true;
     }
 
     const handleEdit = (e) => {
@@ -24,8 +25,8 @@ const UpdateUserProfile = ({data, reload, show, handleClose}) => {
     const handleSubmit = async(e) => {
         e.preventDefault();
         const data = getFormData();
-        await updateProfileByID(data)
-        reload("re-load parent")   //call view to reload to reflect change
+        const state = await updateProfileByID(data)
+        reload(state)   //call view to reload to reflect change
         handleClose();
     }
 

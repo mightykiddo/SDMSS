@@ -28,13 +28,15 @@ function CreateMovie() {
                },
                body: JSON.stringify(formData),
              })
+
+             return true;
      }
 
      const handleSubmit = async (e) =>{
           e.preventDefault();
           const data = getFormData();
-          await postMovie(data)
-          setShowModal(true)    
+          const state =  await postMovie(data)
+          setShowModal(state);
      }
 
 

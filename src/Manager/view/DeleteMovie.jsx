@@ -34,17 +34,17 @@ const DeleteMovie = ({data, reload, show, handleClose}) => {
           },
           body: JSON.stringify(session)
           })
-
       }
-    
+
+      return true;
     }
 
 
     //controller
     const handleDelete = async (e, id) => {
           e.preventDefault();
-          await deleteMovie(id) //call model
-          reload("reload");
+          const state = await deleteMovie(id) //call model
+          reload(state);
           handleClose();
     };
   

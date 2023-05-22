@@ -15,6 +15,8 @@ const UpdateRoom = ({data, reload, show, handleClose}) => {
             body: JSON.stringify(formData),
         })
         .then((response) => response.json())
+
+        return true;
         
     }
 
@@ -27,14 +29,15 @@ const UpdateRoom = ({data, reload, show, handleClose}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = getFormData();
-        await updateRoom(formData)//call model
-        reload("re-load parent")
+        const state = await updateRoom(formData)//call model
+        reload(state)
         handleClose();
     }
 
     const getFormData = () => {
         return formData
     }
+    
     return(
       <>
         <Modal show={show} onHide={handleClose}>

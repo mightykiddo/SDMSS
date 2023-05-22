@@ -13,13 +13,15 @@ const DeleteSession = ({data, reload, show, handleClose}) => {
               'Content-Type': 'application/json'
             }
           })
+
+        return true;
     }
 
     //controller
     const handleDelete = async (e, id) => {
         e.preventDefault();
-        await deleteMovieSession(id)
-        reload("reload")
+        const state = await deleteMovieSession(id)
+        reload(state)
         handleClose()
     }
   

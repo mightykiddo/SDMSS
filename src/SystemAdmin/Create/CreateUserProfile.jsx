@@ -21,14 +21,16 @@ function CreateUserProfile(){
                },
                body: JSON.stringify(data),
              })
+
+             return true
      }
 
      //controller
      const handleSubmit = async (e) =>{
           e.preventDefault();
           const data = getFormData();
-          await PostUserProfile(data)
-          setShowModal(true)
+          const state = await PostUserProfile(data)
+          setShowModal(state)
      }
 
      const handleEdit = e => {

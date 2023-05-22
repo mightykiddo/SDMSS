@@ -64,7 +64,7 @@ function CreateMovieSession() {
              ]
      });
 
-
+     
      //model
      const loadMoviesnRooms = async () => {
           const [movieResponse, roomResponse] = await Promise.all([
@@ -86,6 +86,7 @@ function CreateMovieSession() {
                },
                body: JSON.stringify({...formData, movie: movie.Movie, room : room.Name }),
              })
+             return true;
      }
 
 
@@ -115,17 +116,19 @@ function CreateMovieSession() {
      const handleEdit = (e) => {
           const { id, value } = e.target;
           setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
-             
      }
+
+
 
      const handleSubmit = async (e) =>{
           e.preventDefault();
           const formData = getFormData()
           const movie = movies.find(movie => movie.id === parseInt(formData.movie_id));
           const room = rooms.find(room => room.id === parseInt(formData.room_id));
-          await createMovieSession(formData,movie,room)
-          setShowModal(true)
+          const state = await createMovieSession(formData,movie,room)
+          setShowModal(state);
      }
+
 
      //view function
      const getFormData = () => {
@@ -170,7 +173,7 @@ function CreateMovieSession() {
           </div>
      </form>
           <SuccessModel 
-               message = "Movie Successfully Created !" 
+               message = "Movie Session Successfully Created !" 
                show = {showModal}
                handleClose={handleCloseModal}
           />

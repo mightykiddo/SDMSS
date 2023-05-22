@@ -18,6 +18,7 @@ function CreateRoom() {
                },
                body: JSON.stringify(formData),
              })
+          return true;
      }
 
      const handleEdit = (e) => {
@@ -32,8 +33,8 @@ function CreateRoom() {
      const handleSubmit = async (e) =>{
           e.preventDefault();
           const formData = getFormData();
-          await postRoom(formData)
-          setShowModal(true)
+          const state = await postRoom(formData)
+          setShowModal(state);
      }
 
      //view function

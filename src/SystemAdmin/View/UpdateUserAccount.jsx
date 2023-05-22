@@ -8,9 +8,10 @@ const UpdateUserAccount = ({data, reload, show, handleClose}) => {
     const [formData, setFormData] = useState(data[0]);
   
     //modal
-    const getUserProfile = async () => {
-        return fetch(`${apiUrl_profile}/Userprofile`)
-        .then((response) => response.json())
+    const getUser = async () => {
+        const res = await fetch(`${apiUrl_profile}/Userprofile`)
+        const user = res.json();
+        return getUser;
     }
   
     const updateUserById = async (data) => {
@@ -21,11 +22,12 @@ const UpdateUserAccount = ({data, reload, show, handleClose}) => {
         },
         body: JSON.stringify(data),
       })
+      return true;
     }
   
     //controller
     useEffect(() => {
-      getUserProfile()
+      getUser()
           .then((data) => setProfile(data))
           .catch((error) => console.error(error));
     } , [])
@@ -39,8 +41,8 @@ const UpdateUserAccount = ({data, reload, show, handleClose}) => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       const data = getFormData();
-      await updateUserById(data)
-      reload("re-load parent");
+      const state = await updateUserById(data)
+      reload(state);
       handleClose();
       /*
       updateUserById(data)

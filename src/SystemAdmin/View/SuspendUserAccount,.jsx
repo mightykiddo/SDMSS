@@ -12,6 +12,7 @@ const SuspendUserAccount = ({type, data, reload, show , handleClose}) => {
         },
         body: JSON.stringify( {...data[0], status : type}),
       })
+      return true
     }
   
   
@@ -19,13 +20,13 @@ const SuspendUserAccount = ({type, data, reload, show , handleClose}) => {
       e.preventDefault();
       const data = getFormData();
       if (type === "unsuspend"){
-        await updateStatus(data, 'Active')//call model
-        reload("reload")
+        const state = await updateStatus(data, 'Active')//call model
+        reload(state)
         handleClose()
       }
       else if (type === "suspend") {
-        await updateStatus(data, 'Suspended')//call model
-        reload("reload")
+        const state = await updateStatus(data, 'Suspended')//call model
+        reload(state)
         handleClose()
       }
     } 

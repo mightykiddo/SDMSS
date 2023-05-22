@@ -98,6 +98,17 @@
       "status": "Active",
       "seatpref": "A1",
       "id": 30
+    },
+    {
+      "id": 31,
+      "name": "ddd",
+      "username": "ddd",
+      "loyaltypoint": 0,
+      "seatpref": "",
+      "email": "dd@",
+      "password": "dddd",
+      "status": "Active",
+      "acctype": "Manager"
     }
   ]
 }

@@ -28,7 +28,7 @@ function ViewRoom() {
   //controller
   useEffect(() => { //load data on page load 
     getRoom()
-    .then(data => setData(data))
+    .then(rooms => setData(rooms))
     .catch(error => console.error(error));
   }, [filteredData, query]);
 

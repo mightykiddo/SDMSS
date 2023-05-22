@@ -28,6 +28,7 @@ function CreateUserAcc() {
                },
                body: JSON.stringify(formData),
           })
+          return true;
      }
 
      const getUserProfile = async() => {//return a list of user
@@ -40,8 +41,8 @@ function CreateUserAcc() {
      const handleSubmit = async (e) =>{ //controller to submit
           e.preventDefault();
           const data = getFormData();
-          await postUser(data);
-          setShowModal(true);
+          const state = await postUser(data);
+          setShowModal(state);
      }
 
      useEffect(() => {  //controller also 

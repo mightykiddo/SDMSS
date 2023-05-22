@@ -33,14 +33,16 @@ const DeleteRoom = ({data, reload, show, handleClose}) => {
           body: JSON.stringify(session)
         })
       }
+
+      return true;
     }
   
     //delete room in movie session // do here instead of in movie sessions
     //controller
     const handleDelete = async (e, id) => {
       e.preventDefault();
-      await deleteRoom(id)//call model
-      reload("reload");
+      const state = await deleteRoom(id)//call model
+      reload(true);
       handleClose();
 
     };

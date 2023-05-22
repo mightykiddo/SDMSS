@@ -36,6 +36,7 @@ const UpdateSession = ({data, reload, show, handleClose}) => {
               movie_id : parseInt(formData.movie_id)
             }),
           })
+          return true;
     }
     //controller
     useEffect(() => {
@@ -64,8 +65,8 @@ const UpdateSession = ({data, reload, show, handleClose}) => {
       room = rooms.find(room => room.id == formData.room_id)
       room = room.Name
     }
-    updateMovieSession(formData, movie, room)
-    reload("reload parent")
+    const state = await updateMovieSession(formData, movie, room)
+    reload(state);
     handleClose();
 
   }
