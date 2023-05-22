@@ -60,7 +60,10 @@ const BookTicket = () => {
         result[key].push(item);
         return result;
     }, {});
-  
+    const handleSubmit = (e) =>{
+        setDate(e.target.value)
+        BookTicketEntity()
+    }
     return ( 
         <>
         <NavBarUser/>
@@ -72,7 +75,7 @@ const BookTicket = () => {
 
             <select 
                 value={date}
-                onChange={(e) => setDate(e.target.value)}
+                onChange={(e) => handleSubmit(e)}
             >
                 <option value="">Select a date</option>
                 {(Object.keys(groupedData2)).map(record => (
